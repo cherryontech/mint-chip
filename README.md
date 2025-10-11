@@ -1,4 +1,8 @@
 # Mint Chip 🍃
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9fa45353-e5f9-4bcc-978e-57f607862e6d/deploy-status)](https://app.netlify.com/projects/mint-chip/deploys)
+
+## 🌐 Live Site
+**[mint-chip.netlify.app](https://mint-chip.netlify.app)**
 
 ## 🛠️ Tech Stack
 
@@ -74,6 +78,13 @@
   - Tab width: 2
   - Trailing commas: ES5
 
+## ⚡ Deployment
+
+This project uses Netlify as a tool for continuous integration and continuous deployment (CI/CD) to streamline our development workflow. This allows us to test changes efficiently and quickly deliver new features and bug fixes to end-users.
+
+### How Deployment Works
+- All changes merged into the main branch are automatically deployed 
+- Deployment previews are available for open PRs, generating unique links to test potential changes
 
 ## 📝 License
 
