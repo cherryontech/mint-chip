@@ -1,1 +1,11 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-eerie: #1E1E1E;
+  --color-electricgreen: #15F30D;
+  --color-persianblue: #0561A7;
+  --color-sangria: #950606;
+  --color-nyanza: #E1FFE4;
+  --color-celeste: #BBFDFF;
+    
+}
