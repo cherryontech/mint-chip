@@ -1,40 +1,84 @@
 import { tv } from 'tailwind-variants/lite';
 
 const buttonVariants = tv({
-    // base styles for all buttons
-    base: 'flex items-center justify-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
-    // all button variants
-    variants: {
-        size: {
-            sm: 'h-14 w-[220px] text-2xl text-md font-semibold rounded-lg',
-            md: 'h-16 w-82 text-2xl font-semibold rounded-lg',
-            lg: 'h-11 w-[501px] text-lg font-medium rounded-md',
-            circ: 'h-11 w-11 text-2xl rounded-full'
-        },
-        color: {
-            primary: 'bg-[#1E1E1E] text-white border-1 border-[#1E1E1E]',
-            secondary: 'bg-white text-[#1E1E1E] border-1 border-[#1E1E1E]',
-            gradient: 'bg-gradient-to-b from-[#15F30D] to-[#0561A7] text-white'
-        }
+  // base styles for all buttons
+  base: 'flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out group',
+  // all button variants
+  variants: {
+    size: {
+      navbar: 'h-14 w-[220px] px-[58px] py-[8px] rounded-[10px]',
+      sm: 'h-14 w-[220px] text-2xl text-md font-semibold rounded-lg drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
+      md: 'h-16 w-82 text-2xl font-semibold rounded-lg drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
+      lg: 'h-11 w-[501px] text-lg font-medium rounded-md drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
+      circ: 'h-11 w-11 text-2xl rounded-full drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
     },
-    // default button styles if no specified props
-    defaultVariants: {
-        size: 'sm',
-        color: 'primary'
+    color: {
+      primary: 'bg-eerie text-white border-1 border-eerie',
+      secondary: 'bg-white text-eerie border-1 border-eerie',
+      gradient: 'bg-gradient-to-b from-electricgreen to-persianblue text-white',
+      none: '', // use for navbar to avoid the defaultVariant
     },
-    // conditional style cases for specific prop combinations
-    compoundVariants: [
-        // remove drop shadow and lower font weight for onboarding quiz button
-        {
-            color: 'secondary',
-            size: 'md',
-            className: 'drop-shadow-none !font-normal'
-        }
-    ]
+    // Prop Navbar
+    isNavbar: {
+      true: '',
+      false: '',
+    },
+  },
+  // default button styles if no specified props
+  defaultVariants: {
+    size: 'sm',
+    color: 'primary',
+  },
+  // conditional style cases for specific prop combinations
+  compoundVariants: [
+    // remove drop shadow and lower font weight for onboarding quiz button
+    {
+      color: 'secondary',
+      size: 'md',
+      className: 'drop-shadow-none !font-normal',
+    },
+    {
+      size: 'navbar',
+      className: `
+            hover:bg-eerie
+            hover:drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]
+        `,
+    },
+  ],
 });
 
-export default function Button({ size, color, label }) {
-    return (
-        <button className={buttonVariants({ size, color })}>{label}</button>
-    )
+//  Navbar classes
+const navbarTextClasses = `
+    text-stone-900 text-2xl font-normal font-playfair 
+    group-hover:text-white 
+    group-hover:text-2xl 
+    group-hover:font-semibold 
+    group-hover:font-poppins
+`;
+
+export default function Button({
+  size,
+  color,
+  children,
+  isNavbar = false,
+  ...props
+}) {
+  const finalClasses = buttonVariants({
+    size: isNavbar ? 'navbar' : size,
+    color: isNavbar ? 'none' : color,
+  });
+
+  const getContent = () => {
+    if (isNavbar) {
+      return <span className={navbarTextClasses}>{children}</span>;
+    }
+
+    return children;
+  };
+
+  return (
+    <button className={finalClasses} {...props}>
+      {getContent()}
+    </button>
+  );
 }

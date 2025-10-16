@@ -1,11 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
 @import 'tailwindcss';
 
 @theme {
-  --color-eerie: #1E1E1E;
-  --color-electricgreen: #15F30D;
-  --color-persianblue: #0561A7;
+  --color-eerie: #1e1e1e;
+  --color-electricgreen: #15f30d;
+  --color-persianblue: #0561a7;
   --color-sangria: #950606;
-  --color-nyanza: #E1FFE4;
-  --color-celeste: #BBFDFF;
-    
+  --color-nyanza: #e1ffe4;
+  --color-celeste: #bbfdff;
+
+  --font-playfair: 'Playfair Display', serif;
+  --font-poppins: 'Poppins', sans-serif;
 }
