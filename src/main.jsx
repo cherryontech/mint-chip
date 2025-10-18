@@ -11,34 +11,21 @@ import Error from './pages/Error';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import App from './App';
-import NavbarLayout from './NavbarLayout';
-import AuthenticationLayout from './AuthenticationLayout';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    Component: App,
-    children: [{ index: true, Component: Home }],
-  },
-  {
-    path: 'auth',
-    Component: AuthenticationLayout,
+    element: <App />,
     children: [
-      { path: 'login', Component: Login },
-      { path: 'signup', Component: Signup },
-      { path: 'onboarding', Component: Onboarding },
+      { index: true, element: <Home /> },
+      { path: 'dashboard', element: <Dashboard /> },
+      { path: 'community', element: <Community /> },
+      { path: 'signup', element: <Signup /> },
+      { path: 'login', element: <Login /> },
+      { path: 'onboarding', element: <Onboarding /> },
+      { path: 'achievements', element: <Achievements /> },
     ],
   },
-  {
-    path: 'user',
-    Component: NavbarLayout,
-    children: [
-      { path: 'dashboard', Component: Dashboard },
-      { path: 'community', Component: Community },
-      { path: 'achievements', Component: Achievements },
-    ],
-  },
-
   {
     path: '*',
     element: <Error />,
