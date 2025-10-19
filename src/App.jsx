@@ -1,11 +1,21 @@
-import './App.css';
+import { Outlet, useLocation } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
+  const location = useLocation();
+  const { pathname } = location;
+  const hideNav = ['/login', '/signup', '/onboarding'].includes(pathname);
+  const showHomeNav = ['/'].includes(pathname);
+  const hideFooter = ['/login', '/signup', '/onboarding'].includes(pathname);
+
   return (
-    <div className="min-h-screen bg-emerald-100 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-lime-500">
-        Mint Chips - Tailwind works! 🎉
-      </h1>
+    <div>
+      {!hideNav && (showHomeNav ? <Navbar /> : <Navbar />)}
+      <main>
+        <Outlet />
+      </main>
+      {!hideFooter && <Footer />}
     </div>
   );
 }
