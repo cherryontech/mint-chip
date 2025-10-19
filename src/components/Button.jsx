@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { tv } from 'tailwind-variants/lite';
 
 const buttonVariants = tv({
@@ -60,6 +61,7 @@ export default function Button({
   size,
   color,
   children,
+  to,
   isNavbar = false,
   ...props
 }) {
@@ -76,6 +78,19 @@ export default function Button({
     return children;
   };
 
+  if (to) {
+    return (
+      <Link
+        to={to}
+        className={finalClasses}
+        {...props} // Pasa props adicionales como aria-label
+      >
+        {getContent()}
+      </Link>
+    );
+  }
+
+  // Si NO se proporciona 'to', renderiza el <button> normal
   return (
     <button className={finalClasses} {...props}>
       {getContent()}

@@ -19,17 +19,16 @@ const testimonials = [
 ];
 
 const TestimonialCardsGrid = () => {
-return (
+  return (
     // Contenedor principal
-   <div className="w-full py-1">
-    
-    {/* Título - Mantenido */}
-    <h2 className="text-center text-stone-900 text-5xl font-semibold font-Playfair mb-12">
+    <div className="w-full py-1">
+      {/* Título - Mantenido */}
+      <h2 className="text-center text-stone-900 text-5xl font-semibold font-Playfair mb-12">
         Women in Tech are developing life-changing habits
-    </h2> 
+      </h2>
 
-    {/* Contenedor de Carrusel/Grid Ajustado */}
-    <div 
+      {/* Contenedor de Carrusel/Grid Ajustado */}
+      <div
         // CLAVES DE AJUSTE DE DESKTOP (lg:):
         // max-w-[1092px] mx-auto: Centra el contenedor a 1092px de ancho.
         // lg:px-[37px]: Padding de 37px para el margen interno (los '37' de los lados).
@@ -39,31 +38,30 @@ return (
                    md:grid md:grid-cols-2 lg:grid-cols-3 
                    gap-6 lg:gap-[38px] 
                    max-w-full lg:max-w-[1092px] mx-auto 
-                   px-4 lg:px-[37px]" 
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} 
-    >
-      
-      {testimonials.map((testimonial, index) => (
-        // Tarjeta de Testimonio
-        <article 
-          key={index} 
-          // p-9 (36px) para el padding interno
-          // Dimensiones fijas en desktop (lg:w-[314px], lg:h-[335px])
-          className="relative bg-white p-9 rounded-lg border-2 border-solid border-[#1e1e1e] shadow-lg flex flex-col 
+                   px-4 lg:px-[37px]"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        {testimonials.map((testimonial, index) => (
+          // Tarjeta de Testimonio
+          <article
+            key={index}
+            // p-9 (36px) para el padding interno
+            // Dimensiones fijas en desktop (lg:w-[314px], lg:h-[335px])
+            className="relative bg-white p-9 rounded-lg border-2 border-solid border-[#1e1e1e] shadow-lg flex flex-col 
                      snap-center min-w-[90%] sm:min-w-[400px] 
                      lg:w-[314px] lg:h-[335px] lg:min-w-0" // Aplicando medidas exactas
-        >
-          <div>
-            <h3 className="mb-4 font-poppins font-normal text-[#1e1e1e] text-lg tracking-[0] leading-normal">
-              {testimonial.title}
-            </h3>
-            <blockquote className="font-poppins font-normal text-[#1e1e1e] text-base tracking-[0] leading-normal">
-              {testimonial.content} 
-            </blockquote>
-          </div>
-        </article>
-      ))}
-    </div>
+          >
+            <div>
+              <p className="mb-4 font-poppins font-normal text-[#1e1e1e] text-lg tracking-[0] leading-normal">
+                {testimonial.title}
+              </p>
+              <blockquote className="font-poppins font-normal text-[#1e1e1e] text-base tracking-[0] leading-normal">
+                {testimonial.content}
+              </blockquote>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   );
 };

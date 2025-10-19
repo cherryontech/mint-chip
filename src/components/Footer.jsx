@@ -5,8 +5,12 @@ const links = [
   { id: 'home', text: 'Home', href: '/' },
   { id: 'dashboard', text: 'Dashboard', href: '/dashboard' },
   { id: 'privacy-policy', text: 'Privacy Policy', href: '/privacy-policy' },
-  { id: 'sign-up', text: 'Sign Up', href: '/sign-up' },
-  { id: 'terms-of-service', text: 'Terms of Service', href: '/terms-of-service' },
+  { id: 'sign-up', text: 'Sign Up', href: '/signup' },
+  {
+    id: 'terms-of-service',
+    text: 'Terms of Service',
+    href: '/terms-of-service',
+  },
 ];
 
 const Footer = () => {
@@ -31,9 +35,8 @@ const Footer = () => {
   return (
     // 1. Main Footer Container
     <footer className="w-full relative bg-[linear-gradient(180deg,rgba(225,255,228,1)_0%,rgba(187,253,255,1)_100%)]">
-      
       {/* 2. Responsive Navigation Container (The Core) */}
-      <nav 
+      <nav
         className="
           // Mobile Styles (Default: Stacked, Centered)
           flex flex-col items-center py-10 px-4 space-y-4
@@ -53,7 +56,7 @@ const Footer = () => {
           lg:mx-auto
           lg:max-w-[1440px] 
           lg:w-full
-        " 
+        "
         aria-label="Footer navigation"
       >
         {links.map((link) => (
@@ -61,9 +64,8 @@ const Footer = () => {
             key={link.id}
             href={link.href}
             className={`
-              // Text Styles (Common)
               relative h-[30px] font-medium text-[#1e1e1e] text-xl tracking-[0] leading-[normal] 
-              hover:underline focus:outline-2 focus:outline-offset-2 focus:outline-[#1e1e1e] 
+              
               
               // Grid Placement for Desktop
               lg:text-left
