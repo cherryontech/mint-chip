@@ -3,11 +3,16 @@ import { tv } from 'tailwind-variants/lite';
 
 const buttonVariants = tv({
   // base styles for all buttons
-  base: 'flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out group',
+  base: 'flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out group \
+         focus:outline-none focus:ring-4 focus:ring-persianblue focus:ring-offset-[12px] focus:ring-opacity-75 \
+         active:scale-[0.98]',
+
   // all button variants
   variants: {
     size: {
-      navbar: 'h-14 w-[220px] px-[58px] py-[8px] rounded-[10px]',
+      // responsive navbar size: smaller on mobile so multiple buttons can sit side-by-side
+      navbar:
+        'h-14 w-32 md:w-[220px] px-4 md:px-[58px] py-[8px] rounded-[10px]',
       sm: 'h-14 w-[220px] text-2xl text-md font-semibold rounded-lg drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
       md: 'h-16 w-82 text-2xl font-semibold rounded-lg drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
       lg: 'h-11 w-[501px] text-lg font-medium rounded-md drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
@@ -41,9 +46,22 @@ const buttonVariants = tv({
     {
       size: 'navbar',
       className: `
-            hover:bg-eerie
+            hover:bg-zinc hover:text-white
             hover:drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]
+            active:bg-persianblue active:border-persianblue active:text-white   
         `,
+    },
+    {
+      color: 'primary',
+      className: `hover:bg-zinc hover:text-white
+      active:bg-persianblue active:border-persianblue active:text-white
+               
+      `,
+    },
+    {
+      isNavbar: true,
+      className:
+        'active:bg-persianblue active:text-white active:border-persianblue focus:ring-offset-white',
     },
   ],
 });
@@ -55,6 +73,7 @@ const navbarTextClasses = `
     group-hover:text-2xl 
     group-hover:font-semibold 
     group-hover:font-poppins
+    
 `;
 
 export default function Button({
@@ -79,20 +98,20 @@ export default function Button({
   };
 
   if (to) {
+    // Merge any className passed via props with generated classes (props.className should not override finalClasses)
+    const { className, ...rest } = props;
+    const merged = `${finalClasses} ${className || ''}`.trim();
     return (
-      <Link
-        to={to}
-        className={finalClasses}
-        {...props} // Pasa props adicionales como aria-label
-      >
+      <Link to={to} className={merged} {...rest}>
         {getContent()}
       </Link>
     );
   }
 
-  // Si NO se proporciona 'to', renderiza el <button> normal
+  const { className, ...rest } = props;
+  const merged = `${finalClasses} ${className || ''}`.trim();
   return (
-    <button className={finalClasses} {...props}>
+    <button className={merged} {...rest}>
       {getContent()}
     </button>
   );

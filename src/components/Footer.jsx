@@ -39,20 +39,19 @@ const Footer = () => {
       <nav
         className="
           // Mobile Styles (Default: Stacked, Centered)
-          flex flex-col items-center py-10 px-4 space-y-4
+          flex flex-col items-center py-5 px-2 space-y-4
 
           // Desktop Styles (lg: breakpoint applies the Grid layout)
           lg:grid 
           lg:grid-cols-2 
           lg:grid-rows-3 
           
-          // ******* CAMBIO CLAVE AQUI *******
-          // Reducción del espaciado vertical (lg:gap-y-4 = 16px)
+        
           lg:gap-x-[184px] lg:gap-y-4 
           
           lg:px-[104px] 
-          lg:py-[40px] // Reducido el padding vertical de 66px a 40px
-          lg:h-[250px] // Reducida la altura fija para reflejar el nuevo espaciado
+          lg:py-[40px] 
+          lg:h-[250px] 
           lg:mx-auto
           lg:max-w-[1440px] 
           lg:w-full
@@ -64,7 +63,7 @@ const Footer = () => {
             key={link.id}
             href={link.href}
             className={`
-              relative h-[30px] font-medium text-[#1e1e1e] text-xl tracking-[0] leading-[normal] 
+              relative h-[30px] font-medium text-[#1e1e1e] text-xl tracking-[0] leading-[normal]   focus:ring-2 focus:ring-persianblue rounded-[5px]  px-5
               
               
               // Grid Placement for Desktop

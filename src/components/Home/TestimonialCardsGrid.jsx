@@ -20,36 +20,43 @@ const testimonials = [
 
 const TestimonialCardsGrid = () => {
   return (
-    // Contenedor principal
     <div className="w-full py-1">
-      {/* Título - Mantenido */}
-      <h2 className="text-center text-stone-900 text-5xl font-semibold font-Playfair mb-12">
+      <h2 className="text-center text-stone-900 text-5xl font-semibold font-playfair mb-12">
         Women in Tech are developing life-changing habits
       </h2>
 
-      {/* Contenedor de Carrusel/Grid Ajustado */}
       <div
-        // CLAVES DE AJUSTE DE DESKTOP (lg:):
-        // max-w-[1092px] mx-auto: Centra el contenedor a 1092px de ancho.
-        // lg:px-[37px]: Padding de 37px para el margen interno (los '37' de los lados).
-        // lg:gap-[38px]: Espacio exacto de 38px entre las columnas (las tarjetas).
+        className="
+        /* LAYOUT DE REFLOW/400% ZOOM */
+        grid grid-cols-1 gap-[40px] 
+        px-4 
+        
+        /* LAYOUT  CARRUSEL */
+        sm:flex sm:space-x-[40px] 
+        sm:overflow-x-scroll sm:snap-x sm:snap-mandatory 
+        sm:pb-4 sm:px-4 
 
-        className="flex overflow-x-scroll snap-x snap-mandatory pb-4 
-                   md:grid md:grid-cols-2 lg:grid-cols-3 
-                   gap-6 lg:gap-[38px] 
-                   max-w-full lg:max-w-[1092px] mx-auto 
-                   px-4 lg:px-[37px]"
+        /* LAYOUT DESKTOP */
+        md:grid md:grid-cols-2 lg:grid-cols-3 
+        lg:gap-[38px] 
+        max-w-full lg:max-w-[1092px] mx-auto 
+        lg:px-[37px]
+        "
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {testimonials.map((testimonial, index) => (
-          // Tarjeta de Testimonio
           <article
             key={index}
-            // p-9 (36px) para el padding interno
-            // Dimensiones fijas en desktop (lg:w-[314px], lg:h-[335px])
-            className="relative bg-white p-9 rounded-lg border-2 border-solid border-[#1e1e1e] shadow-lg flex flex-col 
-                     snap-center min-w-[90%] sm:min-w-[400px] 
-                     lg:w-[314px] lg:h-[335px] lg:min-w-0" // Aplicando medidas exactas
+            className="
+            relative bg-white p-9 rounded-lg border-2 border-solid border-[#1e1e1e] shadow-lg flex flex-col 
+            w-full                            
+            
+            sm:snap-start                        
+            sm:shrink-0                          
+            sm:min-w-[90%] sm:w-[400px] 
+
+            lg:w-[314px] lg:h-[335px] lg:min-w-0 
+            "
           >
             <div>
               <p className="mb-4 font-poppins font-normal text-[#1e1e1e] text-lg tracking-[0] leading-normal">

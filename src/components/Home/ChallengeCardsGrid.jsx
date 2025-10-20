@@ -1,5 +1,3 @@
-// src/components/ChallengeCardsGrid.jsx (Versión Final)
-
 import ChallengeCard from './ChallengeCard';
 
 const challenges = [
@@ -14,9 +12,6 @@ const challenges = [
       'Reciting positive phrases everyday can lower your stress levels and rebuild your confidence.',
   },
   {
-    // Ojo: En la imagen_85b626.png, 'Sleep 7 to 9 Hours' y 'Practice Saying No'
-    // tienen las descripciones originales INTERCAMBIADAS respecto a tu data.
-    // Usaremos tu data, que es más lógica con el título.
     title: 'Sleep 7 to 9 Hours',
     description:
       'Track your sleep to see how it affects your mood and outlook in your daily life.',
@@ -33,18 +28,16 @@ const challenges = [
   },
 ];
 
-// Ancho máximo para el desktop para limitar y centrar el contenedor del grid.
-const DESKTOP_MAX_WIDTH = 'max-w-6xl'; // Se puede usar 'max-w-[944px]' o un valor más genérico como 'max-w-6xl'
+const DESKTOP_MAX_WIDTH = 'max-w-6xl';
 
 const ChallengeCardsGrid = () => {
   return (
     <div className="w-full py-10">
-      {/* Título */}
-      <h2 className="text-center text-stone-900 text-5xl font-semibold font-Playfair mb-12">
+      <h2 className="text-center text-stone-900 text-5xl font-semibold font-playfair mb-12">
         Customize your tasks and start your journey today
       </h2>
 
-      {/* 1. MOBILE CAROUSEL (md:hidden) */}
+      {/* 1. MOBILE LAYOUT (md:hidden)  */}
       <div
         className="
         md:hidden 
@@ -60,12 +53,9 @@ const ChallengeCardsGrid = () => {
         ))}
       </div>
 
-      {/* 2. DESKTOP LAYOUT (md:block) - Centramos el contenedor principal */}
+      {/* 2. DESKTOP LAYOUT (md:block)  */}
       <div className={`hidden md:block ${DESKTOP_MAX_WIDTH} mx-auto px-4`}>
-        {/* Usamos un contenedor de ancho fijo para la disposición 3x2. 
-           max-w-[944px] es 3*288 + 2*40. Esto es crucial para centrar la Fila 2. */}
         <div className="max-w-[944px] mx-auto">
-          {/* Fila 1: Layout de Grid (3 columnas) */}
           <div className="grid grid-cols-3 gap-[40px]">
             {challenges.slice(0, 3).map((item, index) => (
               <ChallengeCard
@@ -76,12 +66,8 @@ const ChallengeCardsGrid = () => {
             ))}
           </div>
 
-          {/* Fila 2: Layout de Flexbox (2 tarjetas centradas) */}
           <div className="flex justify-center mt-[40px] gap-[40px]">
             {challenges.slice(3).map((item, index) => (
-              // Para la Fila 2, necesitamos que la tarjeta use su ancho fijo (min-w-[288px])
-              // en lugar de heredar w-full. El w-full en ChallengeCard funciona mal con flex.
-              // Usamos un wrapper con w-[288px] o w-72 para forzar el ancho en desktop.
               <div key={index + 3} className="w-[288px]">
                 <ChallengeCard
                   title={item.title}

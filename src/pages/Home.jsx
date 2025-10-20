@@ -2,34 +2,20 @@
 import React from 'react';
 
 //components
+import Button from '../components/Button';
 import ChallengeCardsGrid from '../components/Home/ChallengeCardsGrid';
 import TestimonialCardsGrid from '../components/Home/TestimonialCardsGrid';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import Button from '../components/Button';
 
 const Home = () => {
   return (
-    // Se usa 'relative' aquí para que las secciones internas (challenge, testimonial) se posicionen correctamente.
     <div className="bg-white w-full relative">
-      {/* 2. Hero Container (Background + Content) 
-          - AHORA la altura (h-[...]), el fondo (bg-gradient-to-b) y la forma (rounded-bl/br) 
-          - están en un solo contenedor.
-      */}
-      <div className="w-full h-[550px] sm:h-[350px] bg-gradient-to-b from-nyanza to-celeste rounded-bl-[40px] rounded-br-[40px] relative">
-        {/* 3. Hero Content - Centrado verticalmente usando h-full y justify-center. SIN MARGEN NEGATIVO. */}
-        <section
-          // h-full asegura que ocupa toda la altura del contenedor padre.
-          // justify-center centra el contenido verticalmente.
-          className="w-full h-full flex flex-col items-center justify-center px-4 relative z-10"
-        >
-          {/* H2 Title */}
-          <h2 className="w-[745px] max-w-full mx-auto h-auto mb-2 text-center text-stone-900 text-4xl sm:text-5xl lg:text-5xl font-bold font-playfair capitalize leading-snug">
+      <div className="w-full h-[350px] sm:h-[350px] bg-gradient-to-b from-nyanza to-celeste rounded-bl-[40px] rounded-br-[40px] relative mt-[-22px]">
+        <section className="w-full h-full flex flex-col items-center justify-center px-4 relative z-10">
+          <h1 className="w-[745px] max-w-full mx-auto h-auto mb- text-center text-stone-900 text-4xl sm:text-5xl lg:text-5xl font-bold font-playfair capitalize leading-snug">
             Helping Women In Tech <br />
             Fight Burnout
-          </h2>
+          </h1>
 
-          {/* Paragraph */}
           <p className="w-[829px] max-w-full mx-auto h-auto mb-6 sm:mb-8 font-poppins font-normal text-eerie text-lg sm:text-2xl lg:text-xl text-center tracking-normal leading-normal px-2">
             Healie hosts a 30-Day Detox Challenge that provides five <br />
             healthy strategies women can use to prevent and fight burnout
@@ -48,13 +34,11 @@ const Home = () => {
       </div>
 
       <main className="w-full">
-        {/* 4. Challenge Cards Section - Fluye correctamente justo después del Hero Container. */}
-        <section className="pt-10 pb-10 px-4">
+        <section className="pt-10 pb-10 px-2">
           <ChallengeCardsGrid />
         </section>
 
-        {/* 5. Testimonial Section - Ajuste de espaciado. */}
-        <section className=" pb-10 px-4">
+        <section className=" pb-10 px-2">
           <TestimonialCardsGrid />
         </section>
       </main>
