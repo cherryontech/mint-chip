@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Corrected from a function to a constant array
 const links = [
   { id: 'home', text: 'Home', href: '/' },
   { id: 'dashboard', text: 'Dashboard', href: '/dashboard' },
@@ -15,7 +14,6 @@ const links = [
 ];
 
 const Footer = () => {
-  // Helper function to apply specific grid placement classes for desktop
   const getLinkGridClasses = (id) => {
     switch (id) {
       case 'home':

@@ -1,4 +1,3 @@
-// components
 import CheckIcon from './CheckIcon';
 
 const ChallengeCard = ({ title, description }) => {
