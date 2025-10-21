@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const links = [
   { id: 'home', text: 'Home', href: '/' },
@@ -58,9 +59,9 @@ const Footer = () => {
         aria-label="Footer navigation"
       >
         {links.map((link) => (
-          <a
+          <Link
             key={link.id}
-            href={link.href}
+            to={link.href}
             className={`
               relative h-[30px] font-medium text-[#1e1e1e] text-xl tracking-[0] leading-[normal]   focus:ring-2 focus:ring-persianblue rounded-[5px]  px-5
               
@@ -73,7 +74,7 @@ const Footer = () => {
             aria-label={link.text}
           >
             {link.text}
-          </a>
+          </Link>
         ))}
       </nav>
     </footer>
