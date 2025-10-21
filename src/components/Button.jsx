@@ -17,6 +17,7 @@ const buttonVariants = tv({
       md: 'h-16 w-82 text-2xl font-semibold rounded-lg drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
       lg: 'h-11 w-[501px] text-lg font-medium rounded-md drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
       circ: 'h-11 w-11 text-2xl rounded-full drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
+      onboarding: 'h-14 w-full text-xl font-normal rounded-lg md:w-[280px]', 
     },
     color: {
       primary: 'bg-eerie text-white border-1 border-eerie',
@@ -37,11 +38,17 @@ const buttonVariants = tv({
   },
   // conditional style cases for specific prop combinations
   compoundVariants: [
-    // remove drop shadow and lower font weight for onboarding quiz button
+    // remove drop shadow and lower font weight for onboarding 
     {
       color: 'secondary',
       size: 'md',
       className: 'drop-shadow-none !font-normal',
+    },
+    // onboarding selection buttons 
+    {
+      color: 'secondary',
+      size: 'onboarding',
+      className: 'drop-shadow-none border-2 border-black !text-black !font-normal',
     },
     {
       size: 'navbar',
@@ -80,6 +87,7 @@ export default function Button({
   size,
   color,
   children,
+  label, 
   to,
   isNavbar = false,
   ...props
@@ -90,11 +98,18 @@ export default function Button({
   });
 
   const getContent = () => {
+    // If it's a Navbar button, use wrapped children
     if (isNavbar) {
       return <span className={navbarTextClasses}>{children}</span>;
     }
-
-    return children;
+    
+    // If 'children' is provided, use it
+    if (children) {
+        return children;
+    }
+    
+    // If no 'children', use 'label' 
+    return label; 
   };
 
   if (to) {

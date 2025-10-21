@@ -11,6 +11,7 @@ const links = [
     text: 'Terms of Service',
     href: '/terms-of-service',
   },
+  { id: 'onboarding', text: 'Onboarding', href: '/onboarding' },
 ];
 
 const Footer = () => {
