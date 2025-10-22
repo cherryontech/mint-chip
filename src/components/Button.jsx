@@ -12,9 +12,9 @@ const buttonVariants = tv({
             circ: 'h-11 w-11 text-2xl rounded-full'
         },
         color: {
-            primary: 'bg-[#1E1E1E] text-white border-1 border-[#1E1E1E]',
-            secondary: 'bg-white text-[#1E1E1E] border-1 border-[#1E1E1E]',
-            gradient: 'bg-gradient-to-b from-[#15F30D] to-[#0561A7] text-white'
+            primary: 'bg-eerie text-white border-1 border-eerie',
+            secondary: 'bg-white text-eerie border-1 border-eerie',
+            gradient: 'bg-gradient-to-b from-electricgreen to-persianblue text-white'
         }
     },
     // default button styles if no specified props
