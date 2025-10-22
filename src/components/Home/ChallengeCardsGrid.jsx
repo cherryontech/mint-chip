@@ -37,14 +37,9 @@ const ChallengeCardsGrid = () => {
         Customize your tasks and start your journey today
       </h2>
 
-      {/* 1. MOBILE LAYOUT (md:hidden)  */}
+      {/* mobile layout */}
       <div
-        className="
-        md:hidden 
-        flex space-x-[40px] 
-        overflow-x-scroll snap-x snap-mandatory 
-        px-4 pb-4 
-      "
+        className="md:hidden flex space-x-[40px] overflow-x-scroll snap-x snap-mandatory px-4 pb-4"
       >
         {challenges.map((item, index) => (
           <div key={index} className="shrink-0 snap-start">
@@ -53,7 +48,7 @@ const ChallengeCardsGrid = () => {
         ))}
       </div>
 
-      {/* 2. DESKTOP LAYOUT (md:block)  */}
+      {/* desktop layout */}
       <div className={`hidden md:block ${DESKTOP_MAX_WIDTH} mx-auto px-4`}>
         <div className="max-w-[944px] mx-auto">
           <div className="grid grid-cols-3 gap-[40px]">

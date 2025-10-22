@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 // components
 import Button from './Button';
 
+//Home Navbar
 const Navbar = () => {
   return (
     <div className="w-full bg-nyanza relative z-20 py-4">
@@ -21,7 +22,7 @@ const Navbar = () => {
             onClick={() => console.log('Go to sign up')}
             aria-label="Sign Up"
             to="/signup"
-            className="mx-1"
+            
           >
             Sign Up
           </Button>
@@ -30,7 +31,7 @@ const Navbar = () => {
             onClick={() => console.log('Go to sign in')}
             aria-label="Log In"
             to="/login"
-            className="mx-1"
+           
           >
             Log In
           </Button>

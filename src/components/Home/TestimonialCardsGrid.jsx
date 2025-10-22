@@ -28,8 +28,7 @@ const TestimonialCardsGrid = () => {
       <div
         className="
         /* LAYOUT DE REFLOW/400% ZOOM */
-        grid grid-cols-1 gap-[40px] 
-        px-4 
+        grid grid-cols-1 gap-[40px] px-4 
         
         /* LAYOUT  CARRUSEL */
         sm:flex sm:space-x-[40px] 
@@ -47,9 +46,7 @@ const TestimonialCardsGrid = () => {
         {testimonials.map((testimonial, index) => (
           <article
             key={index}
-            className="
-            relative bg-white p-9 rounded-lg border-2 border-solid border-[#1e1e1e] shadow-lg flex flex-col 
-            w-full                            
+            className="relative bg-white p-9 rounded-lg border-2 border-solid border-[#1e1e1e] shadow-lg flex flex-col w-full                            
             
             sm:snap-start                        
             sm:shrink-0                          

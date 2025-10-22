@@ -33,15 +33,14 @@ const Footer = () => {
   };
 
   return (
-    // 1. Main Footer Container
     <footer className="w-full relative bg-[linear-gradient(180deg,rgba(225,255,228,1)_0%,rgba(187,253,255,1)_100%)]">
-      {/* 2. Responsive Navigation Container (The Core) */}
+      {/*Responsive Navigation Container */}
       <nav
         className="
-          // Mobile Styles (Default: Stacked, Centered)
+          // Mobile Styles 
           flex flex-col items-center py-5 px-2 space-y-4
 
-          // Desktop Styles (lg: breakpoint applies the Grid layout)
+          // Desktop Styles 
           lg:grid 
           lg:grid-cols-2 
           lg:grid-rows-3 
@@ -67,8 +66,7 @@ const Footer = () => {
               
               
               // Grid Placement for Desktop
-              lg:text-left
-              lg:h-auto 
+              lg:text-left lg:h-auto 
               ${getLinkGridClasses(link.id)}
             `}
             aria-label={link.text}
