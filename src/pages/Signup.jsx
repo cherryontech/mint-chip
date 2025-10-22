@@ -1,8 +1,13 @@
+import Emailinput from '../components/Emailinput';
+import Passwordinput from '../components/PasswordInput';
+import Button from '../components/Button';
 function Signup() {
   return (
-    <div className="min-h-screen bg-emerald-100 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-lime-500">Sign up Page! 🎉</h1>
-    </div>
+    <>
+      <section className="flex justify-center items-center h-screen bg-gradient-to-b from-nyanza via-celeste via-50% to-white to-50%">
+        <form></form>
+      </section>
+    </>
   );
 }
 
