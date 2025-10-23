@@ -1,4 +1,5 @@
 import { tv } from 'tailwind-variants/lite';
+import { Link } from 'react-router-dom';
 
 const buttonVariants = tv({
     // base styles for all buttons
@@ -32,6 +33,7 @@ const buttonVariants = tv({
         }
     ]
 });
+
 export default function Button({ size, color, label, className, to }) {
   const classes = `${buttonVariants({ size, color })} ${className || ''}`;
 
