@@ -56,12 +56,12 @@ const TestimonialCardsGrid = () => {
             "
           >
             <div>
-              <p className="mb-4 font-poppins font-normal text-[#1e1e1e] text-lg tracking-[0] leading-normal">
+              <h3 className="mb-4 font-poppins font-normal text-[#1e1e1e] text-lg tracking-[0] leading-normal">
                 {testimonial.title}
-              </p>
-              <blockquote className="font-poppins font-normal text-[#1e1e1e] text-base tracking-[0] leading-normal">
+              </h3>
+              <p className="font-poppins font-normal text-[#1e1e1e] text-base tracking-[0] leading-normal">
                 {testimonial.content}
-              </blockquote>
+              </p>
             </div>
           </article>
         ))}

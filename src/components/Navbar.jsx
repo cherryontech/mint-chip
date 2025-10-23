@@ -7,7 +7,19 @@ import Button from './Button';
 //Home Navbar
 const Navbar = () => {
   return (
-    <div className="w-full bg-nyanza relative z-20 py-4">
+    <header className="w-full bg-nyanza relative z-20 py-4">
+      <a
+        href="#main-content"
+        className="
+          absolute top-[-9999px] left-0 z-50 p-3 
+          text-lg font-bold text-white bg-persianblue 
+          focus:top-0 focus:left-0 focus:z-50 focus:relative
+          
+        "
+      >
+        Skip to main content
+      </a>
+
       <div className="flex justify-between items-center px-10 py-4 md:px-12 md:py-6 h-20">
         <Link
           to="/"
@@ -20,24 +32,20 @@ const Navbar = () => {
           <Button
             isNavbar={true}
             onClick={() => console.log('Go to sign up')}
-            aria-label="Sign Up"
             to="/signup"
-            
           >
             Sign Up
           </Button>
           <Button
             isNavbar={true}
             onClick={() => console.log('Go to sign in')}
-            aria-label="Log In"
             to="/login"
-           
           >
             Log In
           </Button>
         </nav>
       </div>
-    </div>
+    </header>
   );
 };
 

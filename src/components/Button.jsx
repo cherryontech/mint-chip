@@ -10,12 +10,11 @@ const buttonVariants = tv({
   // all button variants
   variants: {
     size: {
-      // responsive navbar size: smaller on mobile so multiple buttons can sit side-by-side
       navbar:
         'h-14 w-32 md:w-[220px] px-4 md:px-[58px] py-[8px] rounded-[10px]',
-      sm: 'h-14 w-[220px] text-2xl text-md font-semibold rounded-lg drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
-      md: 'h-16 w-82 text-2xl font-semibold rounded-lg drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
-      lg: 'h-11 w-[501px] text-lg font-medium rounded-md drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
+      sm: 'h-12 w-[162px] text-base font-semibold rounded-lg lg:h-14 lg:w-[220px] lg:text-xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
+      md: 'h-11 w-[218px] text-base font-semibold rounded-lg lg:h-14 lg:w-[286px] lg:text-xl xl:h-16 xl:w-[327px] xl:text-2xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
+      lg: 'h-11 w-[345px] text-base font-medium rounded-md lg:w-[501px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
       circ: 'h-11 w-11 text-2xl rounded-full drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
       onboarding: 'h-14 w-full text-xl font-normal rounded-lg md:w-[280px]',
     },
@@ -35,6 +34,7 @@ const buttonVariants = tv({
   defaultVariants: {
     size: 'sm',
     color: 'primary',
+    isNavbar: false,
   },
   // conditional style cases for specific prop combinations
   compoundVariants: [
@@ -69,20 +69,10 @@ const buttonVariants = tv({
     {
       isNavbar: true,
       className:
-        'active:bg-persianblue active:text-white active:border-persianblue focus:ring-offset-white',
+        'text-stone-900 text-2xl font-normal font-playfair group-hover:text-white group-hover:text-2xl group-hover:font-semibold group-hover:font-poppins active:bg-persianblue active:text-white active:border-persianblue focus:ring-offset-white',
     },
   ],
 });
-
-//  Navbar classes
-const navbarTextClasses = `
-    text-stone-900 text-2xl font-normal font-playfair 
-    group-hover:text-white 
-    group-hover:text-2xl 
-    group-hover:font-semibold 
-    group-hover:font-poppins
-    
-`;
 
 export default function Button({
   size,
@@ -93,42 +83,33 @@ export default function Button({
   isNavbar = false,
   ...props
 }) {
+  // Pass isNavbar to buttonVariants
   const finalClasses = buttonVariants({
     size: isNavbar ? 'navbar' : size,
     color: isNavbar ? 'none' : color,
+    isNavbar: isNavbar,
   });
 
-  const getContent = () => {
-    // If it's a Navbar button, use wrapped children
-    if (isNavbar) {
-      return <span className={navbarTextClasses}>{children}</span>;
-    }
-
-    // If children is provided, use it
-    if (children) {
-      return children;
-    }
-
-    // If no children, use label
-    return label;
-  };
+  // Direct content without wrappers
+  const content = children || label;
 
   if (to) {
-    // Merge any className passed via props with generated classes
     const { className, ...rest } = props;
     const merged = `${finalClasses} ${className || ''}`.trim();
+
     return (
       <Link to={to} className={merged} {...rest}>
-        {getContent()}
+        {content}
       </Link>
     );
   }
 
   const { className, ...rest } = props;
   const merged = `${finalClasses} ${className || ''}`.trim();
+
   return (
     <button className={merged} {...rest}>
-      {getContent()}
+      {content}
     </button>
   );
 }

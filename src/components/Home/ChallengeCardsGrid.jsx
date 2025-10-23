@@ -38,9 +38,7 @@ const ChallengeCardsGrid = () => {
       </h2>
 
       {/* mobile layout */}
-      <div
-        className="md:hidden flex space-x-[40px] overflow-x-scroll snap-x snap-mandatory px-4 pb-4"
-      >
+      <div className="md:hidden flex space-x-[40px] overflow-x-scroll snap-x snap-mandatory px-4 pb-4">
         {challenges.map((item, index) => (
           <div key={index} className="shrink-0 snap-start">
             <ChallengeCard title={item.title} description={item.description} />

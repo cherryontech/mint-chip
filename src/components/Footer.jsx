@@ -69,7 +69,6 @@ const Footer = () => {
               lg:text-left lg:h-auto 
               ${getLinkGridClasses(link.id)}
             `}
-            aria-label={link.text}
           >
             {link.text}
           </Link>
