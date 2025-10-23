@@ -1,5 +1,4 @@
 import { tv } from 'tailwind-variants/lite';
-import { Link } from 'react-router-dom';
 
 const buttonVariants = tv({
     // base styles for all buttons
@@ -34,18 +33,8 @@ const buttonVariants = tv({
     ]
 });
 
-export default function Button({ size, color, label, className, to }) {
-  const classes = `${buttonVariants({ size, color })} ${className || ''}`;
-
-  // If 'to' prop exists, render as Link for navigation
-  if (to) {
+export default function Button({ size, color, label }) {
     return (
-      <Link to={to} className={classes}>
-        {label}
-      </Link>
-    );
-  }
-
-  // If 'to' prop does not exist, render a normal button
-  return <button className={classes}>{label}</button>;
+        <button className={buttonVariants({ size, color })}>{label}</button>
+    )
 }

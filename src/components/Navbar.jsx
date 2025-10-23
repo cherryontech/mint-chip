@@ -1,26 +1,13 @@
 // react
 import { Link } from 'react-router-dom';
 
-// components
-import Button from './Button';
-
-const navbarButtonClass = `
+const navbarClass = `
   flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out
-  
   h-14 w-32 md:w-[220px] px-4 md:px-[58px] py-[8px] rounded-[10px] 
-  
   text-stone-900 text-2xl font-normal font-playfair
   bg-transparent
-  border-4 border-transparent
-  
-  hover:bg-[#888888] hover:text-white hover:font-semibold hover:font-poppins
-  
-  active:bg-[#0561A7] active:border-[#0561A7] active:text-white active:font-semibold active:font-poppins active:ring-0 active:ring-offset-0
-  
-  focus:outline-none focus:bg-stone-900 focus:text-white focus:ring-4 focus:ring-[#0561A7] focus:ring-offset-4 focus:ring-offset-nyanza focus:font-semibold focus:font-poppins
-`;
+  border-4 border-transparent`;
 
-// Home Navbar
 const Navbar = () => {
   return (
     <header className="w-full bg-nyanza relative z-20 py-4">
@@ -46,15 +33,13 @@ const Navbar = () => {
         <nav className="flex flex-row items-center gap-2 md:gap-4">
           <Link
             to="/signup"
-            className={navbarButtonClass}
-            onClick={() => console.log('Go to sign up')}
+            className={navbarClass}
           >
             Sign Up
           </Link>
           <Link
             to="/login"
-            className={navbarButtonClass}
-            onClick={() => console.log('Go to sign in')}
+            className={navbarClass}
           >
             Log In
           </Link>
