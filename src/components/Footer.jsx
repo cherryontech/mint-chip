@@ -62,7 +62,8 @@ const Footer = () => {
             key={link.id}
             to={link.href}
             className={`
-              relative h-[30px] font-medium text-[#1e1e1e] text-xl tracking-[0] leading-[normal]   focus:ring-2 focus:ring-persianblue rounded-[5px]  px-5
+               relative h-[30px] font-medium text-[#1e1e1e] text-xl tracking-[0] leading-[normal] 
+              focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px] px-5 
               
               
               // Grid Placement for Desktop

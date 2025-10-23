@@ -22,9 +22,13 @@ const Home = () => {
               strategies women can use to prevent and fight burnout
             </p>
 
-            <Button size="sm" color="primary" label="Sign Up" to="/signup">
-              Sign Up
-            </Button>
+            <Button
+              size="sm"
+              color="primary"
+              label="Sign Up"
+              to="/signup"
+              className="hover:bg-[#888888] hover:text-white hover:font-semibold hover:font-poppins active:bg-[#0561A7] active:border-[#0561A7] active:text-white active:font-semibold active:font-poppins active:ring-0 active:ring-offset-0 focus:outline-none focus:ring-4 focus:ring-[#0561A7] focus:ring-offset-4 focus:ring-offset-nyanza focus:font-semibold focus:font-poppins"
+            />
           </section>
         </div>
 
