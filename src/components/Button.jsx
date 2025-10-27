@@ -6,15 +6,15 @@ const buttonVariants = tv({
     // all button variants
     variants: {
         size: {
-            sm: 'h-14 w-[220px] text-2xl text-md font-semibold rounded-lg',
-            md: 'h-16 w-82 text-2xl font-semibold rounded-lg',
-            lg: 'h-11 w-[501px] text-lg font-medium rounded-md',
+            sm: 'h-12 w-[162px] text-base font-semibold rounded-lg lg:h-14 lg:w-[220px] lg:text-xl',
+            md: 'h-11 w-[218px] text-base font-semibold rounded-lg lg:h-14 lg:w-[286px] lg:text-xl xl:h-16 xl:w-[327px] xl:text-2xl',
+            lg: 'h-11 w-[345px] text-base font-medium rounded-md lg:w-[501px]',
             circ: 'h-11 w-11 text-2xl rounded-full'
         },
         color: {
-            primary: 'bg-[#1E1E1E] text-white border-1 border-[#1E1E1E]',
-            secondary: 'bg-white text-[#1E1E1E] border-1 border-[#1E1E1E]',
-            gradient: 'bg-gradient-to-b from-[#15F30D] to-[#0561A7] text-white'
+            primary: 'bg-eerie text-white border-1 border-eerie',
+            secondary: 'bg-white text-eerie border-1 border-eerie',
+            gradient: 'bg-gradient-to-b from-electricgreen to-persianblue text-white'
         }
     },
     // default button styles if no specified props
