@@ -1,29 +1,50 @@
-import { Link } from 'react-router-dom';
+//react
+import React from 'react';
 
-function Home() {
+//components
+import Button from '../components/Button';
+import ChallengeCardsGrid from '../components/Home/ChallengeCardsGrid';
+import TestimonialCardsGrid from '../components/Home/TestimonialCardsGrid';
+
+const Home = () => {
   return (
-    <div className="min-h-screen bg-emerald-100 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-lime-500">Home Page! 🎉</h1>
-      <Link to="/achievements" className="m-4">
-        Achievements{' '}
-      </Link>
-      <Link to="/community" className="m-4">
-        Community{' '}
-      </Link>
-      <Link to="/dashboard" className="m-4">
-        Dashboard{' '}
-      </Link>
-      <Link to="login" className="m-4">
-        Login{' '}
-      </Link>
-      <Link to="/onboarding" className="m-4">
-        Onboarding{' '}
-      </Link>
-      <Link to="/signup" className="m-4">
-        Sign up{' '}
-      </Link>
+    <div className="bg-white w-full relative">
+      <main id="main-content">
+        {/* Hero section */}
+        <div className="w-full h-[350px] sm:h-[350px] bg-gradient-to-b from-nyanza to-celeste rounded-bl-[40px] rounded-br-[40px] relative mt-[-22px]">
+          <section className="w-full h-full flex flex-col items-center justify-center px-4 relative z-10">
+            <h1 className="w-[745px] max-w-full mx-auto h-auto mb- text-center text-stone-900 text-4xl sm:text-5xl lg:text-5xl font-bold font-playfair capitalize leading-snug">
+              Helping Women In Tech<br/>
+               Fight Burnout
+            </h1>
+
+            <p className="w-[829px] max-w-full mx-auto h-auto mb-6 sm:mb-8 font-poppins font-normal text-eerie text-lg sm:text-2xl lg:text-xl text-center tracking-normal leading-normal px-2">
+              Healie hosts a 30-Day Detox Challenge that provides five healthy
+              strategies women can use to prevent and fight burnout
+            </p>
+
+            <Button
+              size="sm"
+              color="primary"
+              label="Sign Up"
+              to="/signup"
+              
+            />
+          </section>
+        </div>
+
+        {/* Challenge cards section */}
+        <section className="pt-10 pb-10 px-2">
+          <ChallengeCardsGrid />
+        </section>
+
+        {/* Testimonials section */}
+        <section className="pb-10 px-2">
+          <TestimonialCardsGrid />
+        </section>
+      </main>
     </div>
   );
-}
+};
 
 export default Home;

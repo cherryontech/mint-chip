@@ -38,14 +38,14 @@ function Navbar() {
       <header className="w-full bg-nyanza relative z-20 py-4">
         <a
           href="#main-content"
-          className="absolute top-[-9999px] left-0 z-50 p-3 text-lg font-bold text-white bg-persianblue focus:top-0 focus:left-0 focus:z-50 focus:relative"
+          className="absolute top-[-9999px] left-0 z-50 p-1 ml-10 text-lg font-bold text-white bg-persianblue focus:top-0 focus:left-0 focus:z-50 focus:relative"
         >
           Skip to main content
         </a>
         <div className="flex justify-between items-center px-10 py-4 md:px-12 md:py-6 h-20">
           <Link
             to="/"
-            className="text-stone-900 text-2xl cursor-pointer font-normal font-playfair focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px]"
+            className="text-stone-900 text-2xl cursor-pointer font-normal font-playfair focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px] focus:p-4"
           >
             Healie
           </Link>
@@ -74,10 +74,10 @@ function Navbar() {
   // navbar for authenticated user
   return (
     <>
-      <header className="w-full bg-gradient-to-b from-nyanza to-celeste relative z-20 py-4">
+      <header className="w-full bg-nyanza relative z-20 py-4">
         <a
           href="#main-content"
-          className="absolute top-[-9999px] left-0 z-50 p-3 text-lg font-bold text-white bg-persianblue focus:top-0 focus:left-0 focus:z-50 focus:relative"
+          className="absolute top-[-9999px] left-0 z-50 p-1 ml-10 text-lg font-bold text-white bg-persianblue focus:top-0 focus:left-0 focus:z-50 focus:relative"
         >
           Skip to main content
         </a>
@@ -96,7 +96,7 @@ function Navbar() {
           {/* logo */}
           <Link
             to="/"
-            className="hidden md:block text-stone-900 text-2xl cursor-pointer font-normal font-playfair focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px] hover:font-bold"
+            className="text-stone-900 text-2xl cursor-pointer font-normal font-playfair focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px]"
           >
             Healie
           </Link>
@@ -109,7 +109,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/dashboard"
-                  className="text-stone-900 text-base font-normal font-Playfair hover:font-bold focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px]"
+                  className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus:ring-2 focus:ring-persianblue focus:p-2 rounded-[5px]"
                 >
                   Dashboard
                 </Link>
@@ -117,7 +117,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/detox-challenge"
-                  className="text-stone-900 text-base font-normal font-Playfair hover:font-bold focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px]"
+                  className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus:ring-2 focus:ring-persianblue focus:p-2 rounded-[5px]"
                 >
                   Detox Challenge
                 </Link>
@@ -125,32 +125,31 @@ function Navbar() {
               <li>
                 <Link
                   to="/profile"
-                  className="text-stone-900 text-base font-normal font-Playfair hover:font-bold focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px]"
+                  className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus:ring-2 focus:ring-persianblue focus:p-2 rounded-[5px]"
                 >
                   Profile
                 </Link>
               </li>
             </ul>
           </nav>
-          <div className="hidden md:flex justify-start items-center gap-3">
-            <button
-              onClick={handleLogout}
-              className="text-stone-900 text-base font-normal font-Playfair cursor-pointer hover:font-bold focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px] p-1"
-              aria-label="Log out of your account"
-            >
+          <div
+            // Single interactive div for Log Out and Home redirection
+            onClick={handleLogout}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                handleLogout();
+              }
+            }}
+            className="flex justify-start items-center gap-3 cursor-pointer text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px] p-1 transition-all duration-300 ease-in-out"
+            role="button"
+            tabIndex="0"
+            aria-label="Log out of your account and go to home page"
+          >
+            <span className="text-stone-900 text-base font-normal font-playfair">
               Log Out
-            </button>
+            </span>
+            {/* logout icon */}
             <MdOutlineLogin className="text-2xl" aria-hidden="true" />
-          </div>
-          <div className="flex md:hidden justify-start items-center gap-3">
-            <button
-              onClick={handleLogout}
-              className="text-stone-900 text-base font-normal font-Playfair cursor-pointer focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px] p-1"
-              aria-label="Log out of your account"
-            >
-              Log Out
-            </button>
-            <MdOutlineLogin aria-hidden="true" />
           </div>
         </div>
       </header>

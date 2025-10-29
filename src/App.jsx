@@ -12,9 +12,9 @@ function App() {
   return (
     <div>
       {!hideNav && (showHomeNav ? <Navbar /> : <Navbar />)}
-      <main>
-        <Outlet />
-      </main>
+
+      <Outlet />
+
       {!hideFooter && <Footer />}
     </div>
   );
