@@ -7,22 +7,38 @@ function Emailinput({
   fieldName,
   label,
   required = false,
+  setisValidEmail,
+  isValidEmail,
 }) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [error, setError] = useState('');
+  let inputClassName;
   const handleChange = (e) => {
     const newEmail = e.target.value;
     if (!newEmail && required) {
       setError('Email is required');
-    } else if (emailRegex.text(newEmail) === false) {
+      setisValidEmail(false);
+    } else if (emailRegex.test(newEmail) === false) {
       setError('Please enter a valid email address.');
+      setisValidEmail(false);
     } else {
       setError('');
+      setisValidEmail(true);
     }
     console.log('Error', error);
     setFormValue(fieldName, newEmail);
   };
-  let inputDynamicStyles = '';
+  if (error) {
+    inputClassName =
+      'border-sangria ring-2 ring-sangria focus:ring-sangria focus:outline-none';
+  } else if (isValidEmail) {
+    inputClassName =
+      'border-olivegreen ring-2 ring-olivegreen focus:ring-olivegreen focus:outline-none';
+  } else {
+    inputClassName =
+      'border-zinc-300 ring-2 ring-zinc-300 focus:ring-persianblue focus:outline-none';
+  }
+
   return (
     <>
       <Baseinput
@@ -33,9 +49,19 @@ function Emailinput({
         name={fieldName}
         required={required}
         label={label}
-        inputClassName={inputDynamicStyles}
-        //aria-invalid={ariaInvalid}
+        inputClassName={inputClassName}
+        ariaInvalid={isValidEmail === false ? true : undefined}
+        ariaDescribedBy={error ? `${fieldName}-error` : undefined}
       />
+      {error && (
+        <div
+          id={`${fieldName}-error`}
+          role="alert"
+          className="text-sm mt-[8px]"
+        >
+          <p>{error}</p>
+        </div>
+      )}
     </>
   );
 }

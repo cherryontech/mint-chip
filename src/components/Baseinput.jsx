@@ -7,10 +7,11 @@ function Baseinput({
   placeholder = '',
   disabled = false,
   labelClassName = '',
-  ariaInvalid = false,
+  ariaInvalid,
   inputClassName = '',
   onChange,
   value = '',
+  ariaDescribedBy,
 }) {
   return (
     <>
@@ -28,12 +29,13 @@ function Baseinput({
         name={name}
         required={required || undefined}
         placeholder={placeholder}
-        className={`rounded-[5px] outline-2 
-          outline-zinc-300 block w-full h-11 px-4 py-2
+        className={`rounded-[5px] 
+           block w-full h-11 px-4 py-2
           bg-white text-black
-          focus:outline-none focus:ring-2 focus:ring-persianblue focus:ring-offset-1
-          disabled:bg-gray-100 disabled:text-gray-500 ${inputClassName}`}
+           ${inputClassName}
+          disabled:bg-gray-100 disabled:text-gray-500`}
         aria-invalid={ariaInvalid}
+        aria-describedby={ariaDescribedBy}
         disabled={disabled}
       />
     </>

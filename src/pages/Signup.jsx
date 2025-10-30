@@ -6,23 +6,30 @@ import { Link } from 'react-router-dom';
 
 function Signup() {
   const [formValues, setFormValues] = useState({});
+  const [isValidEmail, setisValidEmail] = useState(false);
+  const [isValidPassword, setisValidPassword] = useState(false);
+  const [formSubmitMessage, setFormSubmitMessage] = useState('');
   const setFormValue = (fieldName, value) => {
     setFormValues((prevValue) => ({ ...prevValue, [fieldName]: value }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const signupFormData = new FormData();
-    for (const key in formValues) {
-      signupFormData.append(key, formValues[key]);
+    if (!isValidEmail || !isValidPassword) {
+      setFormSubmitMessage('Fill form properly');
+    } else {
+      const signupFormData = new FormData();
+      for (const key in formValues) {
+        signupFormData.append(key, formValues[key]);
+      }
+      console.log('Submitting Signup Data:', signupFormData);
     }
-    console.log('Submitting Signup Data:', signupFormData);
   };
   return (
     <>
       <section className="flex justify-center items-center min-h-screen bg-gradient-to-b from-nyanza to-celeste md:h-screen md:bg-gradient-to-b md:from-nyanza md:via-celeste md:via-50% md:to-white md:to-50% ">
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col bg-white w-full max-w-lg md:min-w-[30vw] md:h-auto mx-auto rounded-[10px] h-[68vh] shadow-[0px_4px_15px_8px_rgba(30,30,30,0.10)] p-14"
+          className="flex flex-col bg-white w-full max-w-lg md:min-w-[30vw]  mx-auto rounded-[10px] min-h-[68vh]  max-h-[80vh] h-auto shadow-[0px_4px_15px_8px_rgba(30,30,30,0.10)] p-14"
           noValidate
         >
           <h3 className="font-playfair text-2xl mb-[44px]">Sign Up</h3>
@@ -39,9 +46,11 @@ function Signup() {
               setFormValue={setFormValue}
               label="Email Address"
               required={true}
+              setisValidEmail={setisValidEmail}
+              isValidEmail={isValidEmail}
             />
           </div>
-          <div className="relative mt-[44px]">
+          <div className="relative mt-[24px]">
             <Link
               to=""
               className="underline absolute top-0 right-0 focus:outline-none focus:ring-2 focus:ring-persianblue focus:ring-offset-1"
@@ -50,10 +59,13 @@ function Signup() {
             </Link>
             <Passwordinput
               formValue={formValues}
-              fieldName="signuPassword"
+              fieldName="signupPassword"
               setFormValue={setFormValue}
               label="Password"
               required={true}
+              setisValidPassword={setisValidPassword}
+              isValidPassword={isValidPassword}
+              pageType="signup"
             />
           </div>
           <div className="block mt-[16px] mb-[44px]">
@@ -66,7 +78,11 @@ function Signup() {
             />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          <Button size="lg" color="primary" label="Complete Sign up" />
+          {formSubmitMessage && <p className="text-sm">{formSubmitMessage}</p>}
+          <div className="flex justify-center">
+            <Button size="lg" color="primary" label="Complete Sign up" />
+          </div>
+
           <div className="mt-[12px]">
             Existing user?{' '}
             <Link

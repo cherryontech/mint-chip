@@ -2,20 +2,29 @@ import Emailinput from '../components/Emailinput';
 import Passwordinput from '../components/PasswordInput';
 import Button from '../components/Button';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState({});
+  const [isValidEmail, setisValidEmail] = useState(false);
+  const [isValidPassword, setisValidPassword] = useState(false);
+  const [formSubmitMessage, setFormSubmitMessage] = useState('');
   const setFormValue = (fieldName, value) => {
     setFormValues((prevValue) => ({ ...prevValue, [fieldName]: value }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const loginFormData = new FormData();
-    for (const key in formValues) {
-      loginFormData.append(key, formValues[key]);
+    if (!isValidEmail || !isValidPassword) {
+      setFormSubmitMessage('Fill form properly');
+    } else {
+      const loginFormData = new FormData();
+      for (const key in formValues) {
+        loginFormData.append(key, formValues[key]);
+      }
+      navigate('/dashboard');
+      console.log('Login Submission Data:', loginFormData);
     }
-    console.log('Login Submission Data:', loginFormData);
   };
   return (
     <section className="flex justify-center items-center min-h-screen md:h-screen bg-gradient-to-b from-nyanza to-celeste md:bg-gradient-to-b md:from-nyanza md:via-celeste md:via-50% md:to-white md:to-50%">
@@ -31,9 +40,12 @@ function Login() {
             setFormValue={setFormValue}
             fieldName="loginEmail"
             label="Email Address"
+            setisValidEmail={setisValidEmail}
+            isValidEmail={isValidEmail}
+            pageType="login"
           />
         </div>
-        <div className="relative mt-[44px]">
+        <div className="relative mt-[24px]">
           <Link
             to=""
             className="underline absolute top-0 right-0 focus:outline-none focus:ring-2 focus:ring-persianblue focus:ring-offset-1"
@@ -45,6 +57,8 @@ function Login() {
             setFormValue={setFormValue}
             fieldName="loginPassword"
             label="Password"
+            setisValidPassword={setisValidPassword}
+            isValidPassword={isValidPassword}
           />
         </div>
         <div className="block mt-[16px] mb-[44px]">
@@ -57,7 +71,10 @@ function Login() {
           />
           <label htmlFor="remember">Remember me</label>
         </div>
-        <Button size="lg" color="primary" label="Sign in" />
+        {formSubmitMessage && <p className="text-sm">{formSubmitMessage}</p>}
+        <div className="flex justify-center">
+          <Button size="lg" color="primary" label="Sign in" />
+        </div>
         <div className="mt-[12px]">
           New user?{' '}
           <Link
