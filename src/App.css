@@ -1,0 +1,12 @@
+button:focus-visible {
+  outline: solid 4px var(--color-persianblue);
+  outline-offset: 8px;
+}
+button:hover {
+  background-color: var(--color-zinc);
+  color: white;
+}
+button:active {
+  background-color: var(--color-persianblue);
+  color: white;
+}
