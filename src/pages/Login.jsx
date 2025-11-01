@@ -34,7 +34,13 @@ function Login() {
         noValidate
       >
         <h3 className="font-playfair text-2xl mb-[44px]">Sign In</h3>
-        <div>
+        <div className="relative">
+          <Link
+            to=""
+            className="underline absolute top-0 right-0 focus:outline-none focus:ring-2 focus:ring-persianblue focus:ring-offset-1"
+          >
+            Forgot Username
+          </Link>
           <Emailinput
             formValue={formValues}
             setFormValue={setFormValue}

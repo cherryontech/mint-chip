@@ -5,6 +5,7 @@ button:focus-visible {
 button:hover {
   background-color: var(--color-zinc);
   color: white;
+  cursor: pointer;
 }
 button:active {
   background-color: var(--color-persianblue);

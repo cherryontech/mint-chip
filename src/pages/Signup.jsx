@@ -2,9 +2,10 @@ import Emailinput from '../components/Emailinput';
 import Passwordinput from '../components/PasswordInput';
 import Button from '../components/Button';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Signup() {
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState({});
   const [isValidEmail, setisValidEmail] = useState(false);
   const [isValidPassword, setisValidPassword] = useState(false);
@@ -21,6 +22,7 @@ function Signup() {
       for (const key in formValues) {
         signupFormData.append(key, formValues[key]);
       }
+      navigate('/login');
       console.log('Submitting Signup Data:', signupFormData);
     }
   };
@@ -33,13 +35,7 @@ function Signup() {
           noValidate
         >
           <h3 className="font-playfair text-2xl mb-[44px]">Sign Up</h3>
-          <div className="relative">
-            <Link
-              to=""
-              className="underline absolute top-0 right-0 focus:outline-none focus:ring-2 focus:ring-persianblue focus:ring-offset-1"
-            >
-              Forgot Username
-            </Link>
+          <div>
             <Emailinput
               formValue={formValues}
               fieldName="signupEmail"
@@ -51,12 +47,6 @@ function Signup() {
             />
           </div>
           <div className="relative mt-[24px]">
-            <Link
-              to=""
-              className="underline absolute top-0 right-0 focus:outline-none focus:ring-2 focus:ring-persianblue focus:ring-offset-1"
-            >
-              Reset Password
-            </Link>
             <Passwordinput
               formValue={formValues}
               fieldName="signupPassword"
