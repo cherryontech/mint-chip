@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 function Error() {
   return (
     <>
-      {/* Accessibility: Skip to main content link. 
-        It jumps to the main content div for keyboard users.
-      */}
+     
       <a
         href="#main-content"
         className="absolute top-[-9999px] left-0 z-50 p-1 ml-10 text-lg font-bold text-white bg-persianblue focus:top-0 focus:left-0 focus:z-50 focus:relative"
