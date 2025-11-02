@@ -15,7 +15,7 @@ export default function Onboarding() {
           </p>
         </div>
         {/* button quiz grid */}
-        <div className="grid grid-cols-2 grid-rows-3 gap-y-10 gap-x-14">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:grid-rows-3 md:gap-y-10 md:gap-x-14">
           <Button size="md" color="secondary" label="Sleep" />
           <Button size="md" color="secondary" label="Postpartum Anxiety" />
           <Button size="md" color="secondary" label="Self-Doubt" />
@@ -24,7 +24,7 @@ export default function Onboarding() {
           <Button size="md" color="secondary" label="Gender Bias" />
         </div>
         {/* next and skip buttons */}
-        <div className="flex flex-row gap-8">
+        <div className="flex flex-col-reverse gap-5 md:flex-row md:gap-8">
           <Button size="sm" color="secondary" label="Skip" />
           <Button size="sm" color="primary" label="Next" />
         </div>
