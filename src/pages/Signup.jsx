@@ -68,7 +68,11 @@ function Signup() {
             />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          {formSubmitMessage && <p className="text-sm">{formSubmitMessage}</p>}
+          {formSubmitMessage && (
+            <p className="text-sm mb-[18px]" role="alert">
+              {formSubmitMessage}
+            </p>
+          )}
           <div className="flex justify-center">
             <Button size="lg" color="primary" label="Complete Sign up" />
           </div>

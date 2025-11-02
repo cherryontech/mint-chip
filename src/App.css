@@ -1,13 +1,13 @@
-button:focus-visible {
+button:not(.toggle-btn):focus-visible {
   outline: solid 4px var(--color-persianblue);
   outline-offset: 8px;
 }
-button:hover {
+button:not(.toggle-btn):hover {
   background-color: var(--color-zinc);
   color: white;
   cursor: pointer;
 }
-button:active {
+button:not(.toggle-btn):active {
   background-color: var(--color-persianblue);
   color: white;
 }

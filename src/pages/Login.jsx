@@ -77,7 +77,11 @@ function Login() {
           />
           <label htmlFor="remember">Remember me</label>
         </div>
-        {formSubmitMessage && <p className="text-sm">{formSubmitMessage}</p>}
+        {formSubmitMessage && (
+          <p className="text-sm mb-[18px]" role="alert">
+            {formSubmitMessage}
+          </p>
+        )}
         <div className="flex justify-center">
           <Button size="lg" color="primary" label="Sign in" />
         </div>

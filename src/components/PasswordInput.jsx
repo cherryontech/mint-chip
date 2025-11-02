@@ -99,7 +99,7 @@ function Passwordinput({
         onClick={togglePassword}
         aria-label={showPassword ? 'Hide password' : 'Show password'}
         aria-pressed={showPassword}
-        className="absolute right-3 top-[46px] text-2xl text-black hover:text-persianblue
+        className="toggle-btn absolute right-3 top-[46px] text-2xl text-black
           focus:outline-none focus:ring-2 focus:ring-persianblue focus:ring-offset-1 cursor-pointer"
       >
         {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -110,6 +110,7 @@ function Passwordinput({
           role="alert"
           className="text-sm mt-[8px]"
         >
+          <p>Password must:</p>
           {error.split('<br>').map((message, index) => (
             <p key={index}>{message}</p>
           ))}
