@@ -6,11 +6,11 @@ export default function Onboarding() {
       {/* quiz card */}
       <div className="flex flex-col justify-center items-center gap-10 bg-white rounded-[10px] h-[80vh] w-full sm:w-[90vw] md:w-[80vw] lg:w-[70vw] xl:w-[65vw] 2xl:w-[60vw] shadow-[0_4px_15px_8px_rgba(30,30,30,0.10)]">
         {/* title and subtitle */}
-        <div className="flex flex-col gap-3">
-          <h1 className="text-3xl font-medium">
+        <div className="flex flex-col gap-3 text-center">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-medium">
             What are some of your concerns today?
           </h1>
-          <p className="text-2xl font-normal">
+          <p className="text-base sm:text-lg lg:text-2xl font-normal">
             Your selections help us customize your dashboard
           </p>
         </div>
