@@ -6,13 +6,13 @@ import { PiListBulletsFill } from 'react-icons/pi';
 
 const MobileMenu = ({ isOpen, toggleMenu }) => {
   const navLinks = [
-    { name: 'Dashboard', href: '/Dashboard', icon: PiListBulletsFill },
+    { name: 'Dashboard', href: '/dashboard', icon: PiListBulletsFill },
     {
       name: 'Detox Challenge',
-      href: '/DetoxChallenge',
+      href: '/detoxChallenge',
       icon: RiLayoutHorizontalFill,
     },
-    { name: 'Profile', href: '/Profile', icon: RiUser3Fill },
+    { name: 'Profile', href: '/profile', icon: RiUser3Fill },
   ];
 
   return (
