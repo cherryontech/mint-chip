@@ -12,7 +12,7 @@ const loggedOutLinks = [
     text: 'Terms of Service',
     href: '/terms-of-service',
   },
-  { id: 'onboarding', text: 'Onboarding', href: '/onboarding' },
+  
 ];
 
 // Links logged in
@@ -45,7 +45,7 @@ const Footer = () => {
   }, []);
 
   const getLinkClasses = (isLoggedIn) =>
-    `focus:outline-none focus:ring-2 rounded-lg px-2 py-1 transition-colors whitespace-nowrap ${
+    `focus:outline-none focus-visible:ring-2 rounded-lg px-2 py-1 transition-colors whitespace-nowrap ${
       isLoggedIn
         ? `font-[Poppins] text-xl font-medium text-[#1E1E1E] leading-normal hover:font-bold focus:ring-persianblue `
         : 'font-medium text-xl text-[#1e1e1e]  hover:font-bold focus:ring-persianblue'

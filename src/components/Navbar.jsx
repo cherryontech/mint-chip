@@ -38,14 +38,14 @@ function Navbar() {
       <header className="w-full bg-nyanza relative z-20 py-4">
         <a
           href="#main-content"
-          className="absolute top-[-9999px] left-0 z-50 p-1 ml-10 text-lg font-bold text-white bg-persianblue focus:top-0 focus:left-0 focus:z-50 focus:relative"
+          className="absolute top-[-9999px] left-0 z-50 p-1 ml-10 text-lg font-bold text-white bg-persianblue focus:outline-none focus:top-0 focus:left-0 focus:z-50 focus:relative focus:ring-2 focus:ring-persianblue focus:rounded"
         >
           Skip to main content
         </a>
         <div className="flex justify-between items-center px-10 py-4 md:px-12 md:py-6 h-20">
           <Link
             to="/"
-            className="text-stone-900 text-2xl cursor-pointer font-normal font-playfair focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px] focus:p-4"
+            className="text-stone-900 text-2xl cursor-pointer font-normal font-playfair focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue rounded-[5px] focus-visible:p-2"
           >
             Healie
           </Link>
@@ -55,13 +55,13 @@ function Navbar() {
           >
             <Link
               to="/signup"
-              className="flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out h-14 w-32 md:w-[220px] px-4 md:px-[58px] py-[8px] rounded-[10px] text-stone-900 text-2xl font-normal font-playfair bg-transparent border-4 border-transparent hover:border-persianblue focus:outline-none focus:ring-2 focus:ring-persianblue"
+              className="flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out h-14 w-32 md:w-[220px] px-4 md:px-[58px] py-[8px] rounded-[10px] text-stone-900 text-2xl font-normal font-playfair bg-transparent border-4 border-transparent hover:bg-eerie  hover:text-white  hover:font-poppins hover:font-semibold  focus:outline-none  focus-visible:ring-2 active:bg-persianblue focus-visible:ring-persianblue"
             >
               Sign Up
             </Link>
             <Link
               to="/login"
-              className="flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out h-14 w-32 md:w-[220px] px-4 md:px-[58px] py-[8px] rounded-[10px] text-stone-900 text-2xl font-normal font-playfair bg-transparent border-4 border-transparent hover:border-persianblue focus:outline-none focus:ring-2 focus:ring-persianblue"
+              className="flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out h-14 w-32 md:w-[220px] px-4 md:px-[58px] py-[8px] rounded-[10px] text-stone-900 text-2xl font-normal font-playfair bg-transparent border-4 border-transparent hover:bg-eerie  hover:text-white  hover:font-poppins hover:font-semibold  focus:outline-none  focus-visible:ring-2  active:bg-persianblue focus-visible:ring-persianblue"
             >
               Log In
             </Link>
@@ -77,7 +77,7 @@ function Navbar() {
       <header className="w-full bg-nyanza relative z-20 py-4">
         <a
           href="#main-content"
-          className="absolute top-[-9999px] left-0 z-50 p-1 ml-10 text-lg font-bold text-white bg-persianblue focus:top-0 focus:left-0 focus:z-50 focus:relative"
+          className="absolute top-[-9999px] left-0 z-50 p-1 ml-10 text-lg font-bold text-white bg-persianblue focus:outline-none focus:top-0 focus:left-0 focus:z-50 focus:relative focus:ring-2 focus:ring-persianblue focus:rounded "
         >
           Skip to main content
         </a>
@@ -85,7 +85,7 @@ function Navbar() {
           {/* hamburger menu */}
           <button
             onClick={toggleMenu}
-            className="text-stone-900 text-3xl focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px] md:hidden p-2"
+            className="text-stone-900 text-3xl rounded-[5px] md:hidden p-2"
             aria-controls="mobile-menu"
             aria-expanded={isMenuOpen}
             aria-label="Open navigation menu"
@@ -96,7 +96,7 @@ function Navbar() {
           {/* logo */}
           <Link
             to="/"
-            className="text-stone-900 text-2xl cursor-pointer font-normal font-playfair focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px]"
+            className="text-stone-900 text-2xl cursor-pointer font-normal font-playfair focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue rounded-[5px] focus-visible:p-2"
           >
             Healie
           </Link>
@@ -109,7 +109,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/dashboard"
-                  className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus:ring-2 focus:ring-persianblue focus:p-2 rounded-[5px]"
+                  className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue focus-visible:p-2 rounded-[5px]"
                 >
                   Dashboard
                 </Link>
@@ -117,7 +117,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/detox-challenge"
-                  className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus:ring-2 focus:ring-persianblue focus:p-2 rounded-[5px]"
+                  className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue focus-visible:p-2 rounded-[5px]"
                 >
                   Detox Challenge
                 </Link>
@@ -125,7 +125,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/profile"
-                  className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus:ring-2 focus:ring-persianblue focus:p-2 rounded-[5px]"
+                  className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue focus-visible:p-2 rounded-[5px]"
                 >
                   Profile
                 </Link>
@@ -140,7 +140,7 @@ function Navbar() {
                 handleLogout();
               }
             }}
-            className="flex justify-start items-center gap-3 cursor-pointer text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus:ring-2 focus:ring-persianblue rounded-[5px] p-1 transition-all duration-300 ease-in-out"
+            className="flex justify-start items-center gap-3 cursor-pointer text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue rounded-[5px] p-1 transition-all duration-300 ease-in-out"
             role="button"
             tabIndex="0"
             aria-label="Log out of your account and go to home page"

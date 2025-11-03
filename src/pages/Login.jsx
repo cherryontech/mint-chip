@@ -1,79 +1,102 @@
-// Login.jsx
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Emailinput from '../components/Emailinput';
+import Passwordinput from '../components/PasswordInput';
+import Button from '../components/Button';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
+  const [formValues, setFormValues] = useState({});
+  const [isValidEmail, setisValidEmail] = useState(false);
+  const [isValidPassword, setisValidPassword] = useState(false);
+  const [formSubmitMessage, setFormSubmitMessage] = useState('');
+  const setFormValue = (fieldName, value) => {
+    setFormValues((prevValue) => ({ ...prevValue, [fieldName]: value }));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Simular login exitoso (sin validación real)
-    localStorage.setItem('authToken', 'fake-token-123');
-    
-    // Disparar evento para que Navbar y Footer actualicen
-    window.dispatchEvent(new Event('storage'));
-    
-    // Redirigir al dashboard
-    navigate('/dashboard');
+    if (!isValidEmail || !isValidPassword) {
+      setFormSubmitMessage('Fill form properly');
+    } else {
+      localStorage.setItem('authToken', 'my-auth-token');
+      const loginFormData = new FormData();
+      for (const key in formValues) {
+        loginFormData.append(key, formValues[key]);
+      }
+      navigate('/dashboard');
+      console.log('Login Submission Data:', loginFormData);
+    }
   };
-
   return (
-    <>
-      <Navbar />
-      <main id="main-content" className="min-h-screen flex items-center justify-center bg-nyanza">
-        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-          <h1 className="text-3xl font-playfair text-stone-900 mb-6 text-center">
-            Log In
-          </h1>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-stone-900 font-poppins mb-2">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-persianblue"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="block text-stone-900 font-poppins mb-2">
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-persianblue"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-persianblue text-white py-3 rounded-lg font-poppins font-semibold hover:bg-opacity-90 transition-all"
-            >
-              Log In
-            </button>
-          </form>
-          <p className="text-center text-stone-600 mt-4">
-            Don't have an account?{' '}
-            <a href="/signup" className="text-persianblue hover:underline">
-              Sign Up
-            </a>
-          </p>
+    <section className="flex justify-center items-center min-h-screen md:h-screen bg-gradient-to-b from-nyanza to-celeste md:bg-gradient-to-b md:from-nyanza md:via-celeste md:via-50% md:to-white md:to-50%">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col bg-white w-full max-w-lg md:min-w-[30vw] md:h-auto mx-auto rounded-[10px] h-[68vh] shadow-[0px_4px_15px_8px_rgba(30,30,30,0.10)] p-14"
+        noValidate
+      >
+        <h3 className="font-playfair text-2xl mb-[44px]">Sign In</h3>
+        <div className="relative">
+          <Link
+            to=""
+            className="underline absolute top-0 right-0 focus:outline-none focus:ring-2 focus:ring-persianblue focus:ring-offset-1"
+          >
+            Forgot Username
+          </Link>
+          <Emailinput
+            formValue={formValues}
+            setFormValue={setFormValue}
+            fieldName="loginEmail"
+            label="Email Address"
+            setisValidEmail={setisValidEmail}
+            isValidEmail={isValidEmail}
+            pageType="login"
+          />
         </div>
-      </main>
-      <Footer />
-    </>
+        <div className="relative mt-[24px]">
+          <Link
+            to=""
+            className="underline absolute top-0 right-0 focus:outline-none focus:ring-2 focus:ring-persianblue focus:ring-offset-1"
+          >
+            Reset Password
+          </Link>
+          <Passwordinput
+            formValue={formValues}
+            setFormValue={setFormValue}
+            fieldName="loginPassword"
+            label="Password"
+            setisValidPassword={setisValidPassword}
+            isValidPassword={isValidPassword}
+          />
+        </div>
+        <div className="block mt-[16px] mb-[44px]">
+          <input
+            type="checkbox"
+            name="remember"
+            id="remember"
+            aria-disabled="true"
+            className="mr-[8px] focus:outline-none focus:ring-2 focus:ring-persianblue focus:ring-offset-1"
+          />
+          <label htmlFor="remember">Remember me</label>
+        </div>
+        {formSubmitMessage && (
+          <p className="text-sm mb-[18px]" role="alert">
+            {formSubmitMessage}
+          </p>
+        )}
+        <div className="flex justify-center">
+          <Button size="lg" color="primary" label="Sign in" />
+        </div>
+        <div className="mt-[12px]">
+          New user?{' '}
+          <Link
+            to="/signup"
+            className="text-persianblue focus:outline-none focus:ring-2 focus:ring-persianblue focus:ring-offset-1"
+          >
+            Create an Account
+          </Link>
+        </div>
+      </form>
+    </section>
   );
 }
 
