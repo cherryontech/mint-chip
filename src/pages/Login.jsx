@@ -18,6 +18,7 @@ function Login() {
     if (!isValidEmail || !isValidPassword) {
       setFormSubmitMessage('Fill form properly');
     } else {
+      localStorage.setItem('authToken', 'my-auth-token');
       const loginFormData = new FormData();
       for (const key in formValues) {
         loginFormData.append(key, formValues[key]);
