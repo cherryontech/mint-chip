@@ -12,6 +12,7 @@ const links = [
     href: '/terms-of-service',
   },
   { id: 'onboarding', text: 'Onboarding', href: '/onboarding' },
+  { id: 'journal', text: 'Journal', href: '/journal' },
 ];
 
 const Footer = () => {
