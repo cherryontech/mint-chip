@@ -1,6 +1,6 @@
 //react
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 //icons
 import { MdOutlineLogin } from 'react-icons/md';
@@ -12,6 +12,7 @@ import MobileMenu from './MobileMenu';
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // mobile menu state
   const [isAuthenticated, setIsAuthenticated] = useState(false); // user authentication state
+  const navigate = useNavigate();
 
   // check authentication from localstorage
   useEffect(() => {
@@ -29,7 +30,7 @@ function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem('authToken');
     setIsAuthenticated(false);
-    window.location.href = '/';
+    navigate('/logout');
   };
 
   // navbar for NON-authenticated user
@@ -133,17 +134,17 @@ function Navbar() {
             </ul>
           </nav>
           <div
-            // Single interactive div for Log Out and Home redirection
+            // Single interactive div for Log Out redirection
             onClick={handleLogout}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
+              if (e.key === 'Enter') {
                 handleLogout();
               }
             }}
             className="flex justify-start items-center gap-3 cursor-pointer text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue rounded-[5px] p-1 transition-all duration-300 ease-in-out"
             role="button"
             tabIndex="0"
-            aria-label="Log out of your account and go to home page"
+            aria-label="Log out of your account"
           >
             <span className="text-stone-900 text-base font-normal font-playfair">
               Log Out

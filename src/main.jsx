@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import Error from './pages/Error';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Logout from './pages/Logout';
 import App from './App';
 
 const router = createBrowserRouter([
@@ -24,12 +25,15 @@ const router = createBrowserRouter([
       { path: 'login', element: <Login /> },
       { path: 'onboarding', element: <Onboarding /> },
       { path: 'achievements', element: <Achievements /> },
-    ],
-  },
-  {
+      { path: 'logout', element: <Logout /> },
+      { path: 'error', element: <Error /> },
+      {
     path: '*',
     element: <Error />,
   },
+    ],
+  },
+  
 ]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
