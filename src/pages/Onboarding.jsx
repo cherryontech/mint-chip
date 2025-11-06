@@ -1,22 +1,27 @@
 import Button from '../components/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Onboarding() {
   const [selectedConcerns, setSelectedConcerns] = useState([]);
+  
+  // log the selectedConcerns after the array changes to update automatically
+  useEffect(() => {
+    console.log('Updated Concerns:', selectedConcerns);
+  }, [selectedConcerns]);
 
   // function for toggling active state and storing the user's selected concern
   function toggleConcern(concern) {
-    // log the click
-    console.log(`${concern} button clicked!`);
     // if the clicked concern is not selectedConcerns, setSelectedConcerns
     if (!selectedConcerns.includes(concern)) {
+      // log the selection
+      console.log(`${concern} button selected!`);
       setSelectedConcerns([...selectedConcerns, concern]);
       // if the clicked concern is already in selectedConcerns, filter it out of selectedConcerns
     } else {
+      // log the deselection
+      console.log(`${concern} button deselected!`);
       setSelectedConcerns(selectedConcerns.filter(item => item !== concern));
     }
-
-    console.log(selectedConcerns);
   }
 
   return (
