@@ -84,8 +84,8 @@ export default function Onboarding() {
         </div>
         {/* next and skip buttons */}
         <div className="flex flex-col-reverse gap-4 sm:gap-5 sm:flex-row md:gap-8">
-          <Button size="sm" color="secondary" label="Skip" />
-          <Button size="sm" color="primary" label="Next" />
+          <Button size="sm" color="secondary" label="Skip" to="/dashboard"/>
+          <Button size="sm" color="primary" label="Next" to="/dashboard"/>
         </div>
       </div>
     </div>
