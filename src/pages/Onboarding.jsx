@@ -1,6 +1,24 @@
 import Button from '../components/Button';
+import { useState } from 'react';
 
 export default function Onboarding() {
+  const [selectedConcerns, setSelectedConcerns] = useState([]);
+
+  // function for toggling active state and storing the user's selected concern
+  function toggleConcern(concern) {
+    // log the click
+    console.log(`${concern} button clicked!`);
+    // if the clicked concern is not selectedConcerns, setSelectedConcerns
+    if (!selectedConcerns.includes(concern)) {
+      setSelectedConcerns([...selectedConcerns, concern]);
+      // if the clicked concern is already in selectedConcerns, filter it out of selectedConcerns
+    } else {
+      setSelectedConcerns(selectedConcerns.filter(item => item !== concern));
+    }
+
+    console.log(selectedConcerns);
+  }
+
   return (
     <div className="flex justify-center items-center h-screen w-screen bg-gradient-to-b from-nyanza to-celeste sm:via-celeste sm:via-50% sm:to-white sm:to-50%">
       {/* quiz card */}
@@ -16,12 +34,48 @@ export default function Onboarding() {
         </div>
         {/* button quiz grid */}
         <div className="grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-2 md:grid-rows-3 md:gap-y-10 md:gap-x-14">
-          <Button size="md" color="secondary" label="Sleep" />
-          <Button size="md" color="secondary" label="Postpartum Anxiety" />
-          <Button size="md" color="secondary" label="Self-Doubt" />
-          <Button size="md" color="secondary" label="Stress" />
-          <Button size="md" color="secondary" label="Saying No" />
-          <Button size="md" color="secondary" label="Gender Bias" />
+          <Button 
+            size="md" 
+            color="secondary" 
+            label="Sleep" 
+            onClick={() => toggleConcern('Sleep')}
+            isActive={selectedConcerns.includes('Sleep')} 
+          />
+          <Button 
+            size="md" 
+            color="secondary" 
+            label="Postpartum Anxiety"
+            onClick={() => toggleConcern('Postpartum Anxiety')} 
+            isActive={selectedConcerns.includes('Postpartum Anxiety')} 
+          />
+          <Button 
+            size="md" 
+            color="secondary" 
+            label="Self-Doubt" 
+            onClick={() => toggleConcern('Self-Doubt')}
+            isActive={selectedConcerns.includes('Self-Doubt')}  
+          />
+          <Button 
+            size="md" 
+            color="secondary" 
+            label="Stress" 
+            onClick={() => toggleConcern('Stress')}
+            isActive={selectedConcerns.includes('Stress')}  
+          />
+          <Button 
+            size="md" 
+            color="secondary" 
+            label="Saying No" 
+            onClick={() => toggleConcern('Saying No')}
+            isActive={selectedConcerns.includes('Saying No')}  
+          />
+          <Button 
+            size="md" 
+            color="secondary" 
+            label="Gender Bias"
+            onClick={() => toggleConcern('Gender Bias')}
+            isActive={selectedConcerns.includes('Gender Bias')}  
+          />
         </div>
         {/* next and skip buttons */}
         <div className="flex flex-col-reverse gap-4 sm:gap-5 sm:flex-row md:gap-8">
