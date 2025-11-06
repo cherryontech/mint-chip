@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants/lite';
 
 const buttonVariants = tv({
     // base styles for all buttons
-    base: 'flex items-center justify-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
+    base: 'font-poppins flex items-center justify-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
     // all button variants
     variants: {
         size: {
@@ -33,8 +33,8 @@ const buttonVariants = tv({
     ]
 });
 
-export default function Button({ size, color, label }) {
+export default function Button({ size, color, label, onClick, isActive }) {
     return (
-        <button className={buttonVariants({ size, color })}>{label}</button>
+        <button onClick={onClick} className={isActive ? `${buttonVariants({ size, color })} active` : buttonVariants({ size, color })}>{label}</button>
     )
 }

@@ -11,3 +11,10 @@ button:not(.toggle-btn):active {
   background-color: var(--color-persianblue);
   color: white;
 }
+button.active {
+  background-color: var(--color-persianblue);
+  color: white;
+}
+button.active:hover {
+  background-color: var(--color-persianblue);
+}
