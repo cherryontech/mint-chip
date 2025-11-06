@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { tv } from 'tailwind-variants/lite';
 
 const buttonVariants = tv({
@@ -24,7 +25,7 @@ const buttonVariants = tv({
     },
     // conditional style cases for specific prop combinations
     compoundVariants: [
-        // remove drop shadow and lower font weight for onboarding quiz button
+        // remove drop shadow and lower font weight for user selection button
         {
             color: 'secondary',
             size: 'md',
@@ -33,8 +34,18 @@ const buttonVariants = tv({
     ]
 });
 
-export default function Button({ size, color, label, onClick, isActive }) {
+export default function Button({ size, color, label, onClick, isActive, to }) {
+    let navigate = useNavigate();
+
+    function handleClick(){
+        if (to){
+            navigate(to);
+        } else {
+            onClick();
+        }
+    }
+
     return (
-        <button onClick={onClick} className={isActive ? `${buttonVariants({ size, color })} active` : buttonVariants({ size, color })}>{label}</button>
-    )
+        <button onClick={handleClick} className={isActive ? `${buttonVariants({ size, color })} active` : buttonVariants({ size, color })}>{label}</button>
+    );
 }
