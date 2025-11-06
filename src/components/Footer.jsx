@@ -7,14 +7,11 @@ const loggedOutLinks = [
   { id: 'dashboard', text: 'Dashboard', href: '/dashboard' },
   { id: 'privacy-policy', text: 'Privacy Policy', href: '/privacy-policy' },
   { id: 'sign-up', text: 'Sign Up', href: '/signup' },
-  { id: 'journal', text: 'Journal', href: '/journal' },
   {
     id: 'terms-of-service',
     text: 'Terms of Service',
     href: '/terms-of-service',
   },
-  
-  
 ];
 
 // Links logged in

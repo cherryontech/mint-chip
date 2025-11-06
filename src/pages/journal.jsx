@@ -1,11 +1,14 @@
-// src/components/Journal.jsx
-import React, { useState, useEffect, useCallback } from 'react';
+//react
+import { useState, useEffect, useCallback } from 'react';
+
+//components
 import ProgressBar from '../components/ProgressBar';
 import DailyTrackerBar from '../components/DailyTrackerBar';
-import DaySummary from '../components/DaySummary'; // <-- CORRECTED IMPORT NAME
+import DailySummary from '../components/DailySummary';
+
+//data
 import { questions, total_days, local_storage_key } from '../data/questions';
 
-// Utility function to load data from localStorage
 const getInitialData = () => {
   try {
     const storedData = localStorage.getItem(local_storage_key);
@@ -20,27 +23,25 @@ const getInitialData = () => {
 
 const Journal = () => {
   const [progressData, setProgressData] = useState(getInitialData);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDaySummaryOpen, setIsDaySummaryOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
 
-  // The day that should be filled (the next one after the last completed)
   const nextDayToComplete = progressData.effectiveDays + 1;
 
-  // Hook to update localStorage every time progressData changes
+  // Update localStorage
   useEffect(() => {
     localStorage.setItem(local_storage_key, JSON.stringify(progressData));
   }, [progressData]);
 
-  // Function to open the modal for a specific day
-  const openModalForDay = (day) => {
+  // Open the Day Summary for a specific day
+  const openSummaryForDay = (day) => {
     setSelectedDay(day);
-    setIsModalOpen(true);
+    setIsDaySummaryOpen(true);
   };
-  
-  // Function for the progress bar arrow button
-  const handleArrowClick = () => {
+
+   const handleArrowClick = () => {
     if (nextDayToComplete <= total_days) {
-      openModalForDay(nextDayToComplete);
+      openSummaryForDay(nextDayToComplete);
     }
   };
 
@@ -53,7 +54,6 @@ const Journal = () => {
 
       let newEffectiveDays = prevData.effectiveDays;
 
-      // Logic for advancing/decrementing the day counter
       if (!hasPreviousComment && hasNewComment) {
         newEffectiveDays += 1;
       } else if (hasPreviousComment && !hasNewComment) {
@@ -78,26 +78,24 @@ const Journal = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 font-poppins">
-      <div className="max-w-xl mx-auto">
-        {/* Title: Using the title from the images */}
-        <h1 className="text-2xl font-semibold mb-4 mt-6 text-[var(--color-eerie)]">
-          Sleep 7 to 9 hours
+      <div className="max-w-[1000px] mx-auto">
+        <h1 className="text-2xl font-semibold mb-4 mt-6 text-eerie font-playfair">
+          Journal Entry
         </h1>
 
-        {/* Progress Bar: Pass the navigation function */}
-        <ProgressBar 
-          effectiveDays={progressData.effectiveDays} 
+        <ProgressBar
+          effectiveDays={progressData.effectiveDays}
           onArrowClick={handleArrowClick}
         />
+        <p className="self-stretch justify-start text-black text-sd font-normal font-poppins">
+          View saved journal entries or start a new journal entry.
+        </p>
 
-        {/* List of Daily Bars */}
+        {/* Daily Bars */}
         <div className="mt-8">
           {daysArray.map((day) => {
             const dayKey = `day${day}`;
             const isCompleted = !!progressData.entries[dayKey];
-            
-            // Sequential Logic: Only allow interaction with completed days (for editing)
-            // or the immediately next day to complete.
             const isDisabled = day > nextDayToComplete;
 
             return (
@@ -105,18 +103,18 @@ const Journal = () => {
                 key={day}
                 day={day}
                 isCompleted={isCompleted}
-                onClick={() => openModalForDay(day)}
+                onClick={() => openSummaryForDay(day)}
                 isDisabled={isDisabled}
               />
             );
           })}
         </div>
 
-        {/* Daily Summary Modal */}
+        {/* Daily Summary*/}
         {selectedDay && (
-          <DaySummary // <-- CORRECTED COMPONENT NAME
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
+          <DailySummary
+            isOpen={isDaySummaryOpen}
+            onClose={() => setIsDaySummaryOpen(false)}
             day={selectedDay}
             question={questions[selectedDay - 1]}
             initialComment={progressData.entries[`day${selectedDay}`]}

@@ -11,6 +11,7 @@ import Error from './pages/Error';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Journal from './pages/journal';
+import Forum from './pages/Forum';
 import App from './App';
 
 const router = createBrowserRouter([
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       { path: 'onboarding', element: <Onboarding /> },
       { path: 'achievements', element: <Achievements /> },
       { path: 'journal', element: <Journal /> },
+      { path: 'forum', element: <Forum /> },
     ],
   },
   {

@@ -33,8 +33,8 @@ const buttonVariants = tv({
     ]
 });
 
-export default function Button({ size, color, label }) {
+export default function Button({ size, color, label, ...props }) {
     return (
-        <button className={buttonVariants({ size, color })}>{label}</button>
+        <button className={buttonVariants({ size, color })}{...props}>{label}</button>
     )
 }

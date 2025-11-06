@@ -80,7 +80,7 @@ function Navbar() {
           className="absolute top-[-9999px] left-0 z-50 p-1 ml-10 text-lg font-bold text-white bg-persianblue focus:outline-none focus:top-0 focus:left-0 focus:z-50 focus:relative focus:ring-2 focus:ring-persianblue focus:rounded "
         >
           Skip to main content
-        </a>
+        </a>0
         <div className="flex justify-between items-center px-4 md:px-12 h-12 md:h-20">
           {/* hamburger menu */}
           <button
@@ -116,7 +116,7 @@ function Navbar() {
               </li>
               <li>
                 <Link
-                  to="/detox-challenge"
+                  to="/journal"
                   className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue focus-visible:p-2 rounded-[5px]"
                 >
                   Detox Challenge
