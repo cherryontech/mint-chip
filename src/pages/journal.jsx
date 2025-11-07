@@ -39,7 +39,7 @@ const Journal = () => {
     setIsDaySummaryOpen(true);
   };
 
-   const handleArrowClick = () => {
+  const handleArrowClick = () => {
     if (nextDayToComplete <= total_days) {
       openSummaryForDay(nextDayToComplete);
     }
@@ -92,35 +92,35 @@ const Journal = () => {
         </p>
 
         {/* Daily Bars */}
-        <div className="mt-8">
+        <div>
           {daysArray.map((day) => {
             const dayKey = `day${day}`;
             const isCompleted = !!progressData.entries[dayKey];
             const isDisabled = day > nextDayToComplete;
 
             return (
-              <DailyTrackerBar
-                key={day}
-                day={day}
-                isCompleted={isCompleted}
-                onClick={() => openSummaryForDay(day)}
-                isDisabled={isDisabled}
-              />
+              <div key={day} className="relative w-full">
+                <DailyTrackerBar
+                  day={day}
+                  isCompleted={isCompleted}
+                  onClick={() => openSummaryForDay(day)}
+                  isDisabled={isDisabled}
+                />
+                {/* Daily Summary*/}
+                {selectedDay === day && (
+                  <DailySummary
+                    isOpen={isDaySummaryOpen}
+                    onClose={() => setIsDaySummaryOpen(false)}
+                    day={selectedDay}
+                    question={questions[selectedDay - 1]}
+                    initialComment={progressData.entries[`day${selectedDay}`]}
+                    onSave={handleSaveComment}
+                  />
+                )}
+              </div>
             );
           })}
         </div>
-
-        {/* Daily Summary*/}
-        {selectedDay && (
-          <DailySummary
-            isOpen={isDaySummaryOpen}
-            onClose={() => setIsDaySummaryOpen(false)}
-            day={selectedDay}
-            question={questions[selectedDay - 1]}
-            initialComment={progressData.entries[`day${selectedDay}`]}
-            onSave={handleSaveComment}
-          />
-        )}
       </div>
     </div>
   );

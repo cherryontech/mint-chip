@@ -17,7 +17,7 @@ const DailySummary = ({
 }) => {
   const max_chars = 500;
   const [comment, setComment] = useState(initialComment || '');
-  const remainingChars = max_chars  - comment.length;
+  const remainingChars = max_chars - comment.length;
 
   useEffect(() => {
     setComment(initialComment || '');
@@ -36,8 +36,8 @@ const DailySummary = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-white bg-opacity-50 flex justify-center items-center z-50 p-4 font-poppins">
-      <div className="bg-gradient-to-b from-nyanza to-celeste  p-6 rounded-xl w-full max-w-md shadow-2xl">
+    <div className=" absolute right-0 bg-opacity-50 flex justify-center items-center z-50 font-poppins">
+      <div className="bg-gradient-to-b from-nyanza to-celeste  p-6 rounded-xl w-full max-w-md shadow-2xl border  border-eerie">
         <button
           onClick={onClose}
           className="text-gray-500 w-8 h-8 rounded-full flex items-center justify-center"
@@ -61,22 +61,18 @@ const DailySummary = ({
           placeholder="Write your entry here..."
         ></textarea>
 
-        
-        <p
-          className={`text-xs mt-1 text-left font-poppins`}
-        >
+        <p className={`text-xs mt-1 text-left font-poppins`}>
           {remainingChars}/{max_chars} characters remaining
         </p>
 
         <div className="mt-4 flex flex-col items-center space-y-2">
-         
           <Button
             onClick={handleSave}
             color="primary"
             size="sm"
             label="Save Entry"
           />
-         
+
           <div className="mt-2">
             <Button
               onClick={handleCancel}

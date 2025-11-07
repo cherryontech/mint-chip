@@ -14,7 +14,7 @@ const DailyTrackerBar = ({ day, isCompleted, onClick, isDisabled }) => {
   return (
     <div
       onClick={!isDisabled ? onClick : undefined}
-      className={`bg-white max-w-[1000px] p-4 rounded-lg border border-errie flex justify-between items-center mb-3 transition font-poppins 
+      className={`bg-white max-w-[1000px] p-4 rounded-lg border border-errie flex justify-between items-center mb-3 mt-8 transition font-poppins 
         ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:shadow-md'}`}
     >
       <span className="text-eerie font-medium text-base">Day {day}</span>
