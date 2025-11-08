@@ -22,7 +22,7 @@ function Signup() {
       for (const key in formValues) {
         signupFormData.append(key, formValues[key]);
       }
-      navigate('/login');
+      navigate('/onboarding');
       console.log('Submitting Signup Data:', signupFormData);
     }
   };
