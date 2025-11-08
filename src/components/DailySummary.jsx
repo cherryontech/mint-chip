@@ -4,9 +4,6 @@ import { useState, useEffect } from 'react';
 // component
 import Button from './Button';
 
-//icons
-import { IoClose } from 'react-icons/io5';
-
 const DailySummary = ({
   isOpen,
   onClose,
@@ -36,16 +33,14 @@ const DailySummary = ({
   if (!isOpen) return null;
 
   return (
-    <div className=" absolute right-0 bg-opacity-50 flex justify-center items-center z-50 font-poppins">
+    <div
+      id={`summary-day${day}`}
+      role="region"
+      aria-labelledby={`day-${day}-trackerbar`}
+      hidden={!isOpen}
+      className=" absolute right-0 bg-opacity-50 flex justify-center items-center z-50 font-poppins"
+    >
       <div className="bg-gradient-to-b from-nyanza to-celeste  p-6 rounded-xl w-full max-w-md shadow-2xl border  border-eerie">
-        <button
-          onClick={onClose}
-          className="text-gray-500 w-8 h-8 rounded-full flex items-center justify-center"
-          aria-label="Close modal"
-        >
-          <IoClose className="w-6 h-6 roun" />
-        </button>
-
         <h2 className="text-xl mb-2 font-semibold font-playfair text-center text-eerie ">
           Day {day} Summary
         </h2>

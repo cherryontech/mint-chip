@@ -38,7 +38,6 @@ const Journal = () => {
     setSelectedDay(day);
     setIsDaySummaryOpen(true);
   };
-
   const handleArrowClick = () => {
     if (nextDayToComplete <= total_days) {
       openSummaryForDay(nextDayToComplete);
@@ -103,7 +102,13 @@ const Journal = () => {
                 <DailyTrackerBar
                   day={day}
                   isCompleted={isCompleted}
-                  onClick={() => openSummaryForDay(day)}
+                  onClick={() => {
+                    if (isDaySummaryOpen && selectedDay === day) {
+                      setIsDaySummaryOpen(false);
+                    } else {
+                      openSummaryForDay(day);
+                    }
+                  }}
                   isDisabled={isDisabled}
                 />
                 {/* Daily Summary*/}
