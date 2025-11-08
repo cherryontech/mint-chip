@@ -76,7 +76,7 @@ const Journal = () => {
   const daysArray = Array.from({ length: total_days }, (_, i) => i + 1);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 font-poppins">
+    <main className="min-h-screen bg-gray-50 p-4 font-poppins">
       <div className="max-w-[1000px] mx-auto">
         <h1 className="text-2xl font-semibold mb-4 mt-6 text-eerie font-playfair">
           Journal Entry
@@ -91,7 +91,7 @@ const Journal = () => {
         </p>
 
         {/* Daily Bars */}
-        <div>
+        <section>
           {daysArray.map((day) => {
             const dayKey = `day${day}`;
             const isCompleted = !!progressData.entries[dayKey];
@@ -112,7 +112,7 @@ const Journal = () => {
                   isDisabled={isDisabled}
                 />
                 {/* Daily Summary*/}
-                {selectedDay === day && (
+                {selectedDay === day && isDaySummaryOpen ? (
                   <DailySummary
                     isOpen={isDaySummaryOpen}
                     onClose={() => setIsDaySummaryOpen(false)}
@@ -121,13 +121,16 @@ const Journal = () => {
                     initialComment={progressData.entries[`day${selectedDay}`]}
                     onSave={handleSaveComment}
                   />
+                ) : (
+                  /* Serves placeholder so aria-controls points to something in the DOM and accessibility is followed for dropdown*/
+                  <div id={`summary-day${day}`} className="sr-only" />
                 )}
               </div>
             );
           })}
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 };
 
