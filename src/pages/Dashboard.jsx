@@ -1,11 +1,15 @@
+import { useState } from "react";
 import Button from "../components/Button";
 import DashboardTile from "../components/Dashboard/DashboardTile";
+import TaskModal from "../components/Dashboard/TaskModal";
 
 let daysCompleted = 0;
 let daysLeft = 30 - daysCompleted;
 let loginStreak = 1;
 
 export default function Dashboard() {
+  const [taskModalOpen, setTaskModalOpen] = useState(false);
+
   return (
       <div className="bg-white">
       {/* title and button */}
@@ -17,9 +21,11 @@ export default function Dashboard() {
               color='primary'
               label='Start a Task' 
               className="place-items-center"
+              onClick={() => setTaskModalOpen(true)}
             />
           </div>
         </div>
+        <TaskModal isOpen={taskModalOpen} onClose={() => setTaskModalOpen(false)} />
       {/* card grid */}
         <div className="grid grid-cols-1 md:grid-cols-6 gap-8 auto-rows-min my-14 mx-8 sm:mx-15 md:mx-10 lg:mx-20 xl:mx-40 2xl:mx-80">
             {/* row 1 */}
@@ -65,7 +71,7 @@ export default function Dashboard() {
               imgSource="/people.svg"
               altText="illustration of four diverse women" 
             />  
-        </div>
+      </div>
     </div>
   );
 }
