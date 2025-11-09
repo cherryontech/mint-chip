@@ -12,6 +12,10 @@ const tileVariants = tv({
             2: 'col-span-1 md:col-span-2',
             3: 'col-span-1 md:col-span-3'
         },
+        type: {
+            regular: '',
+            data: '',
+        },
     },
 });
 
@@ -26,14 +30,22 @@ const imgVariants = tv({
     },
 });
 
-export default function DashboardTile({ size, span, title, subtitle, imgSource, altText }){
+export default function DashboardTile({ type, size, span, title, subtitle, imgSource, altText, dataSentence }){
     return (
-        <div className={tileVariants({ size, span })}>
-            <div className="flex flex-col gap-2 text-center">
-                <h2 className="text-[20px] font-medium">{title}</h2>
-                <p className="text-base">{subtitle}</p>
-                <img src={imgSource} alt={altText} className={imgVariants({ size })} />
-            </div>
+        <div className={tileVariants({ type, size, span })}>
+            {type == "data" ? (
+                <div className="h-full flex flex-col gap-8 text-left">
+                    <h2 className="text-lg md:text-[20px] font-medium">{title}</h2>
+                    <p className="text-3xl md:text-4xl">{dataSentence}</p>
+                    <p className="text-base">{subtitle}</p>
+                </div>
+            ) : (
+                <div className="flex flex-col gap-2 text-center">
+                    <h2 className="text-[20px] font-medium">{title}</h2>
+                    <p className="text-base font-normal">{subtitle}</p>
+                    <img src={imgSource} alt={altText} className={imgVariants({ size })}/>
+                </div>
+            )}
         </div>
     );
 }

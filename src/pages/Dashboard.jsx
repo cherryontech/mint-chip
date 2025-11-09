@@ -1,6 +1,10 @@
 import Button from "../components/Button";
 import DashboardTile from "../components/Dashboard/DashboardTile";
 
+let daysCompleted = 0;
+let daysLeft = 30 - daysCompleted;
+let loginStreak = 1;
+
 export default function Dashboard() {
   return (
       <div className="bg-white">
@@ -20,14 +24,20 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 md:grid-cols-6 gap-8 auto-rows-min my-14 mx-8 sm:mx-15 md:mx-10 lg:mx-20 xl:mx-40 2xl:mx-80">
             {/* row 1 */}
             <DashboardTile 
+              type="data"
               size="sm" 
               span="2"
-              title="Detox Overview" 
+              title="Detox Summary" 
+              dataSentence={`${daysCompleted} Day${daysCompleted == 1 ? '' : 's'}`}
+              subtitle={`${daysLeft} day${daysLeft == 1 ? '' : 's'} to go!`}
               />
             <DashboardTile 
+              type="data"
               size="sm" 
               span="2"
-              title="Login Streak"
+              title="Login History"
+              dataSentence={`${loginStreak} Day Streak`}
+              subtitle='Keep it up!'
               />
             <DashboardTile 
               size="sm" 
