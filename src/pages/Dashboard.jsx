@@ -19,13 +19,42 @@ export default function Dashboard() {
       {/* card grid */}
         <div className="grid grid-cols-1 md:grid-cols-6 gap-8 auto-rows-min my-14 mx-8 sm:mx-15 md:mx-10 lg:mx-20 xl:mx-40 2xl:mx-80">
             {/* row 1 */}
-            <DashboardTile size="sm" title="Detox Overview" span="2"/>
-            <DashboardTile size="sm" title="Login Streak" span="2"/>
-            <DashboardTile size="sm" title="Achievements" span="2"/>
+            <DashboardTile 
+              size="sm" 
+              span="2"
+              title="Detox Overview" 
+              />
+            <DashboardTile 
+              size="sm" 
+              span="2"
+              title="Login Streak"
+              />
+            <DashboardTile 
+              size="sm" 
+              span="2"
+              title="Achievements" 
+              subtitle="Review badges earned"
+              imgSource="/badge.svg"
+              altText="badge illustration"          
+            />
 
             {/* row 2 */}
-            <DashboardTile size="lg" title="Progress Overview" span="3"/>  
-            <DashboardTile size="lg" title="Community Forum" span="3"/>  
+            <DashboardTile 
+              size="lg" 
+              span="3"
+              title="Progress Overview"
+              subtitle="Your progress for the past 7 days" 
+              imgSource="/pietrs.png"
+              altText="pie chart illustration" 
+            />  
+            <DashboardTile 
+              size="lg" 
+              span="3"
+              title="Community Forum"
+              subtitle="Review answers to prompts from other women in tech"
+              imgSource="/people.svg"
+              altText="illustration of four diverse women" 
+            />  
         </div>
     </div>
   );

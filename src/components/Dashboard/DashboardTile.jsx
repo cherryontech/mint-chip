@@ -1,7 +1,7 @@
 import { tv } from "tailwind-variants/lite";
 
 const tileVariants = tv({
-    base: 'flex flex-col rounded-lg shadow-[0_4px_15px_rgba(0,0,0,0.25)]',
+    base: 'font-poppins flex flex-col justify-center items-center rounded-lg shadow-[0_4px_15px_rgba(0,0,0,0.25)]',
 
     variants: {
         size: {
@@ -18,9 +18,11 @@ const tileVariants = tv({
 export default function DashboardTile({ size, span, title, subtitle, imgSource, altText }){
     return (
         <div className={tileVariants({ size, span })}>
-            <h2>{title}</h2>
-            <p>{subtitle}</p>
-            <img src={imgSource} alt={altText} />
+            <div className="flex flex-col gap-2 text-center">
+                <h2 className="text-[20px] font-medium">{title}</h2>
+                <p className="text-base">{subtitle}</p>
+                <img src={imgSource} alt={altText} className="w-50 place-self-center" />
+            </div>
         </div>
     );
 }
