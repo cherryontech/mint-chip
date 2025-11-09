@@ -48,7 +48,7 @@ const DailySummary = ({
         <p className="text-sm mb-4 text-eerie">{question}</p>
 
         <textarea
-          className="w-full p-4 border border-errie bg-white rounded-sm resize-none focus:ring-3 focus:ring-persianblue text-eerie"
+          className="w-full p-4 border border-eerie bg-white rounded-sm resize-none focus:ring-3 focus:ring-persianblue text-eerie"
           rows="6"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
@@ -56,7 +56,7 @@ const DailySummary = ({
           placeholder="Write your entry here..."
         ></textarea>
 
-        <p className={`text-xs mt-1 text-left font-poppins`}>
+        <p className={`text-xs mt-1 text-left text-eerie font-poppins`}>
           {remainingChars}/{max_chars} characters remaining
         </p>
 
