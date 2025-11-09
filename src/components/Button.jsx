@@ -34,7 +34,7 @@ const buttonVariants = tv({
     ]
 });
 
-export default function Button({ size, color, label, onClick, isActive, to }) {
+export default function Button({ size, color, label, onClick, isActive, to, ...props }) {
     let navigate = useNavigate();
 
     function handleClick(){
@@ -46,6 +46,9 @@ export default function Button({ size, color, label, onClick, isActive, to }) {
     }
 
     return (
-        <button onClick={handleClick} className={isActive ? `${buttonVariants({ size, color })} active` : buttonVariants({ size, color })}>{label}</button>
+        <button onClick={handleClick} className={isActive ? `${buttonVariants({ size, color })} active` : buttonVariants({ size, color })}
+        {...props}
+        >{label}
+        </button>
     );
 }

@@ -12,7 +12,6 @@ const loggedOutLinks = [
     text: 'Terms of Service',
     href: '/terms-of-service',
   },
-  
 ];
 
 // Links logged in
