@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function Error() {
+function Logout() {
   return (
     <>
       <a
@@ -16,14 +16,13 @@ function Error() {
       >
         <div>
           <img
-            className="mx-auto max-w-xs md:max-w-sm object-contain"
-            alt="Page not found. Illustration of an error page."
-            src="/NotFound.svg"
+            className="w-[400px] h-[400px] mx-auto object-contain"
+            alt="Illustration of successful logout."
+            src="/Logout.svg"
           />
 
           <h1 className="font-poppins font-normal text-2xl text-gray-800 tracking-normal leading-normal mt-2">
-            {' '}
-            Oh no, what happened?
+            See you later!
           </h1>
         </div>
       </div>
@@ -31,4 +30,4 @@ function Error() {
   );
 }
 
-export default Error;
+export default Logout;

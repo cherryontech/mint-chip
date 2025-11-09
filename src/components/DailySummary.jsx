@@ -1,5 +1,6 @@
 //react
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // component
 import Button from './Button';
@@ -79,12 +80,12 @@ const DailySummary = ({
         </div>
 
         <div className="text-center mt-4">
-          <a
-            href="/forum"
+          <Link
+            to="/community" 
             className="text-blue-700 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus:p-2 focus-visible:ring-persianblue rounded-[5px]"
           >
             Visit Community Forum
-          </a>
+          </Link>
         </div>
       </div>
     </div>
