@@ -20,7 +20,6 @@ export default function Dashboard() {
               size='md'
               color='primary'
               label='Start a Task' 
-              className="place-items-center"
               onClick={() => setTaskModalOpen(true)}
             />
           </div>
