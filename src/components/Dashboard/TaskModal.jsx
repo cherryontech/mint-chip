@@ -28,7 +28,7 @@ export default function TaskModal({ isOpen, onClose}) {
 
     return (
         <div className="fixed inset-0 flex justify-center items-center bg-gray-400/30 z-20">
-            <div className="flex flex-col justify-center items-center gap-10 p-8 h-[90vh] sm:h-[75vh] md:h-[70vh] rounded-[20px] bg-gradient-to-b from-nyanza to-celeste opacity-100">
+            <div className="flex flex-col justify-center items-center gap-10 p-8 h-fit rounded-[20px] bg-gradient-to-b from-nyanza to-celeste opacity-100">
                 <button onClick={onClose} className='toggle-btn place-self-start active:outline-4 active:outline-persianblue focus-visible:outline-4 focus-visible:outline-persianblue'><IoClose className='text-2xl'/></button>
                 <h2 className="font-poppins text-2xl font-bold">Detox Challenge Options</h2>
                 {/* buttons */}
@@ -39,6 +39,34 @@ export default function TaskModal({ isOpen, onClose}) {
                         label="Practice Saying No: This task helps you set boundaries in & outside the office."
                         onClick={() => toggleTask('Practice Saying No: This task helps you set boundaries in & outside the office.')}
                         isActive={selectedTask.includes('Practice Saying No: This task helps you set boundaries in & outside the office.')}
+                    />
+                    <Button 
+                        size="lg" 
+                        color="secondary"
+                        label="Read Positive Affirmations: Are you struggling with impostor syndrome, anxiety, & self-doubt? Then this task is for you."
+                        onClick={() => toggleTask('Read Positive Affirmations: Are you struggling with impostor syndrome, anxiety, & self-doubt? Then this task is for you.')}
+                        isActive={selectedTask.includes('Read Positive Affirmations: Are you struggling with impostor syndrome, anxiety, & self-doubt? Then this task is for you.')}
+                    />
+                    <Button 
+                        size="lg" 
+                        color="secondary"
+                        label="Read a Book: When is the last time you sat down and read a good book?"
+                        onClick={() => toggleTask('Read a Book: When is the last time you sat down and read a good book?')}
+                        isActive={selectedTask.includes('Read a Book: When is the last time you sat down and read a good book?')}
+                    />
+                    <Button 
+                        size="lg" 
+                        color="secondary"
+                        label="Sleep 7 to 9 Hours: Your quality of sleep greatly affects your emotions and ability to process information."
+                        onClick={() => toggleTask('Sleep 7 to 9 Hours: Your quality of sleep greatly affects your emotions and ability to process information.')}
+                        isActive={selectedTask.includes('Sleep 7 to 9 Hours: Your quality of sleep greatly affects your emotions and ability to process information.')}
+                    />
+                    <Button 
+                        size="lg" 
+                        color="secondary"
+                        label="Journal Entry: Respond to journal prompts or share your thoughts and feelings each day."
+                        onClick={() => toggleTask('Journal Entry: Respond to journal prompts or share your thoughts and feelings each day.')}
+                        isActive={selectedTask.includes('Journal Entry: Respond to journal prompts or share your thoughts and feelings each day.')}
                     />
                 </div>
                 <Button size="sm" to="/journal" label="Save" />
