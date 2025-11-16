@@ -22,8 +22,9 @@ function Signup() {
       for (const key in formValues) {
         signupFormData.append(key, formValues[key]);
       }
-      navigate('/onboarding');
       console.log('Submitting Signup Data:', signupFormData);
+      localStorage.setItem('authToken', 'my-auth-token');
+      navigate('/onboarding');
     }
   };
   return (

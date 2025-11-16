@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { RiLayoutHorizontalFill, RiUser3Fill } from 'react-icons/ri';
+import { MdForum } from "react-icons/md";
 import { PiListBulletsFill } from 'react-icons/pi';
 
 const MobileMenu = ({ isOpen, toggleMenu }) => {
@@ -13,6 +14,12 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
       href: '/detoxChallenge',
       icon: RiLayoutHorizontalFill,
     },
+    {
+      name: 'Community Forum',
+      href: '/community',
+      icon: MdForum ,
+    },
+    
     { name: 'Profile', href: '/profile', icon: RiUser3Fill },
   ];
 
