@@ -9,7 +9,7 @@ const DailyTrackerBar = ({ day, isCompleted, onClick, isDisabled, isOpen }) => {
       aria-hidden="true"
     />
   ) : (
-    <FaCirclePlus className="w-8 h-8 stroke-2"  aria-hidden="true"/>
+    <FaCirclePlus className="w-8 h-8 stroke-2" aria-hidden="true" />
   );
 
   return (

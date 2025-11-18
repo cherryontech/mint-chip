@@ -10,24 +10,40 @@ const DailySummary = ({
   onClose,
   day,
   question,
-  initialComment,
+  initialComment, // Ahora puede ser un objeto: { comment: '...', optOut: false }
   onSave,
 }) => {
   const max_chars = 500;
-  const [comment, setComment] = useState(initialComment || '');
+
+  // Si initialComment existe, usa sus propiedades. Si no, usa valores por defecto.
+  const initialCommentObject = initialComment || {};
+  const [comment, setComment] = useState(initialCommentObject.comment || '');
+
+  // AJUSTE CLAVE: Nuevo estado para Opt-out
+  const [isOptedOut, setIsOptedOut] = useState(
+    initialCommentObject.optOut || false
+  );
+
   const remainingChars = max_chars - comment.length;
 
   useEffect(() => {
-    setComment(initialComment || '');
+    // Actualiza el estado cuando cambian las props
+    const updatedCommentObject = initialComment || {};
+    setComment(updatedCommentObject.comment || '');
+    setIsOptedOut(updatedCommentObject.optOut || false);
   }, [initialComment, day]);
 
   const handleSave = () => {
-    onSave(day, comment);
+    // AJUSTE CLAVE: Pasar el estado de isOptedOut a onSave
+    onSave(day, comment, isOptedOut);
     onClose();
   };
 
   const handleCancel = () => {
-    setComment(initialComment || '');
+    // Restablecer al estado inicial
+    const updatedCommentObject = initialComment || {};
+    setComment(updatedCommentObject.comment || '');
+    setIsOptedOut(updatedCommentObject.optOut || false);
     onClose();
   };
 
@@ -79,13 +95,21 @@ const DailySummary = ({
           </div>
         </div>
 
-        <div className="text-center mt-4">
-          <Link
-            to="/community" 
-            className="text-blue-700 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus:p-2 focus-visible:ring-persianblue rounded-[5px]"
+        {/*Checkbox for Opt-out */}
+        <div className="flex items-center mt-5 mb-3 ml-6">
+          <input
+            id={`opt-out-${day}`}
+            type="checkbox"
+            checked={isOptedOut}
+            onChange={(e) => setIsOptedOut(e.target.checked)}
+            className="h-4 w-4 text-green border-eerie rounded focus:ring-persianblue"
+          />
+          <label
+            htmlFor={`opt-out-${day}`}
+            className="ml-2 text-sm text-eerie font-poppins"
           >
-            Visit Community Forum
-          </Link>
+            Opt out of sharing in the Community Forum
+          </label>
         </div>
       </div>
     </div>

@@ -123,7 +123,7 @@ function Navbar() {
                   Detox Challenge
                 </Link>
               </li>
-               <li>
+              <li>
                 <Link
                   to="community"
                   className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue focus-visible:p-2 rounded-[5px]"
@@ -131,7 +131,7 @@ function Navbar() {
                   Community Forum
                 </Link>
               </li>
-              
+
               <li>
                 <Link
                   to="/profile"

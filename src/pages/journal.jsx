@@ -44,11 +44,16 @@ const Journal = () => {
     }
   };
 
-  const handleSaveComment = useCallback((day, comment) => {
+  const handleSaveComment = useCallback((day, comment, isOptedOut) => {
     setProgressData((prevData) => {
       const dayKey = `day${day}`;
       const trimmedComment = comment.trim();
-      const hasPreviousComment = !!prevData.entries[dayKey];
+
+      const previousEntry = prevData.entries[dayKey];
+      const hasPreviousComment = !!(
+        previousEntry &&
+        (previousEntry.comment || typeof previousEntry === 'string')
+      );
       const hasNewComment = trimmedComment.length > 0;
 
       let newEffectiveDays = prevData.effectiveDays;
@@ -59,9 +64,14 @@ const Journal = () => {
         newEffectiveDays -= 1;
       }
 
+      const entryData =
+        trimmedComment.length > 0
+          ? { comment: trimmedComment, optOut: isOptedOut }
+          : null;
+
       const newEntries = {
         ...prevData.entries,
-        [dayKey]: trimmedComment,
+        [dayKey]: entryData,
       };
 
       newEffectiveDays = Math.max(0, Math.min(newEffectiveDays, total_days));
@@ -94,8 +104,18 @@ const Journal = () => {
         <section>
           {daysArray.map((day) => {
             const dayKey = `day${day}`;
-            const isCompleted = !!progressData.entries[dayKey];
+            const entry = progressData.entries[dayKey];
+
+            const isCompleted = !!(
+              entry &&
+              (entry.comment || typeof entry === 'string')
+            );
             const isDisabled = day > nextDayToComplete;
+
+            const initialCommentData =
+              typeof entry === 'string'
+                ? { comment: entry, optOut: false }
+                : entry;
 
             return (
               <div key={day} className="relative w-full">
@@ -117,8 +137,8 @@ const Journal = () => {
                     isOpen={isDaySummaryOpen}
                     onClose={() => setIsDaySummaryOpen(false)}
                     day={selectedDay}
-                    question={questions[selectedDay - 1]}
-                    initialComment={progressData.entries[`day${selectedDay}`]}
+                    question={questions[selectedDay - 1].question}
+                    initialComment={initialCommentData}
                     onSave={handleSaveComment}
                   />
                 ) : (

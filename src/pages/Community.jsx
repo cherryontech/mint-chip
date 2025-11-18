@@ -1,9 +1,52 @@
-function Community() {
+// react
+import { Link } from 'react-router-dom';
+
+// data
+import { questions } from '../data/questions';
+
+//icon
+import { FaArrowRight } from 'react-icons/fa6';
+
+const Community = () => {
   return (
-    <div className="min-h-screen bg-emerald-100 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-lime-500">Community Page! 🎉</h1>
-    </div>
+    <main className="min-h-screen p-6 font-poppins">
+      <div className="max-w-[1000px] mx-auto">
+        <h1 className="text-3xl font-bold mb-2 font-playfair">
+          Community Forum
+        </h1>
+        <p className="text-eerie mb-8">
+          View how other women in tech responded to journal prompts.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {questions.map((q) => (
+            <div
+              key={q.day}
+              className="bg-white p-6 rounded-lg border border-eerie flex flex-col justify-between"
+            >
+              <div>
+                <h2 className="text-m font-semibold text-eerie font-playfair mb-2">
+                  Theme: {q.theme}
+                </h2>
+                <p className="text-m text-eerie font-poppins mb-4">
+                  {q.question}
+                </p>
+              </div>
+              <div className="text-right">
+                <Link
+                  to={`/community/responses/${q.day}`}
+                  className="bg-eerie text-white p-2 inline-flex items-center justify-center rounded-full cursor-pointer transition hover:bg-black"
+                  aria-label={`View responses for day ${q.day}`}
+                >
+                  <FaArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </main>
   );
-}
+};
 
 export default Community;
