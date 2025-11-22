@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Journal from './pages/Journal';
 import Logout from './pages/Logout';
+import Challenges from './pages/Challenges';
 import App from './App';
 import ForumResponses from './pages/ForumResponses';
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: 'journal', element: <Journal /> },
       { path: 'logout', element: <Logout /> },
       { path: 'error', element: <Error /> },
+      { path: 'challenges', element: <Challenges /> },
       { path: '/community/responses/:day', element: <ForumResponses /> },
     ],
   },

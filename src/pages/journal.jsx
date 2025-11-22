@@ -1,6 +1,6 @@
 //react
 import { useState, useEffect, useCallback } from 'react';
-import { useLocation } from 'react-router-dom'; 
+import { useLocation } from 'react-router-dom';
 
 //components
 import ProgressBar from '../components/ProgressBar';
@@ -23,7 +23,7 @@ const getInitialData = () => {
 };
 
 const Journal = () => {
-  const location = useLocation(); 
+  const location = useLocation();
   const [progressData, setProgressData] = useState(getInitialData);
   const [isDaySummaryOpen, setIsDaySummaryOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
@@ -45,8 +45,8 @@ const Journal = () => {
   useEffect(() => {
     if (location.state && location.state.openDaySummary) {
       openSummaryForDay(location.state.openDaySummary);
-      
-      window.history.replaceState({}, document.title)
+
+      window.history.replaceState({}, document.title);
     }
   }, [location, openSummaryForDay]);
 

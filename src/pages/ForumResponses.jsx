@@ -50,7 +50,7 @@ const ForumResponses = () => {
     return <div className="p-6 text-center font-poppins">Loading...</div>;
   }
 
-  const journalLink = `/journal`; 
+  const journalLink = `/journal`;
 
   return (
     <main className="min-h-screen p-6 font-poppins">
@@ -92,18 +92,16 @@ const ForumResponses = () => {
           ) : (
             <div className="text-zinc p-4 border rounded-lg flex items-center justify-between">
               Be the first to share your response from your journal.
-              
               <Link
-                  to={journalLink}
-                  state={{ openDaySummary: day }} 
-                  className="bg-eerie text-white p-2 inline-flex items-center justify-center rounded-full cursor-pointer transition 
+                to={journalLink}
+                state={{ openDaySummary: day }}
+                className="bg-eerie text-white p-2 inline-flex items-center justify-center rounded-full cursor-pointer transition 
                   hover:bg-zinc hover:text-eerie active:bg-persianblue active:text-white 
                   flex-shrink-0"
-                  aria-label="Be the first to share your response from your journal."
-                >
-                  <FaArrowRight className="w-4 h-4" /> 
-                </Link>
-              
+                aria-label="Be the first to share your response from your journal."
+              >
+                <FaArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           )}
         </div>
