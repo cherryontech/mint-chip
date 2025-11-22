@@ -1,5 +1,6 @@
 //react
 import { useState, useEffect, useCallback } from 'react';
+import { useLocation } from 'react-router-dom'; 
 
 //components
 import ProgressBar from '../components/ProgressBar';
@@ -22,6 +23,7 @@ const getInitialData = () => {
 };
 
 const Journal = () => {
+  const location = useLocation(); 
   const [progressData, setProgressData] = useState(getInitialData);
   const [isDaySummaryOpen, setIsDaySummaryOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
@@ -34,10 +36,20 @@ const Journal = () => {
   }, [progressData]);
 
   // Open the Day Summary for a specific day
-  const openSummaryForDay = (day) => {
+  const openSummaryForDay = useCallback((day) => {
     setSelectedDay(day);
     setIsDaySummaryOpen(true);
-  };
+  }, []);
+
+  // from the ForumResponses
+  useEffect(() => {
+    if (location.state && location.state.openDaySummary) {
+      openSummaryForDay(location.state.openDaySummary);
+      
+      window.history.replaceState({}, document.title)
+    }
+  }, [location, openSummaryForDay]);
+
   const handleArrowClick = () => {
     if (nextDayToComplete <= total_days) {
       openSummaryForDay(nextDayToComplete);
