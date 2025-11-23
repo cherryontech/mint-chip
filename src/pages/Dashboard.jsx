@@ -25,7 +25,7 @@ export default function Dashboard() {
   return (
       <div className="bg-white">
       {/* title and button */}
-        <div className="flex flex-col gap-4 mx-8 sm:mx-15 md:mx-10 lg:mx-20 xl:mx-40 2xl:mx-80">
+        <div className="flex flex-col gap-4 mx-8 sm:mx-15 md:mx-10 lg:mx-20 xl:mx-40 2xl:mx-50">
           <h1 className="text-3xl font-playfair font-semibold text-eerie place-self-center lg:place-self-start mt-4">
             {/* conditional render for new user vs returning */}
             {hasTasks ? 'Welcome Back!' : 'Welcome New User!'}
@@ -43,7 +43,7 @@ export default function Dashboard() {
       {/* conditional render for empty state */}
       {hasTasks ? (
       /* card grid */
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-8 auto-rows-min my-14 mx-8 sm:mx-15 md:mx-10 lg:mx-20 xl:mx-40 2xl:mx-80">
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-8 auto-rows-min my-14 mx-8 sm:mx-15 md:mx-10 lg:mx-20 xl:mx-40 2xl:mx-50">
               {/* row 1 */}
               <DashboardTile 
                 type="data"
