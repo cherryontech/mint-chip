@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import Button from "../Button";
 import { IoClose } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 
 export default function TaskModal({ isOpen, onClose}) {
+    const navigate = useNavigate();
+
     const [selectedTask, setSelectedTask] = useState([]);
       
       // log the selectedTask after the array changes to update automatically
@@ -22,7 +25,17 @@ export default function TaskModal({ isOpen, onClose}) {
       console.log(`${challenge} button deselected!`);
       setSelectedTask(selectedTask.filter(item => item !== challenge));
     }
-  }
+    }
+
+    // function to save selected tasks in local storage for dashboard states
+    function saveTasks(){
+        // save to local storage
+        localStorage.setItem("userTasks", JSON.stringify(selectedTask));
+        console.log("User saved these tasks:", selectedTask);
+
+        // then route to the challenges page
+        navigate("/challenges");
+    }
     
     if (!isOpen) return null;
 
@@ -69,7 +82,7 @@ export default function TaskModal({ isOpen, onClose}) {
                         isActive={selectedTask.includes('Journal Entry: Respond to journal prompts or share your thoughts and feelings each day.')}
                     />
                 </div>
-                <Button size="sm" to="/journal" label="Save" />
+                <Button size="sm" onClick={saveTasks} label="Save" />
             </div>
         </div>
     );
