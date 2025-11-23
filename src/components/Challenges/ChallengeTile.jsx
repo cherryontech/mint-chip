@@ -27,7 +27,7 @@ export default function ChallengeTile({ size, span, title, subtitle, tags, to })
                 </div>
                 {/* tag and button */}
                 <div className="flex flex-row justify-between items-center">
-                    <p>{tags}</p>
+                    <p className="flex-1">{tags}</p>
                     <Button
                         size='circ'
                         color='primary'
