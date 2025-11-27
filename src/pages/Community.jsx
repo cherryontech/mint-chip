@@ -35,10 +35,10 @@ const Community = () => {
               <div className="text-right">
                 <Link
                   to={`/community/responses/${q.day}`}
-                  className="bg-eerie text-white p-2 inline-flex items-center justify-center rounded-full cursor-pointer transition hover:bg-black"
+                  className="bg-eerie text-white p-2 inline-flex items-center justify-center rounded-full cursor-pointer transition hover:bg-zinc active:bg-persianblue active:text-white active:p-2 flex-shrink-0 focus:outline-none focus-visible:ring-3 focus-visible:ring-persianblue focus-visible:ring-offset-2"
                   aria-label={`View responses for day ${q.day}`}
                 >
-                  <FaArrowRight className="w-5 h-5" />
+                  <FaArrowRight className="w-5 h-5" aria-hidden="true" />
                 </Link>
               </div>
             </div>

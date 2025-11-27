@@ -20,7 +20,7 @@ const DailyTrackerBar = ({ day, isCompleted, onClick, isDisabled, isOpen }) => {
       aria-expanded={isOpen}
       aria-controls={`summary-day${day}`}
       onClick={!isDisabled ? onClick : undefined}
-      className={`bg-white max-w-[1000px] p-4 rounded-lg border border-errie flex justify-between items-center mb-3 mt-8 transition font-poppins 
+      className={`bg-white max-w-[1000px] p-4 rounded-lg border border-errie flex justify-between items-center mb-3 mt-8 transition font-poppins focus:outline-none focus-visible:ring-4 focus-visible:ring-persianblue focus-visible:ring-offset-4
         ${isDisabled ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer hover:shadow-md'}`}
       onKeyDown={(e) => {
         if (!isDisabled && (e.key === 'Enter' || e.key === ' ')) {

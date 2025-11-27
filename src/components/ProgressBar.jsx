@@ -37,7 +37,7 @@ const ProgressBar = ({ effectiveDays, onArrowClick }) => {
         </span>
 
         <button
-          className="bg-eerie text-white p-2 rounded-full cursor-pointer transition"
+          className="bg-eerie text-white p-2 rounded-full cursor-pointer transition hover:bg-zinc active:bg-persianblue !outline-none focus-visible:ring-3 focus-visible:ring-persianblue focus-visible:ring-offset-4"
           onClick={onArrowClick}
           aria-label="Go to the next day for a new journal entry"
         >

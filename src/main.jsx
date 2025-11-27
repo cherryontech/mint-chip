@@ -31,13 +31,10 @@ const router = createBrowserRouter([
       { path: 'journal', element: <Journal /> },
       { path: 'logout', element: <Logout /> },
       { path: 'error', element: <Error /> },
+      { path: '*', element: <Error /> },
       { path: 'challenges', element: <Challenges /> },
       { path: '/community/responses/:day', element: <ForumResponses /> },
     ],
-  },
-  {
-    path: '*',
-    element: <Error />,
   },
 ]);
 createRoot(document.getElementById('root')).render(

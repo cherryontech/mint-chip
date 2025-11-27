@@ -57,12 +57,11 @@ const ForumResponses = () => {
       <div className="max-w-[1000px] mx-auto">
         <button
           onClick={() => navigate('/community')}
-          className="flex items-center mb-6 font-playfair"
+          className="flex items-center mb-6 font-playfair focus:outline-none focus:shadow-none focus-visible:ring-persianblue rounded px-2 py-1 "
           size="sm"
           color="primary"
-          aria-label="Back to Community Forum"
         >
-          <FaArrowLeft className="w-4 h-4 mr-2" />
+          <FaArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" />
           Back to Forum
         </button>
 
@@ -90,17 +89,17 @@ const ForumResponses = () => {
               </div>
             ))
           ) : (
-            <div className="text-zinc p-4 border rounded-lg flex items-center justify-between">
+            <div className="text-zinc-400 p-4 border rounded-lg flex items-center justify-between">
               Be the first to share your response from your journal.
               <Link
                 to={journalLink}
                 state={{ openDaySummary: day }}
                 className="bg-eerie text-white p-2 inline-flex items-center justify-center rounded-full cursor-pointer transition 
-                  hover:bg-zinc hover:text-eerie active:bg-persianblue active:text-white 
-                  flex-shrink-0"
+    hover:bg-zinc active:bg-persianblue active:text-white 
+    flex-shrink-0 focus:outline-none focus-visible:ring-3 focus-visible:ring-persianblue focus-visible:ring-offset-2"
                 aria-label="Be the first to share your response from your journal."
               >
-                <FaArrowRight className="w-4 h-4" />
+                <FaArrowRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </div>
           )}

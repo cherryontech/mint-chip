@@ -1,6 +1,5 @@
 //react
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 // component
 import Button from './Button';
@@ -10,16 +9,14 @@ const DailySummary = ({
   onClose,
   day,
   question,
-  initialComment, // Ahora puede ser un objeto: { comment: '...', optOut: false }
+  initialComment,
   onSave,
 }) => {
   const max_chars = 500;
 
-  // Si initialComment existe, usa sus propiedades. Si no, usa valores por defecto.
   const initialCommentObject = initialComment || {};
   const [comment, setComment] = useState(initialCommentObject.comment || '');
 
-  // AJUSTE CLAVE: Nuevo estado para Opt-out
   const [isOptedOut, setIsOptedOut] = useState(
     initialCommentObject.optOut || false
   );
@@ -27,20 +24,17 @@ const DailySummary = ({
   const remainingChars = max_chars - comment.length;
 
   useEffect(() => {
-    // Actualiza el estado cuando cambian las props
     const updatedCommentObject = initialComment || {};
     setComment(updatedCommentObject.comment || '');
     setIsOptedOut(updatedCommentObject.optOut || false);
   }, [initialComment, day]);
 
   const handleSave = () => {
-    // AJUSTE CLAVE: Pasar el estado de isOptedOut a onSave
     onSave(day, comment, isOptedOut);
     onClose();
   };
 
   const handleCancel = () => {
-    // Restablecer al estado inicial
     const updatedCommentObject = initialComment || {};
     setComment(updatedCommentObject.comment || '');
     setIsOptedOut(updatedCommentObject.optOut || false);
