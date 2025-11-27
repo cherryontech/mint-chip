@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ProfileProvider } from './contexts/ProfileContext';
 import Home from './pages/Home';
 import Onboarding from './pages/Onboarding';
 import Achievements from './pages/Achievements';
@@ -12,6 +13,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Journal from './pages/journal';
 import Logout from './pages/Logout';
+import Profile from './pages/Profile';
 import App from './App';
 
 const router = createBrowserRouter([
@@ -28,8 +30,9 @@ const router = createBrowserRouter([
       { path: 'achievements', element: <Achievements /> },
       { path: 'journal', element: <Journal /> },
       { path: 'logout', element: <Logout /> },
+      { path: 'profile', element: <Profile /> },
       { path: 'error', element: <Error /> },
-     ],
+    ],
   },
   {
     path: '*',
@@ -38,6 +41,8 @@ const router = createBrowserRouter([
 ]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ProfileProvider>
+      <RouterProvider router={router} />
+    </ProfileProvider>
   </StrictMode>
 );
