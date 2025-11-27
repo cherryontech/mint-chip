@@ -14,6 +14,7 @@ import Signup from './pages/Signup';
 import Journal from './pages/journal';
 import Logout from './pages/Logout';
 import Profile from './pages/Profile';
+import Challenges from './pages/Challenges';
 import App from './App';
 
 const router = createBrowserRouter([
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       { path: 'logout', element: <Logout /> },
       { path: 'profile', element: <Profile /> },
       { path: 'error', element: <Error /> },
+      { path: 'challenges', element: <Challenges /> },
     ],
   },
   {
