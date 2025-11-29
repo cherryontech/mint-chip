@@ -33,7 +33,7 @@ function Baseinput({
            block w-full h-11 px-4 py-2
           bg-white text-black
            ${inputClassName}
-          disabled:bg-gray-100 disabled:text-gray-500`}
+          disabled:bg-white disabled:text-eerie`}
         aria-invalid={ariaInvalid}
         aria-describedby={ariaDescribedBy}
         disabled={disabled}

@@ -3,6 +3,9 @@ import Passwordinput from '../components/PasswordInput';
 import Button from '../components/Button';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '../firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 function Signup() {
   const navigate = useNavigate();
@@ -10,20 +13,35 @@ function Signup() {
   const [isValidEmail, setisValidEmail] = useState(false);
   const [isValidPassword, setisValidPassword] = useState(false);
   const [formSubmitMessage, setFormSubmitMessage] = useState('');
+  const buttonStyles =
+    'h-11 w-[345px] text-base font-medium rounded-md lg:w-[501px] bg-eerie text-white border-1 border-eerie';
   const setFormValue = (fieldName, value) => {
     setFormValues((prevValue) => ({ ...prevValue, [fieldName]: value }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!isValidEmail || !isValidPassword) {
       setFormSubmitMessage('Fill form properly');
     } else {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formValues.signupEmail,
+        formValues.signupPassword
+      );
+      const uid = userCredential.user.uid;
+
       const signupFormData = new FormData();
       for (const key in formValues) {
         signupFormData.append(key, formValues[key]);
       }
       console.log('Submitting Signup Data:', signupFormData);
-      localStorage.setItem('authToken', 'my-auth-token');
+      await setDoc(doc(db, 'users', uid), {
+        email: formValues.signupEmail,
+        password: formValues.signupPassword,
+        onboardingConcerns: [],
+      });
+      localStorage.setItem('authToken', uid);
       navigate('/onboarding');
     }
   };
@@ -75,7 +93,9 @@ function Signup() {
             </p>
           )}
           <div className="flex justify-center">
-            <Button size="lg" color="primary" label="Complete Sign up" />
+            <button type="submit" className={buttonStyles}>
+              Complete Sign up
+            </button>
           </div>
 
           <div className="mt-[12px]">
