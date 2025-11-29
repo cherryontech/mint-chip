@@ -3,7 +3,7 @@ import Passwordinput from '../components/PasswordInput';
 import Button from '../components/Button';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signinWithEmailAndPassWord } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 
 function Login() {
@@ -12,6 +12,8 @@ function Login() {
   const [isValidEmail, setisValidEmail] = useState(false);
   const [isValidPassword, setisValidPassword] = useState(false);
   const [formSubmitMessage, setFormSubmitMessage] = useState('');
+  const buttonStyles =
+    'h-11 w-[345px] text-base font-medium rounded-md lg:w-[501px] bg-eerie text-white border-1 border-eerie';
   const setFormValue = (fieldName, value) => {
     setFormValues((prevValue) => ({ ...prevValue, [fieldName]: value }));
   };
@@ -26,7 +28,7 @@ function Login() {
         loginFormData.append(key, formValues[key]);
       }
       try {
-        const { user } = await signinWithEmailAndPassWord(
+        const { user } = await signInWithEmailAndPassword(
           auth,
           formValues.loginEmail,
           formValues.loginPassword
@@ -104,7 +106,9 @@ function Login() {
           </p>
         )}
         <div className="flex justify-center">
-          <Button size="lg" color="primary" label="Sign in" />
+          <button type="submit" className={buttonStyles}>
+            Sign in
+          </button>
         </div>
         <div className="mt-[12px]">
           New user?{' '}

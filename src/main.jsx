@@ -13,6 +13,7 @@ import Signup from './pages/Signup';
 import Journal from './pages/journal';
 import Logout from './pages/Logout';
 import Challenges from './pages/Challenges';
+import Profile from './pages/Profile';
 import App from './App';
 
 const router = createBrowserRouter([

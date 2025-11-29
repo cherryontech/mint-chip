@@ -13,6 +13,8 @@ function Signup() {
   const [isValidEmail, setisValidEmail] = useState(false);
   const [isValidPassword, setisValidPassword] = useState(false);
   const [formSubmitMessage, setFormSubmitMessage] = useState('');
+  const buttonStyles =
+    'h-11 w-[345px] text-base font-medium rounded-md lg:w-[501px] bg-eerie text-white border-1 border-eerie';
   const setFormValue = (fieldName, value) => {
     setFormValues((prevValue) => ({ ...prevValue, [fieldName]: value }));
   };
@@ -91,7 +93,9 @@ function Signup() {
             </p>
           )}
           <div className="flex justify-center">
-            <Button size="lg" color="primary" label="Complete Sign up" />
+            <button type="submit" className={buttonStyles}>
+              Complete Sign up
+            </button>
           </div>
 
           <div className="mt-[12px]">

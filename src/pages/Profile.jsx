@@ -1,38 +1,31 @@
 import Button from '../components/Button';
 import Baseinput from '../components/Baseinput';
 import { useState, useEffect } from 'react';
-import { signOut } from 'firebase/auth';
+import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 function Profile() {
-  const { profileData, setProfileData } = useState(null);
-  const { loading, setLoading } = useState(true);
+  const [profileData, setProfileData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   let inputClassName =
     'rounded-none border-0 border-b border-eerie bg-transparent focus:border-stone-600 focus:ring-0';
   useEffect(() => {
-    async function fetchProfileData() {
-      try {
-        const uid = auth.currentUser.uid;
-
-        const docRef = doc(db, 'users', uid);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const docRef = doc(db, 'users', user.uid);
         const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          setProfileData(docSnap.data());
-        } else {
-          console.log('No user document found');
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      } finally {
+        if (docSnap.exists()) setProfileData(docSnap.data());
         setLoading(false);
+      } else {
+        setProfileData(null);
+        setLoading(false);
+        navigate('/logout');
       }
-    }
-
-    fetchProfileData();
+    });
+    return () => unsubscribe();
   }, []);
   const handleLogout = async () => {
     await signOut(auth);
@@ -49,7 +42,7 @@ function Profile() {
         <div className="mb-[24px]">
           <Baseinput
             id="profile-email"
-            value={profileData.email}
+            value={profileData?.email || ''}
             type="email"
             name="profile-email"
             required={false}
@@ -78,7 +71,7 @@ function Profile() {
           <Baseinput
             id="profile-onboarding-choices"
             value={
-              profileData.onboardingConcerns?.length > 0
+              profileData?.onboardingConcerns?.length > 0
                 ? profileData.onboardingConcerns
                     .map((item) => `#${item}`)
                     .join('\u00A0\u00A0')
