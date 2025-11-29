@@ -1,13 +1,43 @@
 import Button from '../components/Button';
 import { useEffect, useState } from 'react';
-
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 export default function Onboarding() {
   const [selectedConcerns, setSelectedConcerns] = useState([]);
-  
+  const navigate = useNavigate();
   // log the selectedConcerns after the array changes to update automatically
   useEffect(() => {
     console.log('Updated Concerns:', selectedConcerns);
   }, [selectedConcerns]);
+
+  async function handleNext() {
+    if (!auth.currentUser) {
+      return;
+    }
+    const uid = auth.currentUser.uid;
+    await setDoc(
+      doc(db, 'users', uid),
+      { onboardingConcerns: selectedConcerns },
+      { merge: true }
+    )
+      .then(() => {
+        console.log('Onboarding data for profile is saved');
+        navigate('/dashboard');
+      })
+      .catch((error) => console.error('Error saving data:', error));
+  }
+  async function handleSkip() {
+    const uid = auth.currentUser.uid;
+    await setDoc(
+      doc(db, 'users', uid),
+      {
+        onboardingConcerns: [],
+      },
+      { merge: true }
+    );
+    navigate('/dashboard');
+  }
 
   // function for toggling active state and storing the user's selected concern
   function toggleConcern(concern) {
@@ -20,7 +50,7 @@ export default function Onboarding() {
     } else {
       // log the deselection
       console.log(`${concern} button deselected!`);
-      setSelectedConcerns(selectedConcerns.filter(item => item !== concern));
+      setSelectedConcerns(selectedConcerns.filter((item) => item !== concern));
     }
   }
 
@@ -39,53 +69,58 @@ export default function Onboarding() {
         </div>
         {/* button quiz grid */}
         <div className="grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-2 md:grid-rows-3 md:gap-y-10 md:gap-x-14">
-          <Button 
-            size="md" 
-            color="secondary" 
-            label="Sleep" 
+          <Button
+            size="md"
+            color="secondary"
+            label="Sleep"
             onClick={() => toggleConcern('Sleep')}
-            isActive={selectedConcerns.includes('Sleep')} 
+            isActive={selectedConcerns.includes('Sleep')}
           />
-          <Button 
-            size="md" 
-            color="secondary" 
+          <Button
+            size="md"
+            color="secondary"
             label="Postpartum Anxiety"
-            onClick={() => toggleConcern('Postpartum Anxiety')} 
-            isActive={selectedConcerns.includes('Postpartum Anxiety')} 
+            onClick={() => toggleConcern('Postpartum Anxiety')}
+            isActive={selectedConcerns.includes('Postpartum Anxiety')}
           />
-          <Button 
-            size="md" 
-            color="secondary" 
-            label="Self-Doubt" 
+          <Button
+            size="md"
+            color="secondary"
+            label="Self-Doubt"
             onClick={() => toggleConcern('Self-Doubt')}
-            isActive={selectedConcerns.includes('Self-Doubt')}  
+            isActive={selectedConcerns.includes('Self-Doubt')}
           />
-          <Button 
-            size="md" 
-            color="secondary" 
-            label="Stress" 
+          <Button
+            size="md"
+            color="secondary"
+            label="Stress"
             onClick={() => toggleConcern('Stress')}
-            isActive={selectedConcerns.includes('Stress')}  
+            isActive={selectedConcerns.includes('Stress')}
           />
-          <Button 
-            size="md" 
-            color="secondary" 
-            label="Saying No" 
+          <Button
+            size="md"
+            color="secondary"
+            label="Saying No"
             onClick={() => toggleConcern('Saying No')}
-            isActive={selectedConcerns.includes('Saying No')}  
+            isActive={selectedConcerns.includes('Saying No')}
           />
-          <Button 
-            size="md" 
-            color="secondary" 
+          <Button
+            size="md"
+            color="secondary"
             label="Gender Bias"
             onClick={() => toggleConcern('Gender Bias')}
-            isActive={selectedConcerns.includes('Gender Bias')}  
+            isActive={selectedConcerns.includes('Gender Bias')}
           />
         </div>
         {/* next and skip buttons */}
         <div className="flex flex-col-reverse gap-4 sm:gap-5 sm:flex-row md:gap-8">
-          <Button size="sm" color="secondary" label="Skip" to="/dashboard"/>
-          <Button size="sm" color="primary" label="Next" to="/dashboard"/>
+          <Button
+            size="sm"
+            color="secondary"
+            label="Skip"
+            onClick={handleSkip}
+          />
+          <Button size="sm" color="primary" label="Next" onClick={handleNext} />
         </div>
       </div>
     </div>

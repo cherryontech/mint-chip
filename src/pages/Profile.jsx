@@ -1,11 +1,47 @@
 import Button from '../components/Button';
 import Baseinput from '../components/Baseinput';
-import { useContext } from 'react';
-import { ProfileContext } from '../contexts/ProfileContext';
+import { useState, useEffect } from 'react';
+//import { useContext } from 'react';
+import { signOut } from 'firebase/auth';
+import { auth, db } from '../firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+//import { ProfileContext } from '../contexts/ProfileContext';
 function Profile() {
+  const { profileData, setProfileData } = useState(null);
+  const { loading, setLoading } = useState(true);
+  const navigate = useNavigate();
   let inputClassName =
     'rounded-none border-0 border-b border-eerie bg-transparent focus:border-stone-600 focus:ring-0';
-  const { handleLogout, handleDeleteAccount } = useContext(ProfileContext);
+  //const { handleLogout, handleDeleteAccount } = useContext(ProfileContext);
+  useEffect(() => {
+    async function fetchProfileData() {
+      try {
+        const uid = auth.currentUser.uid;
+
+        const docRef = doc(db, 'users', uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setProfileData(docSnap.data());
+        } else {
+          console.log('No user document found');
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProfileData();
+  }, []);
+  const handleLogout = async () => {
+    await signOut(auth);
+    localStorage.removeItem('authToken');
+    navigate('/logout');
+  };
+  if (loading) return <p>Loading</p>;
   return (
     <section className="bg-white flex flex-col items-center min-h-[calc(100vh-80px)]">
       <form className="w-full max-w-md min-w-[60%] flex flex-col">
@@ -15,7 +51,7 @@ function Profile() {
         <div className="mb-[24px]">
           <Baseinput
             id="profile-email"
-            value=""
+            value={profileData.email}
             type="email"
             name="profile-email"
             required={false}
@@ -29,7 +65,13 @@ function Profile() {
         <div className="mb-[24px]">
           <Baseinput
             id="profile-password"
-            value=""
+            value={
+              profileData.onboardingConcerns?.length > 0
+                ? profileData.onboardingConcerns
+                    .map((item) => `#${item}`)
+                    .join('\u00A0\u00A0')
+                : 'No concerns were selected'
+            }
             type="password"
             name="profile-password"
             required={false}
@@ -53,14 +95,6 @@ function Profile() {
             ariaDescribedBy={undefined}
             disabled={true}
           />
-        </div>
-        <div className="mb-[24px]">
-          <button
-            className="text-sangria delete-btn bg-transparent p-0 border-0 cursor-pointer hover:text-sangria"
-            onClick={handleDeleteAccount}
-          >
-            Delete Account
-          </button>
         </div>
 
         <Button

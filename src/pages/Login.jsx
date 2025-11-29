@@ -3,6 +3,8 @@ import Passwordinput from '../components/PasswordInput';
 import Button from '../components/Button';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { signinWithEmailAndPassWord } from 'firebase/auth';
+import { auth } from '../firebase';
 
 function Login() {
   const navigate = useNavigate();
@@ -13,17 +15,33 @@ function Login() {
   const setFormValue = (fieldName, value) => {
     setFormValues((prevValue) => ({ ...prevValue, [fieldName]: value }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isValidEmail || !isValidPassword) {
       setFormSubmitMessage('Fill form properly');
     } else {
-      localStorage.setItem('authToken', 'my-auth-token');
+      //localStorage.setItem('authToken', 'my-auth-token');
       const loginFormData = new FormData();
       for (const key in formValues) {
         loginFormData.append(key, formValues[key]);
       }
-      navigate('/dashboard');
+      try {
+        const userCredential = await signinWithEmailAndPassWord(
+          auth,
+          formValues.loginEmail,
+          formValues.loginPassword
+        );
+        navigate('/dashboard');
+      } catch (error) {
+        if (error.code === 'auth/user-not-found') {
+          setFormSubmitMessage('No user found with this email');
+        } else if (error.code === 'auth/wrong-password') {
+          setFormSubmitMessage('No usr found with this email');
+        } else {
+          setFormSubmitMessage('Login failed. Try again.');
+        }
+      }
+
       console.log('Login Submission Data:', loginFormData);
     }
   };
