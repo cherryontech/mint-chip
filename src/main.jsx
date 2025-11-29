@@ -10,7 +10,7 @@ import Dashboard from './pages/Dashboard';
 import Error from './pages/Error';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Journal from './pages/Journal';
+import Journal from './pages/journal';
 import Logout from './pages/Logout';
 import Challenges from './pages/Challenges';
 import App from './App';
