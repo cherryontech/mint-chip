@@ -81,7 +81,7 @@ const ForumResponses = () => {
       <div className="max-w-[1000px] mx-auto">
         <Link
           to={backLink}
-          className="inline-flex items-center text-eerie hover:text-persianblue transition mb-8 focus:outline-none focus-visible:ring-3 focus-visible:ring-persianblue focus-visible:ring-offset-2 rounded-full p-1 -ml-1"
+          className="inline-flex items-center text-eerie hover:text-persianblue transition mb-8 focus:outline-none focus-visible:ring-3 focus-visible:ring-persianblue focus:font-bold focus-visible:ring-offset-2 rounded p-1 -ml-1"
           aria-label="Back to Community Forum"
         >
           <FaArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" />
@@ -117,9 +117,7 @@ const ForumResponses = () => {
               <Link
                 to={journalLink}
                 state={{ openDaySummary: day }}
-                className="bg-eerie text-white p-2 inline-flex items-center justify-center rounded-full cursor-pointer transition 
-    hover:bg-zinc active:bg-persianblue active:text-white 
-    flex-shrink-0 focus:outline-none focus-visible:ring-3 focus-visible:ring-persianblue focus-visible:ring-offset-2"
+                className="bg-eerie text-white p-2 inline-flex items-center justify-center rounded-full cursor-pointer transition hover:bg-zinc active:bg-persianblue active:text-white flex-shrink-0 focus:outline-none focus-visible:ring-3 focus-visible:ring-persianblue focus-visible:ring-offset-2"
                 aria-label="Be the first to share your response from your journal."
               >
                 <FaArrowRight className="w-4 h-4" aria-hidden="true" />

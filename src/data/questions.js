@@ -14,9 +14,9 @@ export const questions = [
   },
   {
     day: 3,
-    theme: 'Self-Advocacy',
+    theme: 'Celebrating Wins',
     question:
-      'How can I ask my partner or support system for help with a specific task today or tomorrow?',
+      'Name one or two things I am proud of myself for accomplishing today, no matter how small.',
   },
   {
     day: 4,
@@ -26,9 +26,9 @@ export const questions = [
   },
   {
     day: 5,
-    theme: 'Celebrating Wins',
+    theme: 'Self-Advocacy',
     question:
-      'Name three things I am proud of myself for accomplishing today, no matter how small.',
+      'How can I ask my partner or support system for help with a specific task today or tomorrow?',
   },
   {
     day: 6,

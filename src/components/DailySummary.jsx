@@ -56,8 +56,9 @@ const DailySummary = ({
           Day {day} Summary
         </h2>
 
-        <p className="text-sm mb-4 text-eerie">{question}</p>
-
+       
+        <p className="text-sm mb-4 text-eerie text-justify">{question}</p>
+       
         <textarea
           className="w-full p-4 border border-eerie bg-white rounded-sm resize-none focus:ring-3 focus:ring-persianblue text-eerie"
           rows="6"
