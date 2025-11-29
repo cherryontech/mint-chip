@@ -3,27 +3,42 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
+// firebase
+import { db } from '../firebase';
+import { collection, getDocs } from 'firebase/firestore';
+
 // data
-import { questions, local_storage_key } from '../data/questions';
+import { questions } from '../data/questions';
 
 // icons
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa6';
 
-const getResponsesForDay = (day) => {
+const getResponsesForDay = async (day) => {
+  if (!day) return [];
+
+  const dayKey = `day${day}`;
+  const journalRef = collection(db, 'journals');
+
   try {
-    const storedData = localStorage.getItem(local_storage_key);
-    if (!storedData) return [];
+    const querySnapshot = await getDocs(journalRef);
+    const responses = [];
 
-    const allEntries = JSON.parse(storedData).entries;
-    const entry = allEntries[`day${day}`];
+    querySnapshot.forEach((doc) => {
+      const entry = doc.data().entries?.[dayKey];
 
-    if (entry && typeof entry === 'object' && entry.comment && !entry.optOut) {
-      return [entry.comment];
-    }
+      if (
+        entry &&
+        typeof entry === 'object' &&
+        entry.comment &&
+        !entry.optOut
+      ) {
+        responses.push(entry.comment);
+      }
+    });
 
-    return [];
+    return responses;
   } catch (error) {
-    console.error('Error retrieving community data:', error);
+    console.error('Error retrieving community data from Firestore:', error);
     return [];
   }
 };
@@ -36,40 +51,48 @@ const ForumResponses = () => {
   const [questionData, setQuestionData] = useState(null);
   const [responses, setResponses] = useState([]);
 
+  const journalLink = `/journal`;
+
   useEffect(() => {
-    if (day && day >= 1 && day <= questions.length) {
-      const qData = questions[day - 1];
-      setQuestionData(qData);
-      setResponses(getResponsesForDay(day));
-    } else {
-      navigate('/community');
-    }
+    const fetchResponses = async () => {
+      if (day && day >= 1 && day <= questions.length) {
+        const qData = questions[day - 1];
+        setQuestionData(qData);
+
+        const communityResponses = await getResponsesForDay(day);
+        setResponses(communityResponses);
+      } else {
+        navigate('/community');
+      }
+    };
+
+    fetchResponses();
   }, [day, navigate]);
 
   if (!questionData) {
-    return <div className="p-6 text-center font-poppins">Loading...</div>;
+    return <div className="min-h-screen p-6 font-poppins">Loading...</div>;
   }
 
-  const journalLink = `/journal`;
+  const { question } = questionData;
+  const backLink = `/community`;
 
   return (
     <main className="min-h-screen p-6 font-poppins">
       <div className="max-w-[1000px] mx-auto">
-        <button
-          onClick={() => navigate('/community')}
-          className="flex items-center mb-6 font-playfair focus:outline-none focus:shadow-none focus-visible:ring-persianblue rounded px-2 py-1 "
-          size="sm"
-          color="primary"
+        <Link
+          to={backLink}
+          className="inline-flex items-center text-eerie hover:text-persianblue transition mb-8 focus:outline-none focus-visible:ring-3 focus-visible:ring-persianblue focus-visible:ring-offset-2 rounded-full p-1 -ml-1"
+          aria-label="Back to Community Forum"
         >
           <FaArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" />
-          Back to Forum
-        </button>
+          <span className="font-poppins text-sm">Back to Forum</span>
+        </Link>
 
-        <h1 className="text-3xl font-bold mb-2 font-playfair">
-          Community Forum
+        <h1 className="text-3xl font-bold mb-4 font-playfair text-eerie">
+          Community Responses for Day {day}
         </h1>
-        <p className="text-eerie mb-8">
-          View how other women in tech answered, {questionData.question}
+        <p className="text-eerie mb-8 border-l-4 border-persianblue pl-4 py-2 bg-gray-50 rounded-r-md">
+          <span className="font-semibold">Prompt:</span> {question}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

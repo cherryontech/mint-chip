@@ -2,40 +2,61 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 
+// firebase
+import { db } from '../firebase';
+import { doc, setDoc, onSnapshot } from 'firebase/firestore';
+
 //components
 import ProgressBar from '../components/ProgressBar';
 import DailyTrackerBar from '../components/DailyTrackerBar';
 import DailySummary from '../components/DailySummary';
 
 //data
-import { questions, total_days, local_storage_key } from '../data/questions';
+import { questions, total_days } from '../data/questions';
 
-const getInitialData = () => {
-  try {
-    const storedData = localStorage.getItem(local_storage_key);
-    return storedData
-      ? JSON.parse(storedData)
-      : { effectiveDays: 0, entries: {} };
-  } catch (error) {
-    console.error('Error retrieving data from localStorage:', error);
-    return { effectiveDays: 0, entries: {} };
-  }
-};
+const USER_ID = 'user-id';
+const JOURNAL_DOC_REF = doc(db, 'journals', USER_ID);
 
 const Journal = () => {
   const location = useLocation();
-  const [progressData, setProgressData] = useState(getInitialData);
+  const [progressData, setProgressData] = useState({
+    effectiveDays: 0,
+    entries: {},
+  });
   const [isDaySummaryOpen, setIsDaySummaryOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
 
   const nextDayToComplete = progressData.effectiveDays + 1;
 
-  // Update localStorage
   useEffect(() => {
-    localStorage.setItem(local_storage_key, JSON.stringify(progressData));
-  }, [progressData]);
+    const unsubscribe = onSnapshot(
+      JOURNAL_DOC_REF,
+      (docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setProgressData({
+            effectiveDays: data.effectiveDays || 0,
+            entries: data.entries || {},
+          });
+        } else {
+          setDoc(
+            JOURNAL_DOC_REF,
+            { effectiveDays: 0, entries: {} },
+            { merge: true }
+          ).catch((error) =>
+            console.error('Error creating initial document:', error)
+          );
+        }
+      },
+      (error) => {
+        console.error('Error listening to journal data:', error);
+      }
+    );
 
-  // Open the Day Summary for a specific day
+    return () => unsubscribe();
+  }, []);
+
+  // Open the DailySummary for a specific day
   const openSummaryForDay = useCallback((day) => {
     setSelectedDay(day);
     setIsDaySummaryOpen(true);
@@ -45,16 +66,12 @@ const Journal = () => {
   useEffect(() => {
     if (location.state && location.state.openDaySummary) {
       openSummaryForDay(location.state.openDaySummary);
-
-      window.history.replaceState({}, document.title);
     }
-  }, [location, openSummaryForDay]);
+  }, [location.state, openSummaryForDay]);
 
-  const handleArrowClick = () => {
-    if (nextDayToComplete <= total_days) {
-      openSummaryForDay(nextDayToComplete);
-    }
-  };
+  const handleArrowClick = useCallback(() => {
+    openSummaryForDay(nextDayToComplete);
+  }, [openSummaryForDay, nextDayToComplete]);
 
   const handleSaveComment = useCallback((day, comment, isOptedOut) => {
     setProgressData((prevData) => {
@@ -62,6 +79,7 @@ const Journal = () => {
       const trimmedComment = comment.trim();
 
       const previousEntry = prevData.entries[dayKey];
+
       const hasPreviousComment = !!(
         previousEntry &&
         (previousEntry.comment || typeof previousEntry === 'string')
@@ -86,44 +104,53 @@ const Journal = () => {
         [dayKey]: entryData,
       };
 
-      newEffectiveDays = Math.max(0, Math.min(newEffectiveDays, total_days));
+      const finalEffectiveDays = Math.max(
+        0,
+        Math.min(newEffectiveDays, total_days)
+      );
+
+      const dataToSave = {
+        effectiveDays: finalEffectiveDays,
+        entries: newEntries,
+      };
+
+      setDoc(JOURNAL_DOC_REF, dataToSave, { merge: true }).catch((error) =>
+        console.error('Error saving journal entry:', error)
+      );
 
       return {
-        effectiveDays: newEffectiveDays,
+        effectiveDays: finalEffectiveDays,
         entries: newEntries,
       };
     });
   }, []);
 
-  const daysArray = Array.from({ length: total_days }, (_, i) => i + 1);
-
   return (
-    <main className="min-h-screen bg-gray-50 p-4 font-poppins">
+    <main className="min-h-screen p-6 font-poppins">
       <div className="max-w-[1000px] mx-auto">
-        <h1 className="text-2xl font-semibold mb-4 mt-6 text-eerie font-playfair">
-          Journal Entry
+        <h1 className="text-3xl font-bold mb-2 font-playfair">
+          30 Day Journal
         </h1>
+        <p className="text-eerie mb-8">
+          A space for reflection and self-advocacy.
+        </p>
 
         <ProgressBar
           effectiveDays={progressData.effectiveDays}
           onArrowClick={handleArrowClick}
         />
-        <p className="self-stretch justify-start text-black text-sd font-normal font-poppins">
-          View saved journal entries or start a new journal entry.
-        </p>
 
-        {/* Daily Bars */}
-        <section>
-          {daysArray.map((day) => {
-            const dayKey = `day${day}`;
-            const entry = progressData.entries[dayKey];
+        <section aria-labelledby="journal-entries-heading">
+          {questions.map((q) => {
+            const day = q.day;
+            const entry = progressData.entries[`day${day}`];
 
-            const isCompleted = !!(
-              entry &&
-              (entry.comment || typeof entry === 'string')
-            );
+            const isCompleted = !!(entry && entry.comment);
+
+            // DailyTrackerBar
             const isDisabled = day > nextDayToComplete;
 
+            // DailySummary
             const initialCommentData =
               typeof entry === 'string'
                 ? { comment: entry, optOut: false }
