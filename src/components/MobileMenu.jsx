@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { RiLayoutHorizontalFill, RiUser3Fill } from 'react-icons/ri';
-import { MdForum } from "react-icons/md";
+import { MdForum } from 'react-icons/md';
 import { PiListBulletsFill } from 'react-icons/pi';
 
 const MobileMenu = ({ isOpen, toggleMenu }) => {
@@ -17,9 +17,9 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
     {
       name: 'Community Forum',
       href: '/community',
-      icon: MdForum ,
+      icon: MdForum,
     },
-    
+
     { name: 'Profile', href: '/profile', icon: RiUser3Fill },
   ];
 
@@ -47,17 +47,17 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
           <ul className="flex flex-col space-y-3 ml-10 ">
             {navLinks.map((link) => (
               <li key={link.name} className="mb-4">
-                <Link 
-                  to={link.href} 
+                <Link
+                  to={link.href}
                   className="flex items-center text-stone-900 text-lg font-poppins font-semibold transition-colors hover:font-bold focus:outline-none focus:ring-2focus:outline-none  focus-visible:ring-2 focus-visible:ring-persianblue rounded-[5px]"
-                  onClick={toggleMenu} 
+                  onClick={toggleMenu}
                 >
                   <link.icon
                     className="mr-2 text-2xl text-black w-5 h-6 "
                     aria-hidden="true"
                   />
                   {link.name}
-                </Link> 
+                </Link>
               </li>
             ))}
           </ul>

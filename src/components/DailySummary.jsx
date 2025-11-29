@@ -1,6 +1,5 @@
 //react
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 // component
 import Button from './Button';
@@ -14,20 +13,31 @@ const DailySummary = ({
   onSave,
 }) => {
   const max_chars = 500;
-  const [comment, setComment] = useState(initialComment || '');
+
+  const initialCommentObject = initialComment || {};
+  const [comment, setComment] = useState(initialCommentObject.comment || '');
+
+  const [isOptedOut, setIsOptedOut] = useState(
+    initialCommentObject.optOut || false
+  );
+
   const remainingChars = max_chars - comment.length;
 
   useEffect(() => {
-    setComment(initialComment || '');
+    const updatedCommentObject = initialComment || {};
+    setComment(updatedCommentObject.comment || '');
+    setIsOptedOut(updatedCommentObject.optOut || false);
   }, [initialComment, day]);
 
   const handleSave = () => {
-    onSave(day, comment);
+    onSave(day, comment, isOptedOut);
     onClose();
   };
 
   const handleCancel = () => {
-    setComment(initialComment || '');
+    const updatedCommentObject = initialComment || {};
+    setComment(updatedCommentObject.comment || '');
+    setIsOptedOut(updatedCommentObject.optOut || false);
     onClose();
   };
 
@@ -46,8 +56,9 @@ const DailySummary = ({
           Day {day} Summary
         </h2>
 
-        <p className="text-sm mb-4 text-eerie">{question}</p>
-
+       
+        <p className="text-sm mb-4 text-eerie text-justify">{question}</p>
+       
         <textarea
           className="w-full p-4 border border-eerie bg-white rounded-sm resize-none focus:ring-3 focus:ring-persianblue text-eerie"
           rows="6"
@@ -79,13 +90,21 @@ const DailySummary = ({
           </div>
         </div>
 
-        <div className="text-center mt-4">
-          <Link
-            to="/community" 
-            className="text-blue-700 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus:p-2 focus-visible:ring-persianblue rounded-[5px]"
+        {/*Checkbox for Opt-out */}
+        <div className="flex items-center mt-5 mb-3 ml-6">
+          <input
+            id={`opt-out-${day}`}
+            type="checkbox"
+            checked={isOptedOut}
+            onChange={(e) => setIsOptedOut(e.target.checked)}
+            className="h-4 w-4 text-green border-eerie rounded focus:ring-persianblue"
+          />
+          <label
+            htmlFor={`opt-out-${day}`}
+            className="ml-2 text-sm text-eerie font-poppins"
           >
-            Visit Community Forum
-          </Link>
+            Opt out of sharing in the Community Forum
+          </label>
         </div>
       </div>
     </div>
