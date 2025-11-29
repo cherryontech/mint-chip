@@ -1,19 +1,17 @@
 import Button from '../components/Button';
 import Baseinput from '../components/Baseinput';
 import { useState, useEffect } from 'react';
-//import { useContext } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth, db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-//import { ProfileContext } from '../contexts/ProfileContext';
+
 function Profile() {
   const { profileData, setProfileData } = useState(null);
   const { loading, setLoading } = useState(true);
   const navigate = useNavigate();
   let inputClassName =
     'rounded-none border-0 border-b border-eerie bg-transparent focus:border-stone-600 focus:ring-0';
-  //const { handleLogout, handleDeleteAccount } = useContext(ProfileContext);
   useEffect(() => {
     async function fetchProfileData() {
       try {
@@ -65,13 +63,7 @@ function Profile() {
         <div className="mb-[24px]">
           <Baseinput
             id="profile-password"
-            value={
-              profileData.onboardingConcerns?.length > 0
-                ? profileData.onboardingConcerns
-                    .map((item) => `#${item}`)
-                    .join('\u00A0\u00A0')
-                : 'No concerns were selected'
-            }
+            value="**********"
             type="password"
             name="profile-password"
             required={false}
@@ -85,7 +77,13 @@ function Profile() {
         <div className="mb-[24px]">
           <Baseinput
             id="profile-onboarding-choices"
-            value=""
+            value={
+              profileData.onboardingConcerns?.length > 0
+                ? profileData.onboardingConcerns
+                    .map((item) => `#${item}`)
+                    .join('\u00A0\u00A0')
+                : 'No concerns were selected'
+            }
             type="text"
             name="profile-onboarding-choices"
             required={false}

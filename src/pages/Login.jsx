@@ -26,11 +26,13 @@ function Login() {
         loginFormData.append(key, formValues[key]);
       }
       try {
-        const userCredential = await signinWithEmailAndPassWord(
+        const { user } = await signinWithEmailAndPassWord(
           auth,
           formValues.loginEmail,
           formValues.loginPassword
         );
+        console.log('Logged in user is: ', user.uid);
+        localStorage.setItem('authToken', user.uid);
         navigate('/dashboard');
       } catch (error) {
         if (error.code === 'auth/user-not-found') {

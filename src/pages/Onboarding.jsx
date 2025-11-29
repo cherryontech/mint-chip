@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+
 export default function Onboarding() {
   const [selectedConcerns, setSelectedConcerns] = useState([]);
   const navigate = useNavigate();
