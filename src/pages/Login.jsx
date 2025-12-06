@@ -3,6 +3,8 @@ import Passwordinput from '../components/PasswordInput';
 import Button from '../components/Button';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
 
 function Login() {
   const navigate = useNavigate();
@@ -10,20 +12,40 @@ function Login() {
   const [isValidEmail, setisValidEmail] = useState(false);
   const [isValidPassword, setisValidPassword] = useState(false);
   const [formSubmitMessage, setFormSubmitMessage] = useState('');
+  const buttonStyles =
+    'h-11 w-[345px] text-base font-medium rounded-md lg:w-[501px] bg-eerie text-white border-1 border-eerie';
   const setFormValue = (fieldName, value) => {
     setFormValues((prevValue) => ({ ...prevValue, [fieldName]: value }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isValidEmail || !isValidPassword) {
       setFormSubmitMessage('Fill form properly');
     } else {
-      localStorage.setItem('authToken', 'my-auth-token');
+      //localStorage.setItem('authToken', 'my-auth-token');
       const loginFormData = new FormData();
       for (const key in formValues) {
         loginFormData.append(key, formValues[key]);
       }
-      navigate('/dashboard');
+      try {
+        const { user } = await signInWithEmailAndPassword(
+          auth,
+          formValues.loginEmail,
+          formValues.loginPassword
+        );
+        console.log('Logged in user is: ', user.uid);
+        localStorage.setItem('authToken', user.uid);
+        navigate('/dashboard');
+      } catch (error) {
+        if (error.code === 'auth/user-not-found') {
+          setFormSubmitMessage('No user found with this email');
+        } else if (error.code === 'auth/wrong-password') {
+          setFormSubmitMessage('No usr found with this email');
+        } else {
+          setFormSubmitMessage('Login failed. Try again.');
+        }
+      }
+
       console.log('Login Submission Data:', loginFormData);
     }
   };
@@ -84,7 +106,9 @@ function Login() {
           </p>
         )}
         <div className="flex justify-center">
-          <Button size="lg" color="primary" label="Sign in" />
+          <button type="submit" className={buttonStyles}>
+            Sign in
+          </button>
         </div>
         <div className="mt-[12px]">
           New user?{' '}
