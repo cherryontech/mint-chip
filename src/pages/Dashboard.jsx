@@ -5,14 +5,17 @@ import TaskModal from "../components/Dashboard/TaskModal";
 import { auth, db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 
-let daysCompleted = 0;
-let daysLeft = 30 - daysCompleted;
 let loginStreak = 1;
 
 export default function Dashboard() {
   const [taskModalOpen, setTaskModalOpen] = useState(false);
   // state for whether tasks have been selected or not from dashboard modal
   const [hasTasks, setHasTasks] = useState(false);
+  // state for challenge task completed days
+  const [completedDays, setCompletedDays] = useState(0);
+  let daysCompleted = completedDays;
+  let daysLeft = 30 - daysCompleted;
+
   // define variable for the authenticated user
   const user = auth.currentUser;
 
@@ -36,7 +39,15 @@ export default function Dashboard() {
       } else {
         setHasTasks(false);
         console.log('user hasnt selected any tasks or deselected')
-      }    
+      } 
+      
+      // check the document's completedDays for the challenges to update state - add optional chaining in case thee user hasn't started any challenges yet
+      if (userDocSnap.data().journalProgress?.completedDays > 0){
+        setCompletedDays(userDocSnap.data().journalProgress.completedDays);
+      } else {
+        console.log('No days completed yet')
+        setCompletedDays(0);
+      };
     });
     
     // call this function once u exit so it stops looking for the changes in the database
@@ -75,7 +86,7 @@ export default function Dashboard() {
                 title="Detox Summary" 
                 dataSentence={`${daysCompleted} Day${daysCompleted == 1 ? '' : 's'}`}
                 subtitle={`${daysLeft} day${daysLeft == 1 ? '' : 's'} to go!`}
-                />
+              />
               <DashboardTile 
                 type="data"
                 size="sm" 
@@ -83,7 +94,7 @@ export default function Dashboard() {
                 title="Login History"
                 dataSentence={`${loginStreak} Day Streak`}
                 subtitle='Keep it up!'
-                />
+              />
               <DashboardTile 
                 size="sm" 
                 span="2"
