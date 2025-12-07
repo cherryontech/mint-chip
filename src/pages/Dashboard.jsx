@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import DashboardTile from "../components/Dashboard/DashboardTile";
 import TaskModal from "../components/Dashboard/TaskModal";
+import { auth, db } from "../firebase";
+import { doc, onSnapshot } from "firebase/firestore";
 
 let daysCompleted = 0;
 let daysLeft = 30 - daysCompleted;
@@ -11,16 +13,37 @@ export default function Dashboard() {
   const [taskModalOpen, setTaskModalOpen] = useState(false);
   // state for whether tasks have been selected or not from dashboard modal
   const [hasTasks, setHasTasks] = useState(false);
+  // define variable for the authenticated user
+  const user = auth.currentUser;
 
   useEffect(() => {
-    // load userTasks from modal from local storage
-    let userTasks = JSON.parse(localStorage.getItem("userTasks") || '[]');
-    console.log("Loaded tasks from local storage:", userTasks);
-    // if it's not empty, setHasTasks state to true
-    if (userTasks.length !== 0){
-      setHasTasks(true);
+    // dont run anything if the user isn't loaded
+    if (!user) {
+      console.log('user wasnt loaded yet or not found');
+      return;
+    } else {
+      console.log('user found');
     }
-  }, []);
+
+    // define variables
+    const userDocRef = doc(db, "users", user.uid);
+
+    // listen in real-time for changes to the document
+    const unsub = onSnapshot(userDocRef, (userDocSnap) => {
+      // check if the document's challengesSelected field is > 0 to display the full dashboard and update state
+      if (userDocSnap.exists() && userDocSnap.data().challengesSelected.length > 0){
+        setHasTasks(true);
+      } else {
+        setHasTasks(false);
+        console.log('user hasnt selected any tasks or deselected')
+      }    
+    });
+    
+    // call this function once u exit so it stops looking for the changes in the database
+    return () => {
+      unsub();
+    }
+  }, [user]);
 
   return (
       <div className="bg-white">
@@ -39,7 +62,7 @@ export default function Dashboard() {
             />
           </div>
         </div>
-        <TaskModal isOpen={taskModalOpen} onClose={() => setTaskModalOpen(false)}/>
+        <TaskModal user={user} isOpen={taskModalOpen} onClose={() => setTaskModalOpen(false)}/>
       {/* conditional render for empty state */}
       {hasTasks ? (
       /* card grid */

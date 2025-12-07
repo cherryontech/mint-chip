@@ -2,15 +2,13 @@ import { useEffect, useState } from 'react';
 import Button from "../Button";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
-import { auth, db } from '../../firebase';
+import { db } from '../../firebase';
 import { doc, updateDoc } from 'firebase/firestore';
 
-export default function TaskModal({ isOpen, onClose}) {
+export default function TaskModal({ isOpen, onClose, user}) {
     console.log('task modal is open', isOpen);
     const navigate = useNavigate();
     const [selectedTask, setSelectedTask] = useState([]);
-    // define the current user logged in
-    const user = auth.currentUser;
       
     // log the selectedTask after the array changes to update automatically
     useEffect(() => {
@@ -33,7 +31,7 @@ export default function TaskModal({ isOpen, onClose}) {
 
     // function to save selected tasks to firestore and local storage
     async function saveTasks(){
-        if (!auth){
+        if (!user){
             console.log('User not authenticated yet')
             return;
         }
@@ -43,8 +41,6 @@ export default function TaskModal({ isOpen, onClose}) {
                 challengesSelected: selectedTask
             });
             
-            // save to local storage
-            localStorage.setItem("userTasks", JSON.stringify(selectedTask));
             console.log("User saved these tasks:", selectedTask);
 
             // then route to the challenges page
