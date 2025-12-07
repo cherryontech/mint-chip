@@ -2,39 +2,57 @@ import { useEffect, useState } from 'react';
 import Button from "../Button";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import { auth, db } from '../../firebase';
+import { doc, updateDoc } from 'firebase/firestore';
 
 export default function TaskModal({ isOpen, onClose}) {
+    console.log('task modal is open', isOpen);
     const navigate = useNavigate();
-
     const [selectedTask, setSelectedTask] = useState([]);
+    // define the current user logged in
+    const user = auth.currentUser;
       
-      // log the selectedTask after the array changes to update automatically
-      useEffect(() => {
+    // log the selectedTask after the array changes to update automatically
+    useEffect(() => {
         console.log('Updated Tasks:', selectedTask);
     }, [selectedTask]);
     
     function toggleTask(challenge) {
     // if the clicked challenge is not selectedTask, setSelectedTask
-    if (!selectedTask.includes(challenge)) {
-      // log the selection
-      console.log(`${challenge} button selected!`);
-      setSelectedTask([...selectedTask, challenge]);
-      // if the clicked challenge is already in selectedTask, filter it out of selectedTask
-    } else {
-      // log the deselection
-      console.log(`${challenge} button deselected!`);
-      setSelectedTask(selectedTask.filter(item => item !== challenge));
-    }
+        if (!selectedTask.includes(challenge)) {
+            // log the selection
+            console.log(`${challenge} button selected!`);
+            setSelectedTask([...selectedTask, challenge]);
+            // if the clicked challenge is already in selectedTask, filter it out of selectedTask
+            } else {
+            // log the deselection
+            console.log(`${challenge} button deselected!`);
+            setSelectedTask(selectedTask.filter(item => item !== challenge));
+        }
     }
 
-    // function to save selected tasks in local storage for dashboard states
-    function saveTasks(){
-        // save to local storage
-        localStorage.setItem("userTasks", JSON.stringify(selectedTask));
-        console.log("User saved these tasks:", selectedTask);
+    // function to save selected tasks to firestore and local storage
+    async function saveTasks(){
+        if (!auth){
+            console.log('User not authenticated yet')
+            return;
+        }
+        const userDocRef = doc(db, "users", user.uid);
+        try {
+            await updateDoc(userDocRef, {
+                challengesSelected: selectedTask
+            });
+            
+            // save to local storage
+            localStorage.setItem("userTasks", JSON.stringify(selectedTask));
+            console.log("User saved these tasks:", selectedTask);
 
-        // then route to the challenges page
-        navigate("/challenges");
+            // then route to the challenges page
+            navigate("/challenges");
+        } catch (error) {
+            console.error("Error while saving user tasks to firestore", error);
+            console.log("Error sending tasks to database");
+        }
     }
     
     if (!isOpen) return null;

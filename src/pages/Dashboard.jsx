@@ -39,7 +39,7 @@ export default function Dashboard() {
             />
           </div>
         </div>
-        <TaskModal isOpen={taskModalOpen} onClose={() => setTaskModalOpen(false)} />
+        <TaskModal isOpen={taskModalOpen} onClose={() => setTaskModalOpen(false)}/>
       {/* conditional render for empty state */}
       {hasTasks ? (
       /* card grid */
