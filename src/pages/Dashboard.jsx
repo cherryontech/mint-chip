@@ -4,10 +4,12 @@ import DashboardTile from "../components/Dashboard/DashboardTile";
 import TaskModal from "../components/Dashboard/TaskModal";
 import { auth, db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 
 let loginStreak = 1;
 
 export default function Dashboard() {
+  const [user, setUser] = useState(null);
   const [taskModalOpen, setTaskModalOpen] = useState(false);
   // state for whether tasks have been selected or not from dashboard modal
   const [hasTasks, setHasTasks] = useState(false);
@@ -17,9 +19,23 @@ export default function Dashboard() {
   let daysLeft = 30 - daysCompleted;
 
   // define variable for the authenticated user
-  const user = auth.currentUser;
+  // const user = auth.currentUser;
+
+  // useEffect to ensure the authenticated user loads before dashboard data and state is determined
+  useEffect(() => {
+    console.log("User is loading...")
+    const unsub = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      console.log('The user has been found')
+    });
+
+    return () => {
+      unsub();
+    }
+  }, []);
 
   useEffect(() => {
+    console.log("About to load the data from the user...")
     // dont run anything if the user isn't loaded
     if (!user) {
       console.log('user wasnt loaded yet or not found');
@@ -33,6 +49,7 @@ export default function Dashboard() {
 
     // listen in real-time for changes to the document
     const unsub = onSnapshot(userDocRef, (userDocSnap) => {
+      console.log('User has already selected these tasks: ', userDocSnap.data().challengesSelected);
       // check if the document's challengesSelected field is > 0 to display the full dashboard and update state
       if (userDocSnap.exists() && userDocSnap.data().challengesSelected.length > 0){
         setHasTasks(true);
