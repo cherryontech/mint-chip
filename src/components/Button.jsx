@@ -1,3 +1,4 @@
+// prettier-ignore-file
 import { useNavigate } from 'react-router-dom';
 import { tv } from 'tailwind-variants/lite';
 
@@ -10,18 +11,18 @@ const buttonVariants = tv({
       sm: 'h-12 w-[162px] text-base font-semibold rounded-lg lg:h-14 lg:w-[220px] lg:text-xl',
       md: 'h-11 w-[218px] text-base font-semibold rounded-lg lg:h-14 lg:w-[286px] lg:text-xl xl:h-16 xl:w-[327px] xl:text-2xl',
       lg: 'h-11 w-[345px] text-base font-medium rounded-md lg:w-[501px]',
-      circ: 'h-11 w-11 text-2xl rounded-full',
+      circ: 'h-11 w-11 text-2xl rounded-full'
     },
     color: {
       primary: 'bg-eerie text-white border-1 border-eerie',
       secondary: 'bg-white text-eerie border-1 border-eerie',
-      gradient: 'bg-gradient-to-b from-electricgreen to-persianblue text-white',
+      gradient: 'bg-gradient-to-b from-electricgreen to-persianblue text-white'
     },
   },
   // default button styles if no specified props
   defaultVariants: {
     size: 'sm',
-    color: 'primary',
+    color: 'primary'
   },
   // conditional style cases for specific prop combinations
   compoundVariants: [
@@ -29,20 +30,12 @@ const buttonVariants = tv({
     {
       color: 'secondary',
       size: 'md',
-      className: 'drop-shadow-none !font-normal',
+      className: 'drop-shadow-none !font-normal'
     },
   ],
 });
 
-export default function Button({
-  size,
-  color,
-  label,
-  onClick,
-  isActive,
-  to,
-  ...props
-}) {
+export default function Button({ size, color, label, onClick, isActive, to, ...props }) {
   let navigate = useNavigate();
 
   function handleClick() {
@@ -54,16 +47,10 @@ export default function Button({
   }
 
   return (
-    <button
-      onClick={handleClick}
-      className={
-        isActive
-          ? `${buttonVariants({ size, color })} active`
-          : buttonVariants({ size, color })
-      }
-      {...props}
-    >
-      {label}
+    <button 
+      onClick={handleClick} 
+      className={isActive ? `${buttonVariants({ size, color })} active` : buttonVariants({ size, color })} {...props}
+    >{label}
     </button>
   );
 }
