@@ -9,9 +9,9 @@ import { FaArrowRight } from 'react-icons/fa6';
 
 const Community = () => {
   return (
-    <main className="min-h-screen p-6 font-poppins">
+    <main className="min-h-screen font-poppins">
       <div className="max-w-[1000px] mx-auto">
-        <h1 className="text-3xl font-bold mb-2 font-playfair">
+        <h1 className="text-3xl font-playfair font-semibold text-eerie place-self-center lg:place-self-start mt-4 mb-2">
           Community Forum
         </h1>
         <p className="text-eerie mb-8">

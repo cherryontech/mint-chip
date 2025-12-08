@@ -1,6 +1,6 @@
 //react
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 //icons
 import { MdOutlineLogin } from 'react-icons/md';
@@ -17,6 +17,7 @@ function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // mobile menu state
   const [isAuthenticated, setIsAuthenticated] = useState(false); // user authentication state
   const navigate = useNavigate();
+  const location = useLocation(); 
 
   // check authentication from localstorage
   useEffect(() => {
@@ -117,38 +118,45 @@ function Navbar() {
           >
             <ul className="flex items-center gap-12 list-none p-0 m-0">
               <li>
-                <Link
-                  to="/dashboard"
-                  className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue focus-visible:p-2 rounded-[5px]"
-                >
-                  Dashboard
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/challenges"
-                  className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue focus-visible:p-2 rounded-[5px]"
-                >
-                  Detox Challenge
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="community"
-                  className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue focus-visible:p-2 rounded-[5px]"
-                >
-                  Community Forum
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/profile"
-                  className="text-stone-900 text-base font-normal font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue focus-visible:p-2 rounded-[5px]"
-                >
-                  Profile
-                </Link>
-              </li>
+              <Link
+                to="/dashboard"
+                className={`text-stone-900 text-base font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue focus-visible:p-2 rounded-[5px] ${
+                  location.pathname === '/dashboard' ? 'font-bold' : 'font-normal'
+                }`}
+              >
+                Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/challenges"
+                className={`text-stone-900 text-base font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue focus-visible:p-2 rounded-[5px] ${
+                  location.pathname === '/challenges' ? 'font-bold' : 'font-normal'
+                }`}
+              >
+                Detox Challenge
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/community"
+                className={`text-stone-900 text-base font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue focus-visible:p-2 rounded-[5px] ${
+                  location.pathname === '/community' ? 'font-bold' : 'font-normal'
+                }`}
+              >
+                Community Forum
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/profile"
+                className={`text-stone-900 text-base font-playfair hover:font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue focus-visible:p-2 rounded-[5px] ${
+                  location.pathname === '/profile' ? 'font-bold' : 'font-normal'
+                }`}
+              >
+                Profile
+              </Link>
+            </li>
             </ul>
           </nav>
           <div
