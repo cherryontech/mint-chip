@@ -12,7 +12,7 @@ const ProgressBar = ({ effectiveDays, onArrowClick }) => {
       <div className="flex justify-between items-center mb-2">
         <h4
           id="progress-label"
-          className="text-sm font-medium text-eerie font-poppins"
+          className="text-eerie font-medium text-base"
         >
           30 Day Progress
         </h4>

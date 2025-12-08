@@ -14,6 +14,7 @@ import Journal from './pages/journal';
 import Logout from './pages/Logout';
 import Challenges from './pages/Challenges';
 import Profile from './pages/Profile';
+import ForumResponses from './pages/ForumResponses';
 import App from './App';
 
 const router = createBrowserRouter([
@@ -32,12 +33,10 @@ const router = createBrowserRouter([
       { path: 'logout', element: <Logout /> },
       { path: 'profile', element: <Profile /> },
       { path: 'error', element: <Error /> },
+      { path: '*', element: <Error /> },
       { path: 'challenges', element: <Challenges /> },
+      { path: '/community/responses/:day', element: <ForumResponses /> },
     ],
-  },
-  {
-    path: '*',
-    element: <Error />,
   },
 ]);
 createRoot(document.getElementById('root')).render(
