@@ -1,17 +1,19 @@
 // react
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { RiLayoutHorizontalFill, RiUser3Fill } from 'react-icons/ri';
 import { MdForum } from "react-icons/md";
 import { PiListBulletsFill } from 'react-icons/pi';
 
 const MobileMenu = ({ isOpen, toggleMenu }) => {
+  const location = useLocation();
+  
   const navLinks = [
     { name: 'Dashboard', href: '/dashboard', icon: PiListBulletsFill },
     {
       name: 'Detox Challenge',
-      href: '/detoxChallenge',
+      href: '/Challenges',
       icon: RiLayoutHorizontalFill,
     },
     {
@@ -44,22 +46,28 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
 
         {/* Links with Icons */}
         <nav>
-          <ul className="flex flex-col space-y-3 ml-10 ">
-            {navLinks.map((link) => (
-              <li key={link.name} className="mb-4">
-                <Link 
-                  to={link.href} 
-                  className="flex items-center text-stone-900 text-lg font-poppins font-semibold transition-colors hover:font-bold focus:outline-none focus:ring-2focus:outline-none  focus-visible:ring-2 focus-visible:ring-persianblue rounded-[5px]"
-                  onClick={toggleMenu} 
-                >
-                  <link.icon
-                    className="mr-2 text-2xl text-black w-5 h-6 "
-                    aria-hidden="true"
-                  />
-                  {link.name}
-                </Link> 
-              </li>
-            ))}
+            <ul className="flex flex-col space-y-3 ml-10">
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.href;
+              
+              return (
+                <li key={link.name} className="mb-4">
+                  <Link 
+                    to={link.href} 
+                    className={`flex items-center text-stone-900 text-lg font-poppins transition-colors hover:font-bold active:font-bold  focus:outline-none focus-visible:ring-2 focus-visible:ring-persianblue rounded-[5px] ${
+                      isActive ? 'font-bold' : 'font-normal'
+                    }`}
+                    onClick={toggleMenu} 
+                  >
+                    <link.icon
+                      className="mr-2 text-2xl text-black w-5 h-6"
+                      aria-hidden="true"
+                    />
+                    {link.name}
+                  </Link> 
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </div>
