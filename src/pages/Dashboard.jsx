@@ -73,6 +73,10 @@ export default function Dashboard() {
     }
   }, [user]);
 
+  // define variable for a progress day array showing 3 most recent completed tasks, filter numbers over 0 for empty state
+  let progressArray = [completedDays, completedDays - 1, completedDays - 2].filter(num => num > 0);
+  console.log("Progress array:", progressArray);
+
   return (
       <div className="bg-white">
       {/* title and button */}
@@ -122,12 +126,14 @@ export default function Dashboard() {
               />
               {/* row 2 */}
               <DashboardTile 
+                type="progress"
                 size="lg" 
                 span="3"
                 title="Progress Overview"
                 subtitle="Your progress for the past 7 days" 
                 imgSource="/pietrs.png"
                 altText="pie chart illustration" 
+                progressDays={progressArray}
               />  
               <DashboardTile 
                 size="lg" 
