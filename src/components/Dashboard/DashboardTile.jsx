@@ -32,9 +32,16 @@ const imgVariants = tv({
     },
 });
 
-export default function DashboardTile({ type, size, span, title, subtitle, imgSource, altText, dataSentence, progressDays }){
+export default function DashboardTile({ type, size, span, title, subtitle, imgSource, altText, dataSentence, progressDays, onClick, onKeyDown }){
     return (
-        <div className={tileVariants({ type, size, span })}>
+        // if an onClick prop exists, set a cursor pointer, add a role of button, and make it open to tab nav
+        <div 
+            className={`${tileVariants({ type, size, span })} ${onClick ? 'cursor-pointer dash-tile-link': ''}`}
+            onClick={onClick}
+            role={onClick ? 'button': undefined}
+            tabIndex={onClick ? 0 : undefined}
+            onKeyDown={onKeyDown}
+        >
             {type == "data" ? (
                 <div className="h-full flex flex-col gap-8 text-left">
                     <h2 className="text-lg md:text-[20px] font-medium">{title}</h2>

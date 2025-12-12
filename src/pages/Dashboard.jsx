@@ -5,6 +5,7 @@ import TaskModal from "../components/Dashboard/TaskModal";
 import { auth, db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 let loginStreak = 1;
 
@@ -77,6 +78,9 @@ export default function Dashboard() {
   let progressArray = [completedDays, completedDays - 1, completedDays - 2].filter(num => num > 0);
   console.log("Progress array:", progressArray);
 
+  // logic to click tile and navigate to community 
+  let navigate = useNavigate();
+
   return (
       <div className="bg-white">
       {/* title and button */}
@@ -142,6 +146,8 @@ export default function Dashboard() {
                 subtitle="Review answers to prompts from other women in tech"
                 imgSource="/people.svg"
                 altText="illustration of four diverse women" 
+                onClick={() => navigate("/community")}
+                onKeyDown={(event) => event.key === 'Enter' ? navigate("/community") : null}
               />  
         </div>
       ) : (

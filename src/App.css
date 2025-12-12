@@ -18,3 +18,8 @@ button.active {
 button.active:hover {
   background-color: var(--color-persianblue);
 }
+/* style for focus for dashboard tile link */
+.dash-tile-link:focus-visible {
+  outline: solid 4px var(--color-persianblue);
+  outline-offset: 8px;
+}
