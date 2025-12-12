@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 // firebase
 import { db, auth } from '../firebase';
-import { doc, setDoc, onSnapshot } from 'firebase/firestore';
+import { doc, setDoc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 
 //components
@@ -147,6 +147,14 @@ const Journal = () => {
       setDoc(JOURNAL_DOC_REF, dataToSave, { merge: true }).catch((error) =>
         console.error('Error saving journal entry:', error)
       );
+
+      // firestore save for dashboard under users collection
+      const userDocRef = doc(db, "users", userId);
+      updateDoc(userDocRef, {
+        journalProgress: {
+          completedDays: finalEffectiveDays
+        }
+      });
 
       return {
         effectiveDays: finalEffectiveDays,
