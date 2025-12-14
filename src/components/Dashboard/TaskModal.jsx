@@ -54,10 +54,10 @@ export default function TaskModal({ isOpen, onClose, user}) {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 flex justify-center items-center bg-gray-400/30 z-20 h-[100vh]">
-            <div className="flex flex-col justify-center items-center gap-3 md:gap-6 p-4 lg:p-10 lg:pb-6 max-h-full sm:h-[90vh] md:m-h-[95vh] lg:max-h-[100vh] xl:h-fit w-[90vw] md:w-[60vw] lg:w-[55vw] rounded-[20px] bg-gradient-to-b from-nyanza to-celeste opacity-100">
+        <div className="fixed inset-0 flex justify-center items-center bg-gray-400/30 z-20 h-[100vh]" aria-modal="true" role='dialog' aria-labelledby='modal-title'>
+            <div className="flex flex-col justify-start items-center gap-3 md:gap-6 p-4 lg:p-10 lg:pb-6 max-h-full sm:max-h-[90vh] md:max-h-[95vh] lg:max-h-[100vh] xl:h-fit w-[90vw] md:w-[70vw] lg:w-[55vw] rounded-[20px] bg-gradient-to-b from-nyanza to-celeste opacity-100 overflow-y-auto">
                 <button onClick={onClose} className='toggle-btn place-self-start active:outline-4 active:outline-persianblue focus-visible:outline-4 focus-visible:outline-persianblue'><IoClose className='text-2xl'/></button>
-                <h2 className="font-poppins text-base lg:text-2xl font-bold">Detox Challenge Options</h2>
+                <h2 className="font-poppins text-base lg:text-2xl font-bold" id='modal-title'>Detox Challenge Options</h2>
                 {/* buttons */}
                 <div className="flex flex-col gap-4 md:gap-3 text-left w-full items-center">
                     <Button 
@@ -101,7 +101,7 @@ export default function TaskModal({ isOpen, onClose, user}) {
                         isActive={selectedTask.includes('Journal Entry: Respond to journal prompts or share your thoughts and feelings each day.')}
                     />
                 </div>
-                <Button size="sm" onClick={saveTasks} label="Save"/>
+                <div className='shrink-0'><Button size="sm" onClick={saveTasks} label="Save"/></div>
             </div>
         </div>
     );

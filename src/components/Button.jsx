@@ -11,7 +11,7 @@ const buttonVariants = tv({
       sm: 'h-12 w-[162px] text-base font-semibold rounded-lg lg:h-14 lg:w-[220px] lg:text-xl',
       md: 'h-11 w-[218px] text-base font-semibold rounded-lg lg:h-14 lg:w-[286px] lg:text-xl xl:h-16 xl:w-[327px] xl:text-2xl',
       lg: 'h-11 w-[345px] text-base font-medium rounded-md lg:w-[501px]',
-      xl: 'h-fit w-full md:w-[345px] text-sm sm:text-base font-medium rounded-md lg:w-[501px] 2xl:w-full p-3 justify-start',
+      xl: 'h-fit w-full md:w-[450px] text-sm sm:text-base font-medium rounded-md lg:w-[501px] 2xl:w-full p-3 justify-start',
       circ: 'h-11 w-11 text-2xl rounded-full'
     },
     color: {
