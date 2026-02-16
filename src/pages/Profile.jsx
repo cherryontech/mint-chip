@@ -11,7 +11,7 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   let inputClassName =
-    'rounded-none border-0 border-b border-eerie bg-transparent focus:border-stone-600 focus:ring-0';
+    'rounded-none border-0 border-b border-eerie bg-transparent focus:border-stone-600 focus:ring-0 overflow-x-auto';
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -34,7 +34,7 @@ function Profile() {
   };
   if (loading) return <p>Loading</p>;
   return (
-    <section className="bg-white flex flex-col items-center min-h-[calc(100vh-80px)]">
+    <section className="bg-white flex flex-col items-center min-h-[calc(100vh-80px)] px-8">
       <form className="w-full max-w-md min-w-[60%] flex flex-col">
         <h3 className="text-2xl font-playfair mb-[24px] mt-[60px] place-self-center">
           Profile
