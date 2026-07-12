@@ -3,7 +3,7 @@ reviewers:
   - nkabembo
   - CMolinaBetancourt
   
-addReviewers: true
+addReviewers: false
 
 numberOfReviewers: 2
 
